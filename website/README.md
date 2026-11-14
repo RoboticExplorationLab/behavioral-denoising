@@ -29,7 +29,7 @@ All asset URLs are relative so the site works under a GitHub project subpath.
 
 ## GitHub Pages
 
-In `RoboticExplorationLab/behavioral_denoising`, select **Settings → Pages → Build
+In `RoboticExplorationLab/behavioral-denoising`, select **Settings → Pages → Build
 and deployment → Source → GitHub Actions**. The
 [`Deploy rollout gallery` workflow](../.github/workflows/pages.yml) builds from
 `results/paper.zip` and deploys when gallery inputs change on `main`, or when run
@@ -37,4 +37,4 @@ manually from the Actions tab. The workflow uses GitHub's
 [official Pages actions](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
 
 After a successful deployment, the gallery URL is:
-<https://roboticexplorationlab.github.io/behavioral_denoising/>.
+<https://roboticexplorationlab.github.io/behavioral-denoising/>.

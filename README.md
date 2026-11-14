@@ -5,7 +5,7 @@ on Nonlinear Behavioral Control Inspired by Closed-Form Diffusion Policies**.
 
 [Paper results](results/README.md) · [Configurations](config/README.md) ·
 [Implementation](IMPLEMENTATION.md) · [Data](data/README.md) ·
-[Video gallery](https://roboticexplorationlab.github.io/behavioral_denoising/)
+[Video gallery](https://roboticexplorationlab.github.io/behavioral-denoising/)
 
 ## BD-χ² across four tasks
 
@@ -24,9 +24,9 @@ synchronized by simulation time, with final poses held after termination.
 
 ## All Push-T trials
 
-[![Preview of the BD-χ² Push-T video gallery.](media/teasers/pusht_gallery.png)](https://roboticexplorationlab.github.io/behavioral_denoising/)
+[![Preview of the BD-χ² Push-T video gallery.](media/teasers/pusht_gallery.png)](https://roboticexplorationlab.github.io/behavioral-denoising/)
 
-[Watch all 50 BD-χ² trials](https://roboticexplorationlab.github.io/behavioral_denoising/):
+[Watch all 50 BD-χ² trials](https://roboticexplorationlab.github.io/behavioral-denoising/):
 peak and final coverage for each trial, with coverage summaries and seed search.
 
 ## Install
