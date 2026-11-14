@@ -1,0 +1,56 @@
+id: select_dpc_upstream
+name: Select-DPC (upstream parameters)
+family: deepc
+policy: select_dpc
+parameters:
+  factorization: none
+  past: 2
+  future: 30
+  hankel_length: 73
+  columns: 40
+  iterations: 1
+  selector: norm
+  selector_options:
+    order: 1
+    forgetting_factor: 0.8
+  Q:
+  - 5
+  - 0
+  - 10000
+  - 0.1
+  - 0.1
+  R:
+  - 1
+  slack: 5000000.0
+  g_l1: 50000.0
+  g_projection: 0.0
+  A_u:
+  - - 1
+  - - -1
+  b_u:
+  - 3
+  - 3
+  A_y:
+  - - 1
+    - 0
+    - 0
+    - 0
+    - 0
+  - - -1
+    - 0
+    - 0
+    - 0
+    - 0
+  b_y:
+  - 1
+  - 1
+  input_reference:
+  - 0
+  solver:
+    solver: OSQP
+    warm_start: false
+    max_iter: 6000
+    eps_abs: 1.0e-05
+    eps_rel: 0.0001
+    adaptive_rho_interval: 25
+parameter_status: Adapted Select-DPC benchmark parameters

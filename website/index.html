@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Explore all 50 BD-χ² Push-T test rollouts from Behavioral Denoising, with peak and final target coverage.">
+    <meta name="theme-color" content="#286546">
+    <title>Push-T rollouts · Behavioral Denoising</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="gallery.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#rollouts">Skip to rollouts</a>
+    <div class="page">
+      <header class="site-header">
+        <a class="brand" href="./" aria-label="Behavioral Denoising home"><span class="brand-mark" aria-hidden="true">BD</span>Behavioral Denoising</a>
+        <a class="repository-link" href="https://github.com/RoboticExplorationLab/behavioral_denoising">GitHub <span aria-hidden="true">↗</span></a>
+      </header>
+
+      <main>
+        <section class="introduction" aria-labelledby="page-title">
+          <div class="introduction-copy">
+            <p class="eyebrow">BD-χ² · rollout gallery</p>
+            <h1 id="page-title">Push-T rollouts</h1>
+            <p class="lede">Every test trial, from start to finish.</p>
+            <p class="description">Push the T-shaped block onto its target.</p>
+          </div>
+          <dl class="summary" aria-label="Coverage across all trials">
+            <div><dt>Trials</dt><dd id="total-count">50</dd></div>
+            <div class="summary-coverage"><dt>Mean peak coverage</dt><dd id="mean-coverage">—</dd></div>
+            <div class="summary-coverage"><dt>Median peak coverage</dt><dd id="median-coverage">—</dd></div>
+          </dl>
+        </section>
+
+        <section id="rollouts" class="rollouts" aria-labelledby="rollouts-title" tabindex="-1">
+          <div class="gallery-toolbar">
+            <div class="gallery-heading">
+              <h2 id="rollouts-title">Explore the trials</h2>
+              <p id="result-count" role="status" aria-live="polite" aria-atomic="true">Loading trials…</p>
+            </div>
+            <div class="gallery-controls">
+              <label class="seed-search" for="seed-search">
+                <span class="sr-only">Search trials by seed</span>
+                <svg viewBox="0 0 20 20" width="18" height="18" fill="none" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"></circle><path d="m13 13 4 4"></path></svg>
+                <input id="seed-search" type="search" inputmode="numeric" autocomplete="off" placeholder="Find a seed" disabled>
+              </label>
+            </div>
+          </div>
+
+          <p class="gallery-note">Select a trial to play. Peak coverage is the highest target coverage reached during the trial.</p>
+          <div id="trial-grid" class="trial-grid" aria-busy="true"></div>
+          <div id="empty-state" class="empty-state" hidden>
+            <p>No trials match this seed.</p>
+            <button id="reset-search" class="text-button" type="button">Show all trials</button>
+          </div>
+          <div id="load-error" class="empty-state" role="alert" hidden>
+            <p>The trials could not be loaded.</p>
+            <button id="retry-load" class="text-button" type="button">Try again</button>
+          </div>
+          <noscript><p class="empty-state">Enable JavaScript to explore the gallery, or <a href="data/trials.json">view the trial data</a>.</p></noscript>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>Behavioral Denoising <span aria-hidden="true">/</span> Push-T</p>
+        <div><a href="data/trials.json">Trial data</a><a href="https://github.com/RoboticExplorationLab/behavioral_denoising">Code &amp; results <span aria-hidden="true">↗</span></a></div>
+      </footer>
+    </div>
+  </body>
+</html>

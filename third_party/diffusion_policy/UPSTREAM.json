@@ -1,0 +1,31 @@
+{
+  "repository": "https://github.com/real-stanford/diffusion_policy",
+  "revision": "5ba07ac6661db573af695b419a7947ecb704690f",
+  "files": {
+    "LICENSE": {
+      "sha256": "304e99a48271e10820f71a1b86ef395c06c100d7f68dd1d308790d1064fc4d41",
+      "bytes": 1106,
+      "url": "https://github.com/real-stanford/diffusion_policy/blob/5ba07ac6661db573af695b419a7947ecb704690f/LICENSE"
+    },
+    "diffusion_policy/env/pusht/__init__.py": {
+      "sha256": "3047be4b156d8fa96834db16ca29853271cc641216a0b0051f7e67669f15a685",
+      "bytes": 238,
+      "url": "https://github.com/real-stanford/diffusion_policy/blob/5ba07ac6661db573af695b419a7947ecb704690f/diffusion_policy/env/pusht/__init__.py"
+    },
+    "diffusion_policy/env/pusht/pusht_env.py": {
+      "sha256": "759107dc0ea6017b8afe3380ce23817713edf26af725fc4f03c0416ced940bd0",
+      "bytes": 13554,
+      "url": "https://github.com/real-stanford/diffusion_policy/blob/5ba07ac6661db573af695b419a7947ecb704690f/diffusion_policy/env/pusht/pusht_env.py"
+    },
+    "diffusion_policy/env/pusht/pymunk_override.py": {
+      "sha256": "85e7c54b5e9630a9f7e675250ee514ae9b2249d11654ec0811d8e4bcf413fe39",
+      "bytes": 8415,
+      "url": "https://github.com/real-stanford/diffusion_policy/blob/5ba07ac6661db573af695b419a7947ecb704690f/diffusion_policy/env/pusht/pymunk_override.py"
+    },
+    "diffusion_policy/config/task/pusht_lowdim.yaml": {
+      "sha256": "f623b6225002d9d754ec452a8e57c07ae633cf757b388d60fc98773d213eb384",
+      "bytes": 880,
+      "url": "https://github.com/real-stanford/diffusion_policy/blob/5ba07ac6661db573af695b419a7947ecb704690f/diffusion_policy/config/task/pusht_lowdim.yaml"
+    }
+  }
+}

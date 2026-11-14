@@ -1,0 +1,58 @@
+action_limit: 0.5
+action_weights:
+- 10
+- 10
+benchmark_id: paper_control_benchmark
+data_arm: shared_mpc
+data_budget:
+  episodes: 200
+  samples: 40000
+  steps_per_episode: 200
+demonstrations:
+  data_file: data/reacher/demonstrations.npz
+  draw: 0
+  episodes: 200
+  noise: 0.1
+  steps: 200
+description: 'Reacher benchmark: shared MPC data, ten starts, fixed parameters.'
+evaluation:
+  expert_cache_file: data/reacher/expert_evaluations.json
+  steps: 500
+  stop_after_targets: 5
+evaluation_mode: fixed
+expert:
+  action_weight: 10.0
+  horizon: 30
+  max_iterations: 200
+  position_weight: 40000.0
+  speed_weight: 10.0
+  tolerance: 1.0e-06
+height_limit: 0.1
+implementation: draft_aligned
+methods:
+- bd_chi2
+- select_dpc_upstream
+- bd_mean
+- bd_sample
+- bd_kl
+- bd_mean_chi2
+- windowed_deepc_upstream
+- deepc_upstream
+name: reacher
+outcome_protocol: benchmark_v1
+protocols:
+- demos
+record_traces: true
+state_weights:
+- 0
+- 0
+- 0
+- 0
+- 40000
+- 40000
+- 10
+- 10
+task:
+  target_seed: 42
+  target_tolerance: 0.005
+test_starts: data/reacher/test_starts.json

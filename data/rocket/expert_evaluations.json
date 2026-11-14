@@ -1,0 +1,529 @@
+{
+  "protocol": {
+    "version": 1,
+    "expert": {
+      "kind": "mpc",
+      "horizon": 60,
+      "clip_dx": 1.0,
+      "clip_dy": 2.0,
+      "follow_reference": false
+    },
+    "task": {
+      "mode": "landing"
+    },
+    "state_weights": [
+      40,
+      20,
+      20,
+      1,
+      3000,
+      300
+    ],
+    "action_weights": [
+      10,
+      10,
+      10
+    ],
+    "expert_state_bounds": {
+      "A_y": [
+        [
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          -1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ]
+      ],
+      "b_y": [
+        0,
+        33.333333333333336,
+        0,
+        26.666666666666668,
+        0.6108652381980153,
+        0.6108652381980153
+      ]
+    },
+    "steps": 1000,
+    "outcome_protocol": "benchmark_v1",
+    "source_sha256": {
+      "experiments.rocket.episode": "5079b4d05526a6a222c2380616bebaa7cb1772307c43b8a59f5dde9481316818",
+      "experiments.rocket.expert_factory": "1389f1621677036d511f4cf8faf42508449cbb35edcb394628cc7615989f6d61",
+      "experiments.rocket.make_task": "471630ba8efb5996eb49978061b4697cc049ec8c4b7abaf144edd86290a24070",
+      "experiments.rocket.bounds": "a63836e9fb63929a757969c4fa2f21eb1124d9a6e495b7088404ecb90918785e",
+      "experiments.rocket.hover_input": "177a731d8ebf75db7ddabf0a3054bdb1747586cc679dffc7d330440568773b88",
+      "src.controllers.rocket_mpc.RocketMPC": "5109d95f7b7734efcb55997364f790ea3e35d0a0fff30a69a36ee12d26620b13",
+      "src.controllers.rocket_mpc.RocketPID": "62d7d12b7291ddf82cf0ae3282686cdfb015cc9bd4b610e110cfb05eb36d50ce",
+      "src.tasks.rocket.RocketTask": "41714efee133b5b7dd40070ffbd1629ae72a74f58e286581915d2a3cee96906a",
+      "src.benchmarks.outcomes.EpisodeAudit": "94c64801b70fe2410284f04bc726aeb8251eaaf5a6df0367c7b1a92f41cf766f",
+      "src.benchmarks.outcomes.benchmark_outcomes": "f2ece6198d63c2d86346515709d96d78d4e11393d29a8bb541cd485e2a076c77"
+    }
+  },
+  "protocol_sha256": "a6ae8c346d2a2468a53a0c7076f023a3dd7c0d4faf5663d72717c1b5b668bdcd",
+  "runs": [
+    {
+      "seed": 3000,
+      "start": [
+        0.2,
+        0.9,
+        0.0
+      ],
+      "result": {
+        "success": 1.0,
+        "crashed": 0.0,
+        "steps": 365,
+        "cost": 675404.717453699,
+        "settled": 1.0,
+        "timeout": 0.0,
+        "cost_hover": 675080.0196978351,
+        "ms": 5.177655130334804,
+        "terminal_reason": "settled",
+        "controller_failure": false,
+        "history_infeasible": false,
+        "controller_error": null,
+        "failure_cost": 0.0,
+        "solver_status_counts": {
+          "optimal": 326
+        },
+        "action_source_counts": {
+          "policy": 326,
+          "task_override": 39
+        },
+        "applied_actions": 365,
+        "modified_actions": 39,
+        "clipped_actions": 0,
+        "noisy_actions": 0,
+        "override_actions": 39,
+        "contact_success": 1.0
+      }
+    },
+    {
+      "seed": 3001,
+      "start": null,
+      "result": {
+        "success": 1.0,
+        "crashed": 0.0,
+        "steps": 510,
+        "cost": 943796.4329085002,
+        "settled": 1.0,
+        "timeout": 0.0,
+        "cost_hover": 943547.4543027534,
+        "ms": 3.9939343855633895,
+        "terminal_reason": "settled",
+        "controller_failure": false,
+        "history_infeasible": false,
+        "controller_error": null,
+        "failure_cost": 0.0,
+        "solver_status_counts": {
+          "optimal": 373
+        },
+        "action_source_counts": {
+          "policy": 373,
+          "task_override": 137
+        },
+        "applied_actions": 510,
+        "modified_actions": 137,
+        "clipped_actions": 0,
+        "noisy_actions": 0,
+        "override_actions": 137,
+        "contact_success": 1.0
+      }
+    },
+    {
+      "seed": 3002,
+      "start": null,
+      "result": {
+        "success": 1.0,
+        "crashed": 0.0,
+        "steps": 416,
+        "cost": 380178.3067087581,
+        "settled": 1.0,
+        "timeout": 0.0,
+        "cost_hover": 379991.05203162046,
+        "ms": 4.58099944857551,
+        "terminal_reason": "settled",
+        "controller_failure": false,
+        "history_infeasible": false,
+        "controller_error": null,
+        "failure_cost": 0.0,
+        "solver_status_counts": {
+          "optimal": 294
+        },
+        "action_source_counts": {
+          "policy": 294,
+          "task_override": 122
+        },
+        "applied_actions": 416,
+        "modified_actions": 122,
+        "clipped_actions": 0,
+        "noisy_actions": 0,
+        "override_actions": 122,
+        "contact_success": 1.0
+      }
+    },
+    {
+      "seed": 3003,
+      "start": null,
+      "result": {
+        "success": 1.0,
+        "crashed": 0.0,
+        "steps": 403,
+        "cost": 892200.5359722902,
+        "settled": 1.0,
+        "timeout": 0.0,
+        "cost_hover": 891844.057028945,
+        "ms": 3.9742633111668915,
+        "terminal_reason": "settled",
+        "controller_failure": false,
+        "history_infeasible": false,
+        "controller_error": null,
+        "failure_cost": 0.0,
+        "solver_status_counts": {
+          "optimal": 369
+        },
+        "action_source_counts": {
+          "policy": 369,
+          "task_override": 34
+        },
+        "applied_actions": 403,
+        "modified_actions": 34,
+        "clipped_actions": 0,
+        "noisy_actions": 0,
+        "override_actions": 34,
+        "contact_success": 1.0
+      }
+    },
+    {
+      "seed": 3004,
+      "start": null,
+      "result": {
+        "success": 1.0,
+        "crashed": 0.0,
+        "steps": 456,
+        "cost": 530558.1806370676,
+        "settled": 1.0,
+        "timeout": 0.0,
+        "cost_hover": 530358.1542507113,
+        "ms": 4.086037948008902,
+        "terminal_reason": "settled",
+        "controller_failure": false,
+        "history_infeasible": false,
+        "controller_error": null,
+        "failure_cost": 0.0,
+        "solver_status_counts": {
+          "optimal": 311
+        },
+        "action_source_counts": {
+          "policy": 311,
+          "task_override": 145
+        },
+        "applied_actions": 456,
+        "modified_actions": 145,
+        "clipped_actions": 0,
+        "noisy_actions": 0,
+        "override_actions": 145,
+        "contact_success": 1.0
+      }
+    },
+    {
+      "seed": 3005,
+      "start": null,
+      "result": {
+        "success": 1.0,
+        "crashed": 0.0,
+        "steps": 516,
+        "cost": 1443529.2024504463,
+        "settled": 1.0,
+        "timeout": 0.0,
+        "cost_hover": 1443262.5072258818,
+        "ms": 4.045201098532835,
+        "terminal_reason": "settled",
+        "controller_failure": false,
+        "history_infeasible": false,
+        "controller_error": null,
+        "failure_cost": 0.0,
+        "solver_status_counts": {
+          "optimal": 378
+        },
+        "action_source_counts": {
+          "policy": 378,
+          "task_override": 138
+        },
+        "applied_actions": 516,
+        "modified_actions": 138,
+        "clipped_actions": 0,
+        "noisy_actions": 0,
+        "override_actions": 138,
+        "contact_success": 1.0
+      }
+    },
+    {
+      "seed": 3006,
+      "start": null,
+      "result": {
+        "success": 1.0,
+        "crashed": 0.0,
+        "steps": 517,
+        "cost": 1396198.027198556,
+        "settled": 1.0,
+        "timeout": 0.0,
+        "cost_hover": 1395933.1227508343,
+        "ms": 4.112882743509927,
+        "terminal_reason": "settled",
+        "controller_failure": false,
+        "history_infeasible": false,
+        "controller_error": null,
+        "failure_cost": 0.0,
+        "solver_status_counts": {
+          "optimal": 380
+        },
+        "action_source_counts": {
+          "policy": 380,
+          "task_override": 137
+        },
+        "applied_actions": 517,
+        "modified_actions": 137,
+        "clipped_actions": 0,
+        "noisy_actions": 0,
+        "override_actions": 137,
+        "contact_success": 1.0
+      }
+    },
+    {
+      "seed": 3007,
+      "start": null,
+      "result": {
+        "success": 1.0,
+        "crashed": 0.0,
+        "steps": 290,
+        "cost": 145759.04912601056,
+        "settled": 1.0,
+        "timeout": 0.0,
+        "cost_hover": 145812.52050216115,
+        "ms": 5.297070193046238,
+        "terminal_reason": "settled",
+        "controller_failure": false,
+        "history_infeasible": false,
+        "controller_error": null,
+        "failure_cost": 0.0,
+        "solver_status_counts": {
+          "optimal": 120
+        },
+        "action_source_counts": {
+          "policy": 120,
+          "task_override": 170
+        },
+        "applied_actions": 290,
+        "modified_actions": 170,
+        "clipped_actions": 0,
+        "noisy_actions": 0,
+        "override_actions": 170,
+        "contact_success": 1.0
+      }
+    },
+    {
+      "seed": 3008,
+      "start": null,
+      "result": {
+        "success": 1.0,
+        "crashed": 0.0,
+        "steps": 539,
+        "cost": 1608104.8570964562,
+        "settled": 1.0,
+        "timeout": 0.0,
+        "cost_hover": 1607810.2803039113,
+        "ms": 4.085273678971695,
+        "terminal_reason": "settled",
+        "controller_failure": false,
+        "history_infeasible": false,
+        "controller_error": null,
+        "failure_cost": 0.0,
+        "solver_status_counts": {
+          "optimal": 402
+        },
+        "action_source_counts": {
+          "policy": 402,
+          "task_override": 137
+        },
+        "applied_actions": 539,
+        "modified_actions": 137,
+        "clipped_actions": 0,
+        "noisy_actions": 0,
+        "override_actions": 137,
+        "contact_success": 1.0
+      }
+    },
+    {
+      "seed": 3009,
+      "start": null,
+      "result": {
+        "success": 1.0,
+        "crashed": 0.0,
+        "steps": 430,
+        "cost": 1557874.859974519,
+        "settled": 1.0,
+        "timeout": 0.0,
+        "cost_hover": 1557484.1683442555,
+        "ms": 4.039327986947911,
+        "terminal_reason": "settled",
+        "controller_failure": false,
+        "history_infeasible": false,
+        "controller_error": null,
+        "failure_cost": 0.0,
+        "solver_status_counts": {
+          "optimal": 398
+        },
+        "action_source_counts": {
+          "policy": 398,
+          "task_override": 32
+        },
+        "applied_actions": 430,
+        "modified_actions": 32,
+        "clipped_actions": 0,
+        "noisy_actions": 0,
+        "override_actions": 32,
+        "contact_success": 1.0
+      }
+    },
+    {
+      "seed": 3010,
+      "start": null,
+      "result": {
+        "success": 1.0,
+        "crashed": 0.0,
+        "steps": 350,
+        "cost": 61380.869089243264,
+        "settled": 1.0,
+        "timeout": 0.0,
+        "cost_hover": 61316.77121902093,
+        "ms": 4.765311598163738,
+        "terminal_reason": "settled",
+        "controller_failure": false,
+        "history_infeasible": false,
+        "controller_error": null,
+        "failure_cost": 0.0,
+        "solver_status_counts": {
+          "optimal": 204
+        },
+        "action_source_counts": {
+          "policy": 204,
+          "task_override": 146
+        },
+        "applied_actions": 350,
+        "modified_actions": 146,
+        "clipped_actions": 0,
+        "noisy_actions": 0,
+        "override_actions": 146,
+        "contact_success": 1.0
+      }
+    },
+    {
+      "seed": 3011,
+      "start": null,
+      "result": {
+        "success": 1.0,
+        "crashed": 0.0,
+        "steps": 454,
+        "cost": 321361.79171347193,
+        "settled": 1.0,
+        "timeout": 0.0,
+        "cost_hover": 321190.690243046,
+        "ms": 4.328477649247231,
+        "terminal_reason": "settled",
+        "controller_failure": false,
+        "history_infeasible": false,
+        "controller_error": null,
+        "failure_cost": 0.0,
+        "solver_status_counts": {
+          "optimal": 309
+        },
+        "action_source_counts": {
+          "policy": 309,
+          "task_override": 145
+        },
+        "applied_actions": 454,
+        "modified_actions": 145,
+        "clipped_actions": 0,
+        "noisy_actions": 0,
+        "override_actions": 145,
+        "contact_success": 1.0
+      }
+    },
+    {
+      "seed": 3012,
+      "start": null,
+      "result": {
+        "success": 1.0,
+        "crashed": 0.0,
+        "steps": 284,
+        "cost": 210818.11907029003,
+        "settled": 1.0,
+        "timeout": 0.0,
+        "cost_hover": 210589.35557169595,
+        "ms": 4.046301619498527,
+        "terminal_reason": "settled",
+        "controller_failure": false,
+        "history_infeasible": false,
+        "controller_error": null,
+        "failure_cost": 0.0,
+        "solver_status_counts": {
+          "optimal": 251
+        },
+        "action_source_counts": {
+          "policy": 251,
+          "task_override": 33
+        },
+        "applied_actions": 284,
+        "modified_actions": 33,
+        "clipped_actions": 0,
+        "noisy_actions": 0,
+        "override_actions": 33,
+        "contact_success": 1.0
+      }
+    }
+  ],
+  "metadata_normalization": {
+    "reason": "Canonical module names for both python -m and imported driver; source bytes and recorded trajectories unchanged",
+    "original_cache": "/tmp/benchmark_data_20261111/rocket/expert_evaluations.json"
+  }
+}

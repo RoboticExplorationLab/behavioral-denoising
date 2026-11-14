@@ -1,0 +1,4 @@
+# Install from the repository root using Python 3.10.
+-c requirements/benchmark.lock
+-e .[benchmark,plot,test]
+-e ./third_party/rocket_lander

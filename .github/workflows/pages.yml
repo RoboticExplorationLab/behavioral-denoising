@@ -1,0 +1,85 @@
+name: Deploy rollout gallery
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "website/**"
+      - "scripts/plots/pusht_gallery.py"
+      - "scripts/plots/pusht.py"
+      - "scripts/plots/common.py"
+      - "results/paper.zip"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.10"
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Install rendering dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes ffmpeg
+          python -m pip install numpy==1.26.4 matplotlib==3.9.2 shapely==1.8.4 pillow
+
+      - name: Extract saved Push-T results
+        run: |
+          python - <<'PY'
+          from zipfile import ZipFile
+
+          with ZipFile("results/paper.zip") as archive:
+              for name in archive.namelist():
+                  if name.startswith("results/paper/pusht/") or name == "results/paper/protocols/pusht.json":
+                      archive.extract(name, ".")
+          PY
+
+      - name: Render and assemble gallery
+        env:
+          MPLBACKEND: Agg
+        run: |
+          python scripts/plots/pusht_gallery.py --root results/paper --output website/build --workers 2
+          cp website/index.html website/styles.css website/gallery.js website/build/
+          touch website/build/.nojekyll
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: website/build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

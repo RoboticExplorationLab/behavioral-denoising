@@ -1,0 +1,513 @@
+{
+  "protocol": {
+    "expert": {
+      "horizon": 30,
+      "position_weight": 40000.0,
+      "speed_weight": 10.0,
+      "action_weight": 10.0,
+      "max_iterations": 200,
+      "tolerance": 1e-06
+    },
+    "task": {
+      "target_seed": 42,
+      "target_tolerance": 0.005
+    },
+    "state_weights": [
+      0,
+      0,
+      0,
+      0,
+      40000,
+      40000,
+      10,
+      10
+    ],
+    "action_weights": [
+      10,
+      10
+    ],
+    "action_limit": 0.5,
+    "height_limit": 0.1,
+    "outcome_protocol": "benchmark_v1",
+    "stop_after_targets": 5
+  },
+  "protocol_sha256": "544f2f5d6110bceabd952825d30def7afb3c0666b079e509819cbaf1c56bf68e",
+  "runs": [
+    {
+      "seed": 3000,
+      "targets": null,
+      "steps": 500,
+      "result": {
+        "cost": 47127.7963909212,
+        "reached": 4,
+        "reached_final": 5,
+        "violations": 0,
+        "violations_strict": 1,
+        "steps": 169,
+        "ms": 11.25996724320796,
+        "terminal_reason": "targets_completed",
+        "controller_failure": false,
+        "history_infeasible": false,
+        "controller_error": null,
+        "failure_cost": 0.0,
+        "solver_status_counts": {
+          "Solve_Succeeded": 169
+        },
+        "action_source_counts": {
+          "policy": 169
+        },
+        "applied_actions": 169,
+        "modified_actions": 0,
+        "clipped_actions": 0,
+        "noisy_actions": 0,
+        "override_actions": 0,
+        "targets_completed": 5,
+        "tracking_cost": 47127.7963909212,
+        "success": true,
+        "all_targets_completed": true
+      },
+      "source_record": "/home/lucas/Workspace/diffusion_filtering_refactor/results/reacher_first_five_500_20261111/reacher/mpc_expert/seed_3000",
+      "source_trajectory_sha256": "f8ffbe574046623637757f8d91a860586b1fddd2d1875601c723d627eed06cde"
+    },
+    {
+      "seed": 3001,
+      "targets": null,
+      "steps": 500,
+      "result": {
+        "cost": 45145.21879685434,
+        "reached": 4,
+        "reached_final": 5,
+        "violations": 0,
+        "violations_strict": 1,
+        "steps": 169,
+        "ms": 10.71389131186001,
+        "terminal_reason": "targets_completed",
+        "controller_failure": false,
+        "history_infeasible": false,
+        "controller_error": null,
+        "failure_cost": 0.0,
+        "solver_status_counts": {
+          "Solve_Succeeded": 169
+        },
+        "action_source_counts": {
+          "policy": 169
+        },
+        "applied_actions": 169,
+        "modified_actions": 0,
+        "clipped_actions": 0,
+        "noisy_actions": 0,
+        "override_actions": 0,
+        "targets_completed": 5,
+        "tracking_cost": 45145.21879685434,
+        "success": true,
+        "all_targets_completed": true
+      },
+      "source_record": "/home/lucas/Workspace/diffusion_filtering_refactor/results/reacher_first_five_500_20261111/reacher/mpc_expert/seed_3001",
+      "source_trajectory_sha256": "17e03e01cac4df1d1a1d151551c9bcee9ea6c668d41da7975559d99f1796df53"
+    },
+    {
+      "seed": 3002,
+      "targets": null,
+      "steps": 500,
+      "result": {
+        "cost": 47009.27122744956,
+        "reached": 4,
+        "reached_final": 5,
+        "violations": 0,
+        "violations_strict": 1,
+        "steps": 169,
+        "ms": 11.244279812241645,
+        "terminal_reason": "targets_completed",
+        "controller_failure": false,
+        "history_infeasible": false,
+        "controller_error": null,
+        "failure_cost": 0.0,
+        "solver_status_counts": {
+          "Solve_Succeeded": 169
+        },
+        "action_source_counts": {
+          "policy": 169
+        },
+        "applied_actions": 169,
+        "modified_actions": 0,
+        "clipped_actions": 0,
+        "noisy_actions": 0,
+        "override_actions": 0,
+        "targets_completed": 5,
+        "tracking_cost": 47009.27122744956,
+        "success": true,
+        "all_targets_completed": true
+      },
+      "source_record": "/home/lucas/Workspace/diffusion_filtering_refactor/results/reacher_first_five_500_20261111/reacher/mpc_expert/seed_3002",
+      "source_trajectory_sha256": "c0f8e562699a72c0b1a767eb904c03016703ab35d1565810554fa9d215fdfb89"
+    },
+    {
+      "seed": 3003,
+      "targets": null,
+      "steps": 500,
+      "result": {
+        "cost": 46157.893868731095,
+        "reached": 4,
+        "reached_final": 5,
+        "violations": 0,
+        "violations_strict": 1,
+        "steps": 169,
+        "ms": 11.447737432572682,
+        "terminal_reason": "targets_completed",
+        "controller_failure": false,
+        "history_infeasible": false,
+        "controller_error": null,
+        "failure_cost": 0.0,
+        "solver_status_counts": {
+          "Solve_Succeeded": 169
+        },
+        "action_source_counts": {
+          "policy": 169
+        },
+        "applied_actions": 169,
+        "modified_actions": 0,
+        "clipped_actions": 0,
+        "noisy_actions": 0,
+        "override_actions": 0,
+        "targets_completed": 5,
+        "tracking_cost": 46157.893868731095,
+        "success": true,
+        "all_targets_completed": true
+      },
+      "source_record": "/home/lucas/Workspace/diffusion_filtering_refactor/results/reacher_first_five_500_20261111/reacher/mpc_expert/seed_3003",
+      "source_trajectory_sha256": "0159fb88e029a110e31b4f68164f53381f4c2b83813b7f409d9f93c01428117f"
+    },
+    {
+      "seed": 3004,
+      "targets": null,
+      "steps": 500,
+      "result": {
+        "cost": 44800.5716484122,
+        "reached": 4,
+        "reached_final": 5,
+        "violations": 0,
+        "violations_strict": 1,
+        "steps": 169,
+        "ms": 11.921272259729104,
+        "terminal_reason": "targets_completed",
+        "controller_failure": false,
+        "history_infeasible": false,
+        "controller_error": null,
+        "failure_cost": 0.0,
+        "solver_status_counts": {
+          "Solve_Succeeded": 169
+        },
+        "action_source_counts": {
+          "policy": 169
+        },
+        "applied_actions": 169,
+        "modified_actions": 0,
+        "clipped_actions": 0,
+        "noisy_actions": 0,
+        "override_actions": 0,
+        "targets_completed": 5,
+        "tracking_cost": 44800.5716484122,
+        "success": true,
+        "all_targets_completed": true
+      },
+      "source_record": "/home/lucas/Workspace/diffusion_filtering_refactor/results/reacher_first_five_500_20261111/reacher/mpc_expert/seed_3004",
+      "source_trajectory_sha256": "8d96b53bb24eee5a261c484f9c40b3c5909c8a96fb04a70296477e4841f38ea4"
+    },
+    {
+      "seed": 4000,
+      "targets": [
+        [
+          -0.18224541376916792,
+          0.0361419955584298
+        ],
+        [
+          0.0032351103810635672,
+          -0.11869999710500653
+        ],
+        [
+          -0.15740001946576562,
+          0.01954846402516132
+        ],
+        [
+          -0.07090076149157945,
+          0.018745046958137432
+        ],
+        [
+          0.03907716350845415,
+          -0.09788728263935716
+        ]
+      ],
+      "steps": 500,
+      "result": {
+        "cost": 140665.1467585048,
+        "reached": 4,
+        "reached_final": 5,
+        "violations": 0,
+        "violations_strict": 0,
+        "steps": 193,
+        "ms": 11.064363924009541,
+        "terminal_reason": "targets_completed",
+        "controller_failure": false,
+        "history_infeasible": false,
+        "controller_error": null,
+        "failure_cost": 0.0,
+        "solver_status_counts": {
+          "Solve_Succeeded": 193
+        },
+        "action_source_counts": {
+          "policy": 193
+        },
+        "applied_actions": 193,
+        "modified_actions": 0,
+        "clipped_actions": 0,
+        "noisy_actions": 0,
+        "override_actions": 0,
+        "targets_completed": 5,
+        "tracking_cost": 140665.1467585048,
+        "success": true,
+        "all_targets_completed": true
+      },
+      "source_record": "/home/lucas/Workspace/diffusion_filtering_refactor/results/reacher_first_five_500_20261111/reacher/mpc_expert/seed_4000",
+      "source_trajectory_sha256": "2ccb3bdf1de94828c92736f582311ab83cd5db562e6e36076021dee1eb84c4f7"
+    },
+    {
+      "seed": 4001,
+      "targets": [
+        [
+          0.0452601957022675,
+          0.07330142264709147
+        ],
+        [
+          0.06132311054021455,
+          -0.10488328835426247
+        ],
+        [
+          -0.11200894914885663,
+          -0.024502112071206842
+        ],
+        [
+          0.06384448354387649,
+          -0.0619469194289838
+        ],
+        [
+          -0.0015584699101549118,
+          -0.0585239783494422
+        ]
+      ],
+      "steps": 500,
+      "result": {
+        "cost": 64994.25096575646,
+        "reached": 4,
+        "reached_final": 5,
+        "violations": 0,
+        "violations_strict": 1,
+        "steps": 183,
+        "ms": 10.974437263005418,
+        "terminal_reason": "targets_completed",
+        "controller_failure": false,
+        "history_infeasible": false,
+        "controller_error": null,
+        "failure_cost": 0.0,
+        "solver_status_counts": {
+          "Solve_Succeeded": 183
+        },
+        "action_source_counts": {
+          "policy": 183
+        },
+        "applied_actions": 183,
+        "modified_actions": 0,
+        "clipped_actions": 0,
+        "noisy_actions": 0,
+        "override_actions": 0,
+        "targets_completed": 5,
+        "tracking_cost": 64994.25096575646,
+        "success": true,
+        "all_targets_completed": true
+      },
+      "source_record": "/home/lucas/Workspace/diffusion_filtering_refactor/results/reacher_first_five_500_20261111/reacher/mpc_expert/seed_4001",
+      "source_trajectory_sha256": "28e2f3866cb273d8cc537f4810da7d26c3489f1e14af27b2fc8a2c16124b3572"
+    },
+    {
+      "seed": 4002,
+      "targets": [
+        [
+          0.013970026339608704,
+          -0.12012476035607292
+        ],
+        [
+          0.040879574403893136,
+          0.0621697782536321
+        ],
+        [
+          -0.005801774968338088,
+          -0.1518472410577049
+        ],
+        [
+          0.08869152547912694,
+          0.00782274124275093
+        ],
+        [
+          0.041526448209377814,
+          -0.15168494622560114
+        ]
+      ],
+      "steps": 500,
+      "result": {
+        "cost": 101817.96990986733,
+        "reached": 4,
+        "reached_final": 5,
+        "violations": 0,
+        "violations_strict": 0,
+        "steps": 243,
+        "ms": 10.551633093881694,
+        "terminal_reason": "targets_completed",
+        "controller_failure": false,
+        "history_infeasible": false,
+        "controller_error": null,
+        "failure_cost": 0.0,
+        "solver_status_counts": {
+          "Solve_Succeeded": 243
+        },
+        "action_source_counts": {
+          "policy": 243
+        },
+        "applied_actions": 243,
+        "modified_actions": 0,
+        "clipped_actions": 0,
+        "noisy_actions": 0,
+        "override_actions": 0,
+        "targets_completed": 5,
+        "tracking_cost": 101817.96990986733,
+        "success": true,
+        "all_targets_completed": true
+      },
+      "source_record": "/home/lucas/Workspace/diffusion_filtering_refactor/results/reacher_first_five_500_20261111/reacher/mpc_expert/seed_4002",
+      "source_trajectory_sha256": "d5d0f4ccf391f6b8d617101959716c045514b6d01bd230418bd7b3afec2336c4"
+    },
+    {
+      "seed": 4003,
+      "targets": [
+        [
+          -0.005857809099111693,
+          -0.16604564741269148
+        ],
+        [
+          -0.07560451250253557,
+          0.055852439491679735
+        ],
+        [
+          -0.1615352760027025,
+          -0.06909169298608461
+        ],
+        [
+          0.07954098800469174,
+          -0.022499009234637667
+        ],
+        [
+          -0.04942690031421294,
+          0.055507344208652484
+        ]
+      ],
+      "steps": 500,
+      "result": {
+        "cost": 96146.5904640624,
+        "reached": 4,
+        "reached_final": 5,
+        "violations": 0,
+        "violations_strict": 0,
+        "steps": 216,
+        "ms": 11.079750236401905,
+        "terminal_reason": "targets_completed",
+        "controller_failure": false,
+        "history_infeasible": false,
+        "controller_error": null,
+        "failure_cost": 0.0,
+        "solver_status_counts": {
+          "Solve_Succeeded": 216
+        },
+        "action_source_counts": {
+          "policy": 216
+        },
+        "applied_actions": 216,
+        "modified_actions": 0,
+        "clipped_actions": 0,
+        "noisy_actions": 0,
+        "override_actions": 0,
+        "targets_completed": 5,
+        "tracking_cost": 96146.5904640624,
+        "success": true,
+        "all_targets_completed": true
+      },
+      "source_record": "/home/lucas/Workspace/diffusion_filtering_refactor/results/reacher_first_five_500_20261111/reacher/mpc_expert/seed_4003",
+      "source_trajectory_sha256": "aa6d00f2baf1f9a18fc3413d2dd7ec5b9fa716d86afa26be31e337d599e2e733"
+    },
+    {
+      "seed": 4004,
+      "targets": [
+        [
+          -0.13346749262647345,
+          -0.12152320409222718
+        ],
+        [
+          -0.13702558707221899,
+          -0.008058817363951951
+        ],
+        [
+          0.018345481105766046,
+          -0.14707227914891766
+        ],
+        [
+          0.03320913990999817,
+          -0.07785688321472406
+        ],
+        [
+          0.011927834883829131,
+          0.06305551893430834
+        ]
+      ],
+      "steps": 500,
+      "result": {
+        "cost": 82617.64372218357,
+        "reached": 4,
+        "reached_final": 5,
+        "violations": 0,
+        "violations_strict": 0,
+        "steps": 164,
+        "ms": 11.3966641702729,
+        "terminal_reason": "targets_completed",
+        "controller_failure": false,
+        "history_infeasible": false,
+        "controller_error": null,
+        "failure_cost": 0.0,
+        "solver_status_counts": {
+          "Solve_Succeeded": 164
+        },
+        "action_source_counts": {
+          "policy": 164
+        },
+        "applied_actions": 164,
+        "modified_actions": 0,
+        "clipped_actions": 0,
+        "noisy_actions": 0,
+        "override_actions": 0,
+        "targets_completed": 5,
+        "tracking_cost": 82617.64372218357,
+        "success": true,
+        "all_targets_completed": true
+      },
+      "source_record": "/home/lucas/Workspace/diffusion_filtering_refactor/results/reacher_first_five_500_20261111/reacher/mpc_expert/seed_4004",
+      "source_trajectory_sha256": "d86515e8a38b3f822aef73be4c5b8cebf69f84ea12d86830121619da885bb5f2"
+    }
+  ],
+  "source_sha256": {
+    "experiments/reacher.py": "adcdfa543c5e0d142047a5e35d39020590a9daee1e39b4ba45e1c1651901d668",
+    "src/controllers/reacher_mpc.py": "77de49e2515c05b96963be5010f0cee3057e7e7d9819a1ffac4537e897f17337",
+    "src/tasks/reacher.py": "3b3e7cdd6edb84d702b0c8295174f8edd39a72980b45d388fed439154bcede7c",
+    "src/tasks/_gym.py": "2627f9b8951a4231b8b9cb0001892381d998ff7c546f745285c76616cb935c9d",
+    "src/benchmarks/outcomes.py": "05968f3b92e4809068a74d0a839efd361df7762899d3ed50f9a84f5dcbd716c2",
+    "src/data.py": "7d05a50908d68322e9098b828be17ae3871b645a91dbb72e3c87351de48e2203",
+    "src/dataset_io.py": "c9e04f4c3e49a071b2e3c804c298f13ddc401cf2594323432e25b34c040469c3",
+    "collector": "2a36ec554e65cf5c72ac8659b469931c1069f4e625d2200e8b5ac025e84655e4"
+  },
+  "reuse_note": "Exact saved expert prefixes through fifth target; cap500, first-five protocol, no expert rerun."
+}

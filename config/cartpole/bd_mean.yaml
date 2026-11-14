@@ -1,0 +1,11 @@
+id: bd_mean
+name: BD-mean
+family: imitation
+policy: bd
+parameters:
+  sampling: mean
+  sampling_scheme: sigma
+  smoothing: 0.0
+  bandwidth: 0.01
+parameter_status: Transferred validation parameters
+  and matched data

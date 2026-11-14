@@ -1,0 +1,13 @@
+{
+  "repository": "https://gitlab.ethz.ch/bsaverio/coco-project",
+  "revision": "47a7d16f04dc0a149684ea067bfc1e42101b1172",
+  "license_declared_in_upstream_metadata": "MIT",
+  "files": {
+    "coco_rocket_lander/__init__.py": "7252427edfffeb5b857feac99bbd060cbbcfe61c8140cd4bc9ea12f0b04e84ab",
+    "coco_rocket_lander/env/__init__.py": "7994d26c64d7d2749a01be136803ec5d0cebd852e4fcea370bfeaa68c8d4f530",
+    "coco_rocket_lander/env/env_cfg.py": "b9b5ccb0dd79f5aee61c4f7ffd84d106941fb0bb2f8ad87d64126ba121de28e8",
+    "coco_rocket_lander/env/rocketlander.py": "b29d57462365b47f6872b54cb4ddaccecc1a3f2df9f19bdb3050c0f76ae42b03",
+    "coco_rocket_lander/env/system_model.py": "66a999e6b7084c8f710e8f1c000ebfec6bf4de9385de5b2f914f0313da7829b7",
+    "UPSTREAM.toml": "e4b7ae162f6171b5696cbbd98b613eb219e30259460e05c201a7436b29374f98"
+  }
+}

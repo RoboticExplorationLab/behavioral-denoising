@@ -1,0 +1,11 @@
+id: bd_mean_chi2
+name: "BD-mean-\u03C7\xB2"
+family: imitation
+policy: bd_mean_chi2
+parameters:
+  ridge: 1.0e-06
+  sampling_scheme: sigma
+  smoothing: 0.0
+  bandwidth: 0.2
+parameter_status: Transferred validation parameters
+  and matched data

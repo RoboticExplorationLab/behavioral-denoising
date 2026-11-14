@@ -1,0 +1,20 @@
+id: select_dpc
+name: Select-DPC
+family: select_dpc
+prediction_horizon: 30
+parameter_status: Selected on eight validation starts; evaluated on 50 separate test starts.
+parameters:
+  g_l1: 100.0
+  columns: 200
+  iterations: 5
+  output_weight: 100.0
+  input_weight: 0.01
+  slack: 5000000.0
+  g_projection: 10000.0
+  solver_options:
+    solver: OSQP
+    warm_start: false
+    max_iter: 6000
+    eps_abs: 1.0e-05
+    eps_rel: 0.0001
+    adaptive_rho_interval: 25

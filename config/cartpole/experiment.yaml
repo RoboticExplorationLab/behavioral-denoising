@@ -1,0 +1,38 @@
+benchmark_id: paper_control_benchmark
+data_arm: shared_mpc
+data_budget:
+  mpc_episodes: 200
+  mpc_steps_per_episode: 100
+  samples: 20000
+datasets:
+  matched_mpc: data/cartpole/demonstrations.npz
+description: 'Cartpole benchmark: shared MPC data, ten starts, fixed parameters.'
+evaluation_mode: fixed
+future: 1
+implementation: draft_aligned
+methods:
+- bd_chi2
+- select_dpc_upstream
+- bd_mean
+- bd_sample
+- bd_kl
+- bd_mean_chi2
+- windowed_deepc_upstream
+- deepc_upstream
+neighbors: 200
+outcome_protocol: benchmark_v1
+past: 1
+past_inputs: false
+record_traces: true
+reference:
+- 0
+- 0
+- 1
+- 0
+- 0
+steps: 300
+task:
+  angle_termination: 7.0
+  max_episode_steps: 1000
+expert_cache_file: data/cartpole/expert_evaluations.json
+test_starts: data/cartpole/test_starts.json

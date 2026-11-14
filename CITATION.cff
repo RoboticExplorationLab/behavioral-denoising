@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "Please cite the Behavioral Denoising paper when using this software."
+title: "Behavioral Denoising: A New Perspective on Nonlinear Behavioral Control Inspired by Closed-Form Diffusion Policies"
+type: software
+authors:
+  - family-names: Jia
+    given-names: Lucas Y.
+  - family-names: Zhang
+    given-names: John Z.
+  - family-names: Manchester
+    given-names: Zachary
+repository-code: "https://github.com/RoboticExplorationLab/behavioral-denoising"
+version: 0.1.0
+license: MIT

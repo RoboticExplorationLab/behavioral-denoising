@@ -1,0 +1,3527 @@
+[
+  {
+    "id": "screen__bd_h8_e4_b0p05_m0p1",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h8_e4_b0p05_m0p1",
+      "order": 0,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.05,
+          "mode_width": 0.1,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "da6a1317c5e4159d628e7c9e426331291c27b1328e5fc02b49fe831551a5c720"
+  },
+  {
+    "id": "screen__bd_h8_e4_b0p05_m0p3",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h8_e4_b0p05_m0p3",
+      "order": 1,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.05,
+          "mode_width": 0.3,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "6e963a3c2e4ecc627a89cdd4f02548b64b37b9a0da9606e292e6103f40bed8e0"
+  },
+  {
+    "id": "screen__bd_h8_e4_b0p05_m1",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h8_e4_b0p05_m1",
+      "order": 2,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.05,
+          "mode_width": 1.0,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "ff355fe66e66e19281a44ee3dd434225b0a58c6393011d451b7c3ec2d894f918"
+  },
+  {
+    "id": "screen__bd_h8_e4_b0p1_m0p1",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h8_e4_b0p1_m0p1",
+      "order": 3,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.1,
+          "mode_width": 0.1,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "e3617282d1538ae522ef056f7926146c4749cc580e772e59eecbaad2205c74bb"
+  },
+  {
+    "id": "screen__bd_h8_e4_b0p1_m0p3",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h8_e4_b0p1_m0p3",
+      "order": 4,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.1,
+          "mode_width": 0.3,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "6e11257eabcc2ccb367d38dbcab41bfa3c03ad2be2af3afcce3d2ef523d4ca5f"
+  },
+  {
+    "id": "screen__bd_h8_e4_b0p1_m1",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h8_e4_b0p1_m1",
+      "order": 5,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.1,
+          "mode_width": 1.0,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "206a04fcd38884c03b6fc636dcbdbf307cca9b69a85af1b5e77630b1ed6087a4"
+  },
+  {
+    "id": "screen__bd_h8_e4_b0p2_m0p1",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h8_e4_b0p2_m0p1",
+      "order": 6,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.2,
+          "mode_width": 0.1,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "fa7bcab909c76003f687b3eb87f5e37b7aa49465d1d2b52327ecb2af6bafaf89"
+  },
+  {
+    "id": "screen__bd_h8_e4_b0p2_m0p3",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h8_e4_b0p2_m0p3",
+      "order": 7,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.2,
+          "mode_width": 0.3,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "aad6bc89faa7f5f79e5c12c5759b831546a159ee96b65c3eb148cb83d11c903e"
+  },
+  {
+    "id": "screen__bd_h8_e4_b0p2_m1",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h8_e4_b0p2_m1",
+      "order": 8,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.2,
+          "mode_width": 1.0,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "68614e2789727ff989cfc955a90bfb943509b40e1a365866dac4b5290fb37577"
+  },
+  {
+    "id": "screen__bd_h8_e8_b0p05_m0p1",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h8_e8_b0p05_m0p1",
+      "order": 9,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.05,
+          "mode_width": 0.1,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "d7390a2df26d511326bc6b7ef03a4c0592db62d3c2ac0390f04510e32f543b3d"
+  },
+  {
+    "id": "screen__bd_h8_e8_b0p05_m0p3",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h8_e8_b0p05_m0p3",
+      "order": 10,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.05,
+          "mode_width": 0.3,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "bf6a1467fdceaf30725897d575071a75e97af4b9d212cc9b17ae9041a10284ca"
+  },
+  {
+    "id": "screen__bd_h8_e8_b0p05_m1",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h8_e8_b0p05_m1",
+      "order": 11,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.05,
+          "mode_width": 1.0,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "b50d2bf12d930844e7cbfe16f88ab2f75efec001dafe62860a946fe8c0ad96b0"
+  },
+  {
+    "id": "screen__bd_h8_e8_b0p1_m0p1",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h8_e8_b0p1_m0p1",
+      "order": 12,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.1,
+          "mode_width": 0.1,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "53fd5b2d2ad5970a1bfbd57ecdf16e448c803f0e34609c353dd1f3a32a5c0f04"
+  },
+  {
+    "id": "screen__bd_h8_e8_b0p1_m0p3",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h8_e8_b0p1_m0p3",
+      "order": 13,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.1,
+          "mode_width": 0.3,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "2def5a4e4cd58d65b22c6d9ef11ecb29ff0ef4553276d87af52ae1e5580be497"
+  },
+  {
+    "id": "screen__bd_h8_e8_b0p1_m1",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h8_e8_b0p1_m1",
+      "order": 14,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.1,
+          "mode_width": 1.0,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "44f85f298417d0b9085d8ffcd68e5ca7f235b1a5ade81a3d8037b3de1e131426"
+  },
+  {
+    "id": "screen__bd_h8_e8_b0p2_m0p1",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h8_e8_b0p2_m0p1",
+      "order": 15,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.2,
+          "mode_width": 0.1,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "e7fbdd3328fa962a7fbfe309942f7dde160261f84e868fe64ecbaef288eeeae5"
+  },
+  {
+    "id": "screen__bd_h8_e8_b0p2_m0p3",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h8_e8_b0p2_m0p3",
+      "order": 16,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.2,
+          "mode_width": 0.3,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "7b237ca5cf5d3cbd0f5ac2e0d05b567dce2224c00023037d11d3074d36608869"
+  },
+  {
+    "id": "screen__bd_h8_e8_b0p2_m1",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h8_e8_b0p2_m1",
+      "order": 17,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.2,
+          "mode_width": 1.0,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "cba01196818003ac68afce939f737ca1d12eabd62d7db9c549afa3b7e2496e4b"
+  },
+  {
+    "id": "screen__bd_h16_e4_b0p05_m0p1",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h16_e4_b0p05_m0p1",
+      "order": 18,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.05,
+          "mode_width": 0.1,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "9066172d46189ac6f74faa0bf3963d276e84f232a1a77eb8e59198e646544057"
+  },
+  {
+    "id": "screen__bd_h16_e4_b0p05_m0p3",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h16_e4_b0p05_m0p3",
+      "order": 19,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.05,
+          "mode_width": 0.3,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "b676f1919c229fb024418757c7fd2bd58c9e0e225048bcdc4a37617d8a1a77d3"
+  },
+  {
+    "id": "screen__bd_h16_e4_b0p05_m1",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h16_e4_b0p05_m1",
+      "order": 20,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.05,
+          "mode_width": 1.0,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "dda0e1a747b03f44b6165a390e981e5ac7d5a08dd20b4abf22dfc3ea8861454d"
+  },
+  {
+    "id": "screen__bd_h16_e4_b0p1_m0p1",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h16_e4_b0p1_m0p1",
+      "order": 21,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.1,
+          "mode_width": 0.1,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "1fc0e77f6438071c38da728f75c28fb7c4bf859ed4404c450defdd889f7221a5"
+  },
+  {
+    "id": "screen__bd_h16_e4_b0p1_m0p3",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h16_e4_b0p1_m0p3",
+      "order": 22,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.1,
+          "mode_width": 0.3,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "d56a5d8883e1d58535150303304629656e9931f28215a3ae598c201a9d05c11b"
+  },
+  {
+    "id": "screen__bd_h16_e4_b0p1_m1",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h16_e4_b0p1_m1",
+      "order": 23,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.1,
+          "mode_width": 1.0,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "c3e8880d35ac4f37f79d908af30e83eb26b6f4c03c43c5098a2a23184e64441e"
+  },
+  {
+    "id": "screen__bd_h16_e4_b0p2_m0p1",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h16_e4_b0p2_m0p1",
+      "order": 24,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.2,
+          "mode_width": 0.1,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "66a9ab4d1da3dc78f14a4ffcbbf041ef3086ba6480dc23479a4643829ebacd1d"
+  },
+  {
+    "id": "screen__bd_h16_e4_b0p2_m0p3",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h16_e4_b0p2_m0p3",
+      "order": 25,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.2,
+          "mode_width": 0.3,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "bfe19afb19b3321185a7bc0ee002370730db77018751a80f08fc265de1935ec2"
+  },
+  {
+    "id": "screen__bd_h16_e4_b0p2_m1",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h16_e4_b0p2_m1",
+      "order": 26,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.2,
+          "mode_width": 1.0,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "81293ea410af33f0609e77b197b680d0bf844fda4f71b314cb2d49161ce42305"
+  },
+  {
+    "id": "screen__bd_h16_e8_b0p05_m0p1",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h16_e8_b0p05_m0p1",
+      "order": 27,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.05,
+          "mode_width": 0.1,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "57fbfec2a07bbf2e28e48c4a1114a08b4cca81eb31e279cf008552396f196da7"
+  },
+  {
+    "id": "screen__bd_h16_e8_b0p05_m0p3",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h16_e8_b0p05_m0p3",
+      "order": 28,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.05,
+          "mode_width": 0.3,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "fec9796fe9dc9105e6e54810a5c7815a873d742b65ff76d163738d1094cb40b0"
+  },
+  {
+    "id": "screen__bd_h16_e8_b0p05_m1",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h16_e8_b0p05_m1",
+      "order": 29,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.05,
+          "mode_width": 1.0,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "67792667453d42c12d006d4fbf74d76ef6fbee262c94a931568d2f3df80aef0e"
+  },
+  {
+    "id": "screen__bd_h16_e8_b0p1_m0p1",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h16_e8_b0p1_m0p1",
+      "order": 30,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.1,
+          "mode_width": 0.1,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "1fc373f00b98f9d0ee10cf6053e72e163af6c4c71fdcbb7745290a9aa4acb6d0"
+  },
+  {
+    "id": "screen__bd_h16_e8_b0p1_m0p3",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h16_e8_b0p1_m0p3",
+      "order": 31,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.1,
+          "mode_width": 0.3,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "7b9d894f9d03bf981da68bcf844f7cfe04a3f5584753ce35af32045ddc34c3a6"
+  },
+  {
+    "id": "screen__bd_h16_e8_b0p1_m1",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h16_e8_b0p1_m1",
+      "order": 32,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.1,
+          "mode_width": 1.0,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "71d2be67b97d52e451dd1ddf394709d6925ecebb91f3e34cf32c482f0180c1bd"
+  },
+  {
+    "id": "screen__bd_h16_e8_b0p2_m0p1",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h16_e8_b0p2_m0p1",
+      "order": 33,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.2,
+          "mode_width": 0.1,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "56a97c473fbb9870c2f5d6676d1502ff3da18b8e87d378c546c59e6c6c813eb8"
+  },
+  {
+    "id": "screen__bd_h16_e8_b0p2_m0p3",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h16_e8_b0p2_m0p3",
+      "order": 34,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.2,
+          "mode_width": 0.3,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "99f5ceef6462ffcbb27bb2742823392f42b7091dd4df9403445bcd729ed1e4e5"
+  },
+  {
+    "id": "screen__bd_h16_e8_b0p2_m1",
+    "phase": "screen",
+    "candidate": {
+      "id": "bd_h16_e8_b0p2_m1",
+      "order": 35,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.2,
+          "mode_width": 1.0,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "951b07831909de273763f8ce4c974fb56e2f795efb4545f5ddf382c800813b6f"
+  },
+  {
+    "id": "screen__select_h8_e4_l10_n200",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h8_e4_l10_n200",
+      "order": 36,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 10.0,
+          "columns": 200,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "90041101a3110dd5ba9e376af0f6cf89892c2e434207830c30ef06bb1199ca59"
+  },
+  {
+    "id": "screen__select_h8_e4_l100_n200",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h8_e4_l100_n200",
+      "order": 37,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 100.0,
+          "columns": 200,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "e8790793a128a108c5da73c778b5f40fce991b5a6e1fd34723c51e5b08de6e11"
+  },
+  {
+    "id": "screen__select_h8_e4_l1000_n200",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h8_e4_l1000_n200",
+      "order": 38,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 1000.0,
+          "columns": 200,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "083da6e55776d092504ff8132b72dd6a19091d212897f5414603613173fe69a3"
+  },
+  {
+    "id": "screen__select_h8_e8_l10_n200",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h8_e8_l10_n200",
+      "order": 39,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 10.0,
+          "columns": 200,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "4e2dbbd4e2a67256ee599313618d6068d884ec42e19493ec873b84b0a4b32a62"
+  },
+  {
+    "id": "screen__select_h8_e8_l100_n200",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h8_e8_l100_n200",
+      "order": 40,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 100.0,
+          "columns": 200,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "918d4ec0df90ea26fb0006952bc99e6d6f4c2d04b68ac2966d04b614fb51b3b3"
+  },
+  {
+    "id": "screen__select_h8_e8_l1000_n200",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h8_e8_l1000_n200",
+      "order": 41,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 1000.0,
+          "columns": 200,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "15a7e1ff87e48a0bd801da868e42e4a8b57c8419d7d47005a6e8e318a6ce3721"
+  },
+  {
+    "id": "screen__select_h16_e4_l10_n200",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h16_e4_l10_n200",
+      "order": 42,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 10.0,
+          "columns": 200,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "7fa5951942e5b3d9c574529d72e72b1e33329fc647ee7b338143372489a3707f"
+  },
+  {
+    "id": "screen__select_h16_e4_l100_n200",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h16_e4_l100_n200",
+      "order": 43,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 100.0,
+          "columns": 200,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "0ac996caa38e27cd6f75894675d6c66935e1bf7c3cd27d69b2faf23c8b66fc0a"
+  },
+  {
+    "id": "screen__select_h16_e4_l1000_n200",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h16_e4_l1000_n200",
+      "order": 44,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 1000.0,
+          "columns": 200,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "b614a4a257bab8f3d2b38e300680334a553c11df23f64c83194510f08633f0bf"
+  },
+  {
+    "id": "screen__select_h16_e8_l10_n200",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h16_e8_l10_n200",
+      "order": 45,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 10.0,
+          "columns": 200,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "dbe5679f884f0e3938c714cd5c68ca28c09917fe13b53691938e55d2e630b316"
+  },
+  {
+    "id": "screen__select_h16_e8_l100_n200",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h16_e8_l100_n200",
+      "order": 46,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 100.0,
+          "columns": 200,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "5bde232041648f899a9d9b4f9221102550fb67b05f12d73fe41b0e6581749037"
+  },
+  {
+    "id": "screen__select_h16_e8_l1000_n200",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h16_e8_l1000_n200",
+      "order": 47,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 1000.0,
+          "columns": 200,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "b82a04edc36e7c4ea337a4b308b7765bf403a72ddb497526a80b921b7f71deb4"
+  },
+  {
+    "id": "screen__select_h30_e8_l100_n200",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h30_e8_l100_n200",
+      "order": 48,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 30,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 100.0,
+          "columns": 200,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "3cab4d26fc77b3553ef06259088d0bed3efb0b63e42f54c8988d9e68215dd70a"
+  },
+  {
+    "id": "screen__select_h8_e4_l10_n500",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h8_e4_l10_n500",
+      "order": 49,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 10.0,
+          "columns": 500,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "2f1f4129312fe72bca96af47849b41925d7ee38a7c52c9b25c322cafbfd411b9"
+  },
+  {
+    "id": "screen__select_h8_e4_l100_n500",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h8_e4_l100_n500",
+      "order": 50,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 100.0,
+          "columns": 500,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "a1de1b16bb032cf700195b7eddb42bf6d0aa165f8e18346edfcd3a3e93c51f60"
+  },
+  {
+    "id": "screen__select_h8_e4_l1000_n500",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h8_e4_l1000_n500",
+      "order": 51,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 1000.0,
+          "columns": 500,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "5079d8c6933391ab650896f11075bf341aac1adf533825ae1aea45cf0b33713b"
+  },
+  {
+    "id": "screen__select_h8_e8_l10_n500",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h8_e8_l10_n500",
+      "order": 52,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 10.0,
+          "columns": 500,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "eeb9d3fab0c3848db73c20a9689f9ca8856051e13d9dab7eb0bff0419a11c034"
+  },
+  {
+    "id": "screen__select_h8_e8_l100_n500",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h8_e8_l100_n500",
+      "order": 53,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 100.0,
+          "columns": 500,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "c90956bc8dada040ba607f7af636bc8b91e11f22480c2fdf592c8172a46f8c8c"
+  },
+  {
+    "id": "screen__select_h8_e8_l1000_n500",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h8_e8_l1000_n500",
+      "order": 54,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 1000.0,
+          "columns": 500,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "09cffbe81c933016958a1ff840925eb8b3e5052e890ee855ef571f9d6bf4589d"
+  },
+  {
+    "id": "screen__select_h16_e4_l10_n500",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h16_e4_l10_n500",
+      "order": 55,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 10.0,
+          "columns": 500,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "e063a1b628e1ca35ee95bda11c31e44d5f09a824f2f9e19f3ce8fe54b69285b9"
+  },
+  {
+    "id": "screen__select_h16_e4_l100_n500",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h16_e4_l100_n500",
+      "order": 56,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 100.0,
+          "columns": 500,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "8a6b5f1bee17a483dac5b7b59d5a9d0ea9b8ac9df0f5dcbe30459bef41c58164"
+  },
+  {
+    "id": "screen__select_h16_e4_l1000_n500",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h16_e4_l1000_n500",
+      "order": 57,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 1000.0,
+          "columns": 500,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "6a00cb1db4ea54b402bcee1fea3f7f3ca520c9a4581a147a5c9f87ede1db62bc"
+  },
+  {
+    "id": "screen__select_h16_e8_l10_n500",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h16_e8_l10_n500",
+      "order": 58,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 10.0,
+          "columns": 500,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "c7ee73d883e7d426f3af1d726471282e8113c589b639b533aeec1ae69b10e4ea"
+  },
+  {
+    "id": "screen__select_h16_e8_l100_n500",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h16_e8_l100_n500",
+      "order": 59,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 100.0,
+          "columns": 500,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "b2ec336c74190e59afe88a308e98ea5090d650443f582b447c2c3af1570b5d9c"
+  },
+  {
+    "id": "screen__select_h16_e8_l1000_n500",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h16_e8_l1000_n500",
+      "order": 60,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 1000.0,
+          "columns": 500,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "d1527d2dc60b4acd4e99325ac360614d3e255b16f2bf5a69b2ac683dbf9f1426"
+  },
+  {
+    "id": "screen__select_h30_e8_l100_n500",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h30_e8_l100_n500",
+      "order": 61,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 30,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 100.0,
+          "columns": 500,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "506528c599259c864c73c57a5bb1d19435ce9d9a6ad19cf9bc681dd80cefb72c"
+  },
+  {
+    "id": "screen__select_h8_e4_l10_n1000",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h8_e4_l10_n1000",
+      "order": 62,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 10.0,
+          "columns": 1000,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "1093df6990a76bc966e780264a5a00681ba9062d0078831f0b8d00673c9f5331"
+  },
+  {
+    "id": "screen__select_h8_e4_l100_n1000",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h8_e4_l100_n1000",
+      "order": 63,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 100.0,
+          "columns": 1000,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "00b020a719598446d9d80f3c924728e3a8b4977ca40fceee2325d9d5405ddbf1"
+  },
+  {
+    "id": "screen__select_h8_e4_l1000_n1000",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h8_e4_l1000_n1000",
+      "order": 64,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 1000.0,
+          "columns": 1000,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "3ada17bae97571a56197d92cc0980f5f0ecbc13c0cfd717bfa0c4aa9623b446c"
+  },
+  {
+    "id": "screen__select_h8_e8_l10_n1000",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h8_e8_l10_n1000",
+      "order": 65,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 10.0,
+          "columns": 1000,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "01ec98d8d576b5e6356365ce0fa3a31e7f3dd6ab13ac64c2cc2106beae1bd31b"
+  },
+  {
+    "id": "screen__select_h8_e8_l100_n1000",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h8_e8_l100_n1000",
+      "order": 66,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 100.0,
+          "columns": 1000,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "8b035f9415eb42250da1e5271c13174f222a50aa5a0d4ee1d56f249a26e06905"
+  },
+  {
+    "id": "screen__select_h8_e8_l1000_n1000",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h8_e8_l1000_n1000",
+      "order": 67,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 1000.0,
+          "columns": 1000,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "fd3a068baabc46e14ad72954222a0e35a55ca1a2d0326ca1be2457d3c93b0d62"
+  },
+  {
+    "id": "screen__select_h16_e4_l10_n1000",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h16_e4_l10_n1000",
+      "order": 68,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 10.0,
+          "columns": 1000,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "016507e420006e357594143d66a359eaf0ab09725699bc2c48e18c59db98b25f"
+  },
+  {
+    "id": "screen__select_h16_e4_l100_n1000",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h16_e4_l100_n1000",
+      "order": 69,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 100.0,
+          "columns": 1000,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "24d1cdef933fd76be8403999a5153cfb5a5c16f9a97ea5744631180694144ae4"
+  },
+  {
+    "id": "screen__select_h16_e4_l1000_n1000",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h16_e4_l1000_n1000",
+      "order": 70,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 1000.0,
+          "columns": 1000,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 4
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "4a4cd0abb75465d722287abd4bbda51d05037490438d551e97922773af3cf7df"
+  },
+  {
+    "id": "screen__select_h16_e8_l10_n1000",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h16_e8_l10_n1000",
+      "order": 71,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 10.0,
+          "columns": 1000,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "168487405d39ec68c031d61bc404dfd8fb63f092c519f901f3ca5d1eb384f746"
+  },
+  {
+    "id": "screen__select_h16_e8_l100_n1000",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h16_e8_l100_n1000",
+      "order": 72,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 100.0,
+          "columns": 1000,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "493f87a0e2675928a2e239e0a3fd7363dc96f69e7d6a8669423f4b102a376cd5"
+  },
+  {
+    "id": "screen__select_h16_e8_l1000_n1000",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h16_e8_l1000_n1000",
+      "order": 73,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 1000.0,
+          "columns": 1000,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "5f870c51fdb620ec4d8c11d7a361215af33ec65b60d0bf88639bae609db69a8d"
+  },
+  {
+    "id": "screen__select_h30_e8_l100_n1000",
+    "phase": "screen",
+    "candidate": {
+      "id": "select_h30_e8_l100_n1000",
+      "order": 74,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 30,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 100.0,
+          "columns": 1000,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 8
+    },
+    "seeds": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007
+    ],
+    "repeats": 1,
+    "data_bank": "subset",
+    "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+    "sha256": "d2caaa91288dafbaa7e18c3a466302ed92799cdc70b49ab8639f3e0d97419329"
+  }
+]

@@ -1,0 +1,765 @@
+{
+  "runs": [
+    {
+      "seed": 10003,
+      "result": {
+        "action_cost": 164.64664248196738,
+        "action_process_cpu_ms": 23.400550986666712,
+        "action_source_counts": {
+          "policy": 300
+        },
+        "action_timing_count": 300,
+        "applied_actions": 300,
+        "clipped_actions": 0,
+        "controller_error": null,
+        "controller_failure": false,
+        "cost": 497328.97019313974,
+        "cost_finite": true,
+        "driver_ms_including_instrumentation": 24.9638765695272,
+        "failure_cost": 0.0,
+        "failure_cost_finite": true,
+        "first_balanced": 24.0,
+        "history_infeasible": false,
+        "job_failure": false,
+        "method": "MPC expert",
+        "modified_actions": 0,
+        "ms": 23.40448362888613,
+        "noisy_actions": 0,
+        "original_metrics": {
+          "action_process_cpu_ms": 23.400550986666712,
+          "action_source_counts": {
+            "policy": 300
+          },
+          "action_timing_count": 300,
+          "applied_actions": 300,
+          "clipped_actions": 0,
+          "controller_error": null,
+          "controller_failure": false,
+          "driver_ms_including_instrumentation": 24.9638765695272,
+          "failure_cost": 0.0,
+          "first_balanced": 24.0,
+          "history_infeasible": false,
+          "method": "MPC expert",
+          "modified_actions": 0,
+          "ms": 23.40448362888613,
+          "noisy_actions": 0,
+          "override_actions": 0,
+          "preparation": {
+            "process_cpu_seconds": 0.056170147999999864,
+            "wall_seconds": 0.05616952700074762
+          },
+          "seed": 10003,
+          "solver_status_counts": {
+            "Solve_Succeeded": 300
+          },
+          "steps": 300,
+          "success": true,
+          "terminal_reason": "horizon"
+        },
+        "override_actions": 0,
+        "preparation": {
+          "process_cpu_seconds": 0.056170147999999864,
+          "wall_seconds": 0.05616952700074762
+        },
+        "primary_success": true,
+        "record_status": "completed",
+        "schema_version": 1,
+        "seed": 10003,
+        "solver_status_counts": {
+          "Solve_Succeeded": 300
+        },
+        "state_cost": 497164.3235506579,
+        "steps": 300,
+        "success": true,
+        "task": "cartpole",
+        "terminal_reason": "horizon",
+        "trace_cost": 497328.97019313974
+      }
+    },
+    {
+      "seed": 10004,
+      "result": {
+        "action_cost": 169.66386398911112,
+        "action_process_cpu_ms": 25.456843790000036,
+        "action_source_counts": {
+          "policy": 300
+        },
+        "action_timing_count": 300,
+        "applied_actions": 300,
+        "clipped_actions": 0,
+        "controller_error": null,
+        "controller_failure": false,
+        "cost": 500371.35759257857,
+        "cost_finite": true,
+        "driver_ms_including_instrumentation": 26.9701001564196,
+        "failure_cost": 0.0,
+        "failure_cost_finite": true,
+        "first_balanced": 24.0,
+        "history_infeasible": false,
+        "job_failure": false,
+        "method": "MPC expert",
+        "modified_actions": 0,
+        "ms": 25.460776599744957,
+        "noisy_actions": 0,
+        "original_metrics": {
+          "action_process_cpu_ms": 25.456843790000036,
+          "action_source_counts": {
+            "policy": 300
+          },
+          "action_timing_count": 300,
+          "applied_actions": 300,
+          "clipped_actions": 0,
+          "controller_error": null,
+          "controller_failure": false,
+          "driver_ms_including_instrumentation": 26.9701001564196,
+          "failure_cost": 0.0,
+          "first_balanced": 24.0,
+          "history_infeasible": false,
+          "method": "MPC expert",
+          "modified_actions": 0,
+          "ms": 25.460776599744957,
+          "noisy_actions": 0,
+          "override_actions": 0,
+          "preparation": {
+            "process_cpu_seconds": 0.05666642099999919,
+            "wall_seconds": 0.056667072989512235
+          },
+          "seed": 10004,
+          "solver_status_counts": {
+            "Solve_Succeeded": 300
+          },
+          "steps": 300,
+          "success": true,
+          "terminal_reason": "horizon"
+        },
+        "override_actions": 0,
+        "preparation": {
+          "process_cpu_seconds": 0.05666642099999919,
+          "wall_seconds": 0.056667072989512235
+        },
+        "primary_success": true,
+        "record_status": "completed",
+        "schema_version": 1,
+        "seed": 10004,
+        "solver_status_counts": {
+          "Solve_Succeeded": 300
+        },
+        "state_cost": 500201.69372858945,
+        "steps": 300,
+        "success": true,
+        "task": "cartpole",
+        "terminal_reason": "horizon",
+        "trace_cost": 500371.35759257857
+      }
+    },
+    {
+      "seed": 10005,
+      "result": {
+        "action_cost": 165.8911647026516,
+        "action_process_cpu_ms": 24.65310533000005,
+        "action_source_counts": {
+          "policy": 300
+        },
+        "action_timing_count": 300,
+        "applied_actions": 300,
+        "clipped_actions": 0,
+        "controller_error": null,
+        "controller_failure": false,
+        "cost": 498527.35342690645,
+        "cost_finite": true,
+        "driver_ms_including_instrumentation": 26.611042510097228,
+        "failure_cost": 0.0,
+        "failure_cost_finite": true,
+        "first_balanced": 24.0,
+        "history_infeasible": false,
+        "job_failure": false,
+        "method": "MPC expert",
+        "modified_actions": 0,
+        "ms": 24.657212729992654,
+        "noisy_actions": 0,
+        "original_metrics": {
+          "action_process_cpu_ms": 24.65310533000005,
+          "action_source_counts": {
+            "policy": 300
+          },
+          "action_timing_count": 300,
+          "applied_actions": 300,
+          "clipped_actions": 0,
+          "controller_error": null,
+          "controller_failure": false,
+          "driver_ms_including_instrumentation": 26.611042510097228,
+          "failure_cost": 0.0,
+          "first_balanced": 24.0,
+          "history_infeasible": false,
+          "method": "MPC expert",
+          "modified_actions": 0,
+          "ms": 24.657212729992654,
+          "noisy_actions": 0,
+          "override_actions": 0,
+          "preparation": {
+            "process_cpu_seconds": 0.05813593599999933,
+            "wall_seconds": 0.05813335801940411
+          },
+          "seed": 10005,
+          "solver_status_counts": {
+            "Solve_Succeeded": 300
+          },
+          "steps": 300,
+          "success": true,
+          "terminal_reason": "horizon"
+        },
+        "override_actions": 0,
+        "preparation": {
+          "process_cpu_seconds": 0.05813593599999933,
+          "wall_seconds": 0.05813335801940411
+        },
+        "primary_success": true,
+        "record_status": "completed",
+        "schema_version": 1,
+        "seed": 10005,
+        "solver_status_counts": {
+          "Solve_Succeeded": 300
+        },
+        "state_cost": 498361.4622622038,
+        "steps": 300,
+        "success": true,
+        "task": "cartpole",
+        "terminal_reason": "horizon",
+        "trace_cost": 498527.35342690645
+      }
+    },
+    {
+      "seed": 10006,
+      "result": {
+        "action_cost": 170.7555568679632,
+        "action_process_cpu_ms": 25.755444153333176,
+        "action_source_counts": {
+          "policy": 300
+        },
+        "action_timing_count": 300,
+        "applied_actions": 300,
+        "clipped_actions": 0,
+        "controller_error": null,
+        "controller_failure": false,
+        "cost": 500936.16577175894,
+        "cost_finite": true,
+        "driver_ms_including_instrumentation": 27.439369051135145,
+        "failure_cost": 0.0,
+        "failure_cost_finite": true,
+        "first_balanced": 24.0,
+        "history_infeasible": false,
+        "job_failure": false,
+        "method": "MPC expert",
+        "modified_actions": 0,
+        "ms": 25.75969391929296,
+        "noisy_actions": 0,
+        "original_metrics": {
+          "action_process_cpu_ms": 25.755444153333176,
+          "action_source_counts": {
+            "policy": 300
+          },
+          "action_timing_count": 300,
+          "applied_actions": 300,
+          "clipped_actions": 0,
+          "controller_error": null,
+          "controller_failure": false,
+          "driver_ms_including_instrumentation": 27.439369051135145,
+          "failure_cost": 0.0,
+          "first_balanced": 24.0,
+          "history_infeasible": false,
+          "method": "MPC expert",
+          "modified_actions": 0,
+          "ms": 25.75969391929296,
+          "noisy_actions": 0,
+          "override_actions": 0,
+          "preparation": {
+            "process_cpu_seconds": 0.06561548899999892,
+            "wall_seconds": 0.06561385001987219
+          },
+          "seed": 10006,
+          "solver_status_counts": {
+            "Solve_Succeeded": 300
+          },
+          "steps": 300,
+          "success": true,
+          "terminal_reason": "horizon"
+        },
+        "override_actions": 0,
+        "preparation": {
+          "process_cpu_seconds": 0.06561548899999892,
+          "wall_seconds": 0.06561385001987219
+        },
+        "primary_success": true,
+        "record_status": "completed",
+        "schema_version": 1,
+        "seed": 10006,
+        "solver_status_counts": {
+          "Solve_Succeeded": 300
+        },
+        "state_cost": 500765.410214891,
+        "steps": 300,
+        "success": true,
+        "task": "cartpole",
+        "terminal_reason": "horizon",
+        "trace_cost": 500936.16577175894
+      }
+    },
+    {
+      "seed": 10007,
+      "result": {
+        "action_cost": 174.850964237276,
+        "action_process_cpu_ms": 25.878011879999526,
+        "action_source_counts": {
+          "policy": 300
+        },
+        "action_timing_count": 300,
+        "applied_actions": 300,
+        "clipped_actions": 0,
+        "controller_error": null,
+        "controller_failure": false,
+        "cost": 501724.0208675429,
+        "cost_finite": true,
+        "driver_ms_including_instrumentation": 27.87878934080557,
+        "failure_cost": 0.0,
+        "failure_cost_finite": true,
+        "first_balanced": 24.0,
+        "history_infeasible": false,
+        "job_failure": false,
+        "method": "MPC expert",
+        "modified_actions": 0,
+        "ms": 25.882454052916728,
+        "noisy_actions": 0,
+        "original_metrics": {
+          "action_process_cpu_ms": 25.878011879999526,
+          "action_source_counts": {
+            "policy": 300
+          },
+          "action_timing_count": 300,
+          "applied_actions": 300,
+          "clipped_actions": 0,
+          "controller_error": null,
+          "controller_failure": false,
+          "driver_ms_including_instrumentation": 27.87878934080557,
+          "failure_cost": 0.0,
+          "first_balanced": 24.0,
+          "history_infeasible": false,
+          "method": "MPC expert",
+          "modified_actions": 0,
+          "ms": 25.882454052916728,
+          "noisy_actions": 0,
+          "override_actions": 0,
+          "preparation": {
+            "process_cpu_seconds": 0.06320870000000411,
+            "wall_seconds": 0.06321237498195842
+          },
+          "seed": 10007,
+          "solver_status_counts": {
+            "Solve_Succeeded": 300
+          },
+          "steps": 300,
+          "success": true,
+          "terminal_reason": "horizon"
+        },
+        "override_actions": 0,
+        "preparation": {
+          "process_cpu_seconds": 0.06320870000000411,
+          "wall_seconds": 0.06321237498195842
+        },
+        "primary_success": true,
+        "record_status": "completed",
+        "schema_version": 1,
+        "seed": 10007,
+        "solver_status_counts": {
+          "Solve_Succeeded": 300
+        },
+        "state_cost": 501549.1699033056,
+        "steps": 300,
+        "success": true,
+        "task": "cartpole",
+        "terminal_reason": "horizon",
+        "trace_cost": 501724.0208675429
+      }
+    },
+    {
+      "seed": 10008,
+      "result": {
+        "action_cost": 162.04103860385123,
+        "action_process_cpu_ms": 27.49543836333326,
+        "action_source_counts": {
+          "policy": 300
+        },
+        "action_timing_count": 300,
+        "applied_actions": 300,
+        "clipped_actions": 0,
+        "controller_error": null,
+        "controller_failure": false,
+        "cost": 529034.9185100918,
+        "cost_finite": true,
+        "driver_ms_including_instrumentation": 29.124612012528814,
+        "failure_cost": 0.0,
+        "failure_cost_finite": true,
+        "first_balanced": 24.0,
+        "history_infeasible": false,
+        "job_failure": false,
+        "method": "MPC expert",
+        "modified_actions": 0,
+        "ms": 27.508838388215132,
+        "noisy_actions": 0,
+        "original_metrics": {
+          "action_process_cpu_ms": 27.49543836333326,
+          "action_source_counts": {
+            "policy": 300
+          },
+          "action_timing_count": 300,
+          "applied_actions": 300,
+          "clipped_actions": 0,
+          "controller_error": null,
+          "controller_failure": false,
+          "driver_ms_including_instrumentation": 29.124612012528814,
+          "failure_cost": 0.0,
+          "first_balanced": 24.0,
+          "history_infeasible": false,
+          "method": "MPC expert",
+          "modified_actions": 0,
+          "ms": 27.508838388215132,
+          "noisy_actions": 0,
+          "override_actions": 0,
+          "preparation": {
+            "process_cpu_seconds": 0.06212066300000174,
+            "wall_seconds": 0.06212021299870685
+          },
+          "seed": 10008,
+          "solver_status_counts": {
+            "Solve_Succeeded": 300
+          },
+          "steps": 300,
+          "success": true,
+          "terminal_reason": "horizon"
+        },
+        "override_actions": 0,
+        "preparation": {
+          "process_cpu_seconds": 0.06212066300000174,
+          "wall_seconds": 0.06212021299870685
+        },
+        "primary_success": true,
+        "record_status": "completed",
+        "schema_version": 1,
+        "seed": 10008,
+        "solver_status_counts": {
+          "Solve_Succeeded": 300
+        },
+        "state_cost": 528872.877471488,
+        "steps": 300,
+        "success": true,
+        "task": "cartpole",
+        "terminal_reason": "horizon",
+        "trace_cost": 529034.9185100918
+      }
+    },
+    {
+      "seed": 10009,
+      "result": {
+        "action_cost": 168.7708230522971,
+        "action_process_cpu_ms": 27.743945986666628,
+        "action_source_counts": {
+          "policy": 300
+        },
+        "action_timing_count": 300,
+        "applied_actions": 300,
+        "clipped_actions": 0,
+        "controller_error": null,
+        "controller_failure": false,
+        "cost": 499342.1488233881,
+        "cost_finite": true,
+        "driver_ms_including_instrumentation": 29.285946632541403,
+        "failure_cost": 0.0,
+        "failure_cost_finite": true,
+        "first_balanced": 24.0,
+        "history_infeasible": false,
+        "job_failure": false,
+        "method": "MPC expert",
+        "modified_actions": 0,
+        "ms": 27.74962907715235,
+        "noisy_actions": 0,
+        "original_metrics": {
+          "action_process_cpu_ms": 27.743945986666628,
+          "action_source_counts": {
+            "policy": 300
+          },
+          "action_timing_count": 300,
+          "applied_actions": 300,
+          "clipped_actions": 0,
+          "controller_error": null,
+          "controller_failure": false,
+          "driver_ms_including_instrumentation": 29.285946632541403,
+          "failure_cost": 0.0,
+          "first_balanced": 24.0,
+          "history_infeasible": false,
+          "method": "MPC expert",
+          "modified_actions": 0,
+          "ms": 27.74962907715235,
+          "noisy_actions": 0,
+          "override_actions": 0,
+          "preparation": {
+            "process_cpu_seconds": 0.07515661100000415,
+            "wall_seconds": 0.07513937400653958
+          },
+          "seed": 10009,
+          "solver_status_counts": {
+            "Solve_Succeeded": 300
+          },
+          "steps": 300,
+          "success": true,
+          "terminal_reason": "horizon"
+        },
+        "override_actions": 0,
+        "preparation": {
+          "process_cpu_seconds": 0.07515661100000415,
+          "wall_seconds": 0.07513937400653958
+        },
+        "primary_success": true,
+        "record_status": "completed",
+        "schema_version": 1,
+        "seed": 10009,
+        "solver_status_counts": {
+          "Solve_Succeeded": 300
+        },
+        "state_cost": 499173.3780003358,
+        "steps": 300,
+        "success": true,
+        "task": "cartpole",
+        "terminal_reason": "horizon",
+        "trace_cost": 499342.1488233881
+      }
+    },
+    {
+      "seed": 10010,
+      "result": {
+        "action_cost": 162.2713120082143,
+        "action_process_cpu_ms": 26.04373989666679,
+        "action_source_counts": {
+          "policy": 300
+        },
+        "action_timing_count": 300,
+        "applied_actions": 300,
+        "clipped_actions": 0,
+        "controller_error": null,
+        "controller_failure": false,
+        "cost": 495547.30114030384,
+        "cost_finite": true,
+        "driver_ms_including_instrumentation": 27.675705179184053,
+        "failure_cost": 0.0,
+        "failure_cost_finite": true,
+        "first_balanced": 24.0,
+        "history_infeasible": false,
+        "job_failure": false,
+        "method": "MPC expert",
+        "modified_actions": 0,
+        "ms": 26.05191726683794,
+        "noisy_actions": 0,
+        "original_metrics": {
+          "action_process_cpu_ms": 26.04373989666679,
+          "action_source_counts": {
+            "policy": 300
+          },
+          "action_timing_count": 300,
+          "applied_actions": 300,
+          "clipped_actions": 0,
+          "controller_error": null,
+          "controller_failure": false,
+          "driver_ms_including_instrumentation": 27.675705179184053,
+          "failure_cost": 0.0,
+          "first_balanced": 24.0,
+          "history_infeasible": false,
+          "method": "MPC expert",
+          "modified_actions": 0,
+          "ms": 26.05191726683794,
+          "noisy_actions": 0,
+          "override_actions": 0,
+          "preparation": {
+            "process_cpu_seconds": 0.06411106899999908,
+            "wall_seconds": 0.06410812900867313
+          },
+          "seed": 10010,
+          "solver_status_counts": {
+            "Solve_Succeeded": 300
+          },
+          "steps": 300,
+          "success": true,
+          "terminal_reason": "horizon"
+        },
+        "override_actions": 0,
+        "preparation": {
+          "process_cpu_seconds": 0.06411106899999908,
+          "wall_seconds": 0.06410812900867313
+        },
+        "primary_success": true,
+        "record_status": "completed",
+        "schema_version": 1,
+        "seed": 10010,
+        "solver_status_counts": {
+          "Solve_Succeeded": 300
+        },
+        "state_cost": 495385.02982829564,
+        "steps": 300,
+        "success": true,
+        "task": "cartpole",
+        "terminal_reason": "horizon",
+        "trace_cost": 495547.30114030384
+      }
+    },
+    {
+      "seed": 10011,
+      "result": {
+        "action_cost": 156.6684578641474,
+        "action_process_cpu_ms": 28.84076866666618,
+        "action_source_counts": {
+          "policy": 300
+        },
+        "action_timing_count": 300,
+        "applied_actions": 300,
+        "clipped_actions": 0,
+        "controller_error": null,
+        "controller_failure": false,
+        "cost": 524582.6811336419,
+        "cost_finite": true,
+        "driver_ms_including_instrumentation": 30.9604198274125,
+        "failure_cost": 0.0,
+        "failure_cost_finite": true,
+        "first_balanced": 24.0,
+        "history_infeasible": false,
+        "job_failure": false,
+        "method": "MPC expert",
+        "modified_actions": 0,
+        "ms": 28.84554621511294,
+        "noisy_actions": 0,
+        "original_metrics": {
+          "action_process_cpu_ms": 28.84076866666618,
+          "action_source_counts": {
+            "policy": 300
+          },
+          "action_timing_count": 300,
+          "applied_actions": 300,
+          "clipped_actions": 0,
+          "controller_error": null,
+          "controller_failure": false,
+          "driver_ms_including_instrumentation": 30.9604198274125,
+          "failure_cost": 0.0,
+          "first_balanced": 24.0,
+          "history_infeasible": false,
+          "method": "MPC expert",
+          "modified_actions": 0,
+          "ms": 28.84554621511294,
+          "noisy_actions": 0,
+          "override_actions": 0,
+          "preparation": {
+            "process_cpu_seconds": 0.05832334800000183,
+            "wall_seconds": 0.05833099101437256
+          },
+          "seed": 10011,
+          "solver_status_counts": {
+            "Solve_Succeeded": 300
+          },
+          "steps": 300,
+          "success": true,
+          "terminal_reason": "horizon"
+        },
+        "override_actions": 0,
+        "preparation": {
+          "process_cpu_seconds": 0.05832334800000183,
+          "wall_seconds": 0.05833099101437256
+        },
+        "primary_success": true,
+        "record_status": "completed",
+        "schema_version": 1,
+        "seed": 10011,
+        "solver_status_counts": {
+          "Solve_Succeeded": 300
+        },
+        "state_cost": 524426.0126757778,
+        "steps": 300,
+        "success": true,
+        "task": "cartpole",
+        "terminal_reason": "horizon",
+        "trace_cost": 524582.6811336419
+      }
+    },
+    {
+      "seed": 10012,
+      "result": {
+        "action_cost": 163.45738823066227,
+        "action_process_cpu_ms": 25.526087236666747,
+        "action_source_counts": {
+          "policy": 300
+        },
+        "action_timing_count": 300,
+        "applied_actions": 300,
+        "clipped_actions": 0,
+        "controller_error": null,
+        "controller_failure": false,
+        "cost": 497101.6906685835,
+        "cost_finite": true,
+        "driver_ms_including_instrumentation": 27.15321639184064,
+        "failure_cost": 0.0,
+        "failure_cost_finite": true,
+        "first_balanced": 24.0,
+        "history_infeasible": false,
+        "job_failure": false,
+        "method": "MPC expert",
+        "modified_actions": 0,
+        "ms": 25.531209192898437,
+        "noisy_actions": 0,
+        "original_metrics": {
+          "action_process_cpu_ms": 25.526087236666747,
+          "action_source_counts": {
+            "policy": 300
+          },
+          "action_timing_count": 300,
+          "applied_actions": 300,
+          "clipped_actions": 0,
+          "controller_error": null,
+          "controller_failure": false,
+          "driver_ms_including_instrumentation": 27.15321639184064,
+          "failure_cost": 0.0,
+          "first_balanced": 24.0,
+          "history_infeasible": false,
+          "method": "MPC expert",
+          "modified_actions": 0,
+          "ms": 25.531209192898437,
+          "noisy_actions": 0,
+          "override_actions": 0,
+          "preparation": {
+            "process_cpu_seconds": 0.0718653180000075,
+            "wall_seconds": 0.07186037104111165
+          },
+          "seed": 10012,
+          "solver_status_counts": {
+            "Solve_Succeeded": 300
+          },
+          "steps": 300,
+          "success": true,
+          "terminal_reason": "horizon"
+        },
+        "override_actions": 0,
+        "preparation": {
+          "process_cpu_seconds": 0.0718653180000075,
+          "wall_seconds": 0.07186037104111165
+        },
+        "primary_success": true,
+        "record_status": "completed",
+        "schema_version": 1,
+        "seed": 10012,
+        "solver_status_counts": {
+          "Solve_Succeeded": 300
+        },
+        "state_cost": 496938.2332803529,
+        "steps": 300,
+        "success": true,
+        "task": "cartpole",
+        "terminal_reason": "horizon",
+        "trace_cost": 497101.6906685835
+      }
+    }
+  ],
+  "note": "Same-start saved MPC denominators from finalized paper records."
+}

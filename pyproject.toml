@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "behavioral-denoising"
+version = "0.1.0"
+description = "Behavioral denoising and predictive-control paper benchmarks"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.26,<3", "scipy==1.14.1", "cvxpy==1.5.3", "osqp==0.6.7.post3",
+    "clarabel==0.9.0", "ecos==2.0.14", "scs==3.2.7", "qdldl==0.1.7.post4",
+    "PyYAML==6.0.2", "scikit-learn==1.7.2", "threadpoolctl==3.7.0",
+]
+
+[project.optional-dependencies]
+benchmark = [
+    "numpy==2.1.2", "gymnasium==0.29.1", "mujoco==2.3.3", "glfw==2.11.0", "casadi==3.8.2",
+    "Box2D==2.3.10", "pygame==2.6.1", "pillow==10.4.0", "imageio==2.38.0",
+]
+pusht = [
+    "numpy==1.26.4", "pymunk==6.2.1", "shapely==1.8.4", "pygame==2.1.2",
+    "gym==0.26.2", "opencv-python==4.8.1.78", "scikit-image==0.22.0",
+    "zarr==2.16.1", "numcodecs==0.12.1", "pillow==12.3.0",
+]
+plot = ["matplotlib==3.9.2", "pypdf==6.16.2", "Pillow>=10"]
+test = ["pytest==9.1.1"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src", "src.*", "experiments", "scripts", "scripts.*"]
+
+[tool.setuptools.package-data]
+"src.tasks" = ["assets/*.xml"]
+
+[tool.pytest.ini_options]
+addopts = '--disable-plugin-autoload -m "not simulator"'
+testpaths = ["tests"]
+pythonpath = ["."]
+markers = [
+    "reference_results: requires extracted results/paper.zip reference records",
+    "simulator: closed-loop simulation reproduction checks",
+    "pusht: requires the separate Push-T environment",
+]

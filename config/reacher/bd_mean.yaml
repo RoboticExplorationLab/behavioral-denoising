@@ -1,0 +1,12 @@
+id: bd_mean
+name: BD-mean
+family: bd
+parameters:
+  include_past_inputs: false
+  neighbors: 400
+  sampling: mean
+  sampling_scheme: sigma
+  smoothing: 0.0
+  bandwidth: 0.05
+parameter_status: Transferred validation parameters
+  and matched data

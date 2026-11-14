@@ -1,0 +1,100 @@
+action_weights:
+- 10
+- 10
+- 10
+benchmark_id: paper_control_benchmark
+data_arm: shared_mpc
+data_budget:
+  episodes: 58
+  samples: 17705
+  selection: All demonstrations, preserving episode order and boundaries
+demonstrations:
+  data_file: null
+  dataset_file: data/rocket/demonstrations.npz
+  dataset_sha256: d0cde35c7413f737efbed0ed0951b18b7374b2eced13eaa865118dae87481ded
+  draw: 0
+  episode_order: preserve
+  episodes: 58
+  noise: 0.1
+  pairs: 17705
+description: 'Rocket benchmark: shared MPC data, ten starts, fixed parameters.'
+evaluation:
+  expert_cache_file: data/rocket/expert_evaluations.json
+  steps: 1000
+evaluation_mode: fixed
+expert:
+  clip_dx: 1.0
+  clip_dy: 2.0
+  follow_reference: false
+  horizon: 60
+  kind: mpc
+expert_state_bounds:
+  A_y:
+  - - -1
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - - 1
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - - 0
+    - -1
+    - 0
+    - 0
+    - 0
+    - 0
+  - - 0
+    - 1
+    - 0
+    - 0
+    - 0
+    - 0
+  - - 0
+    - 0
+    - 0
+    - 0
+    - -1
+    - 0
+  - - 0
+    - 0
+    - 0
+    - 0
+    - 1
+    - 0
+  b_y:
+  - 0
+  - 33.333333333333336
+  - 0
+  - 26.666666666666668
+  - 0.6108652381980153
+  - 0.6108652381980153
+implementation: draft_aligned
+methods:
+- bd_chi2
+- select_dpc_upstream
+- bd_mean
+- bd_sample
+- bd_kl
+- bd_mean_chi2
+- windowed_deepc_upstream
+- deepc_upstream
+name: rocket
+outcome_protocol: benchmark_v1
+protocols:
+- demos
+record_traces: true
+state_weights:
+- 40
+- 20
+- 20
+- 1
+- 3000
+- 300
+task:
+  mode: landing
+test_starts: data/rocket/test_starts.json

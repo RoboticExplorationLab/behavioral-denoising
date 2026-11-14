@@ -1,0 +1,21 @@
+id: bd_chi2
+name: "BD-\u03C7\xB2"
+family: bd_chi2
+prediction_horizon: 8
+parameter_status: Selected on eight validation starts; evaluated on 50 separate test starts.
+parameters:
+  bandwidth: 0.1
+  mode_width: 0.3
+  neighbors: 200
+  iterations: 5
+  slope_ridge: 1.0e-06
+  reselect_mass: 0.05
+  extrapolation_limit: 3.0
+  sampling: ode
+  sampling_scheme: sigma
+  diffusion_steps: 30
+  sigma_max: 10.0
+  sigma_min: 0.01
+  smoothing: 0.0
+  whitening: global
+  include_past_inputs: false

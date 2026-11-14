@@ -1,0 +1,180 @@
+{
+  "protocol_sha256": "140703fcc07b1320fa4785f221c549b3d284b5677010f7872e9f3ab8c7e75e36",
+  "candidates": [
+    {
+      "id": "bd_h8_e8_b0p05_m0p1",
+      "order": 9,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.05,
+          "mode_width": 0.1,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 8
+    },
+    {
+      "id": "bd_h8_e8_b0p1_m0p3",
+      "order": 13,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.1,
+          "mode_width": 0.3,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 8
+    },
+    {
+      "id": "bd_h16_e8_b0p1_m0p3",
+      "order": 31,
+      "method": {
+        "id": "bd_chi2",
+        "name": "BD-\u03c7\u00b2",
+        "family": "bd_chi2",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "bandwidth": 0.1,
+          "mode_width": 0.3,
+          "neighbors": 200,
+          "iterations": 5,
+          "slope_ridge": 1e-06,
+          "reselect_mass": 0.05,
+          "extrapolation_limit": 3.0,
+          "sampling": "ode",
+          "sampling_scheme": "sigma",
+          "diffusion_steps": 30,
+          "sigma_max": 10.0,
+          "sigma_min": 0.01,
+          "smoothing": 0.0,
+          "whitening": "global",
+          "include_past_inputs": false
+        }
+      },
+      "execute_steps": 8
+    },
+    {
+      "id": "select_h8_e8_l10_n200",
+      "order": 39,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 8,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 10.0,
+          "columns": 200,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 8
+    },
+    {
+      "id": "select_h30_e8_l100_n200",
+      "order": 48,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 30,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 100.0,
+          "columns": 200,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 8
+    },
+    {
+      "id": "select_h16_e4_l1000_n500",
+      "order": 57,
+      "method": {
+        "id": "select_dpc",
+        "name": "Select-DPC",
+        "family": "select_dpc",
+        "prediction_horizon": 16,
+        "parameter_status": "Predeclared tuning candidate; winner chosen only on validation starts.",
+        "parameters": {
+          "g_l1": 1000.0,
+          "columns": 500,
+          "iterations": 5,
+          "output_weight": 100.0,
+          "input_weight": 0.01,
+          "slack": 5000000.0,
+          "g_projection": 10000.0,
+          "solver_options": {
+            "solver": "OSQP",
+            "warm_start": false,
+            "max_iter": 6000,
+            "eps_abs": 1e-05,
+            "eps_rel": 0.0001,
+            "adaptive_rho_interval": 25
+          }
+        }
+      },
+      "execute_steps": 4
+    }
+  ],
+  "rule": "Top two per method plus incumbent; deduplicate candidate IDs"
+}

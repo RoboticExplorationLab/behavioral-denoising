@@ -1,0 +1,11 @@
+id: bd_sample
+name: BD-sample
+family: imitation
+policy: bd
+parameters:
+  diffusion_steps: 50
+  sampling: ode
+  sampling_scheme: sigma
+  smoothing: 0.0
+  bandwidth: 0.1
+parameter_status: 'Fixed bandwidth 0.1; not tuned'

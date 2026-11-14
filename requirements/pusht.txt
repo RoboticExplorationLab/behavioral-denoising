@@ -1,0 +1,3 @@
+# Separate Python 3.10 environment; do not combine with benchmark extras.
+-c requirements/pusht.lock
+-e .[pusht,plot,test]

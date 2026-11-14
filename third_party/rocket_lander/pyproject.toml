@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "coco-rocket-lander"
+version = "0.0.2"
+description = "Pinned Rocket Lander simulator used by the Behavioral Denoising benchmarks"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [{name = "Dylan Vogel"}, {name = "Gerasimos Maltezos"}]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["coco_rocket_lander", "coco_rocket_lander.*"]

@@ -1,0 +1,112 @@
+id: deepc_upstream
+name: DeePC (upstream parameters)
+family: deepc
+parameters:
+  past: 2
+  future: 30
+  hankel_length: 202
+  columns: 500
+  iterations: 1
+  window_columns: 1000
+  selector: isomap
+  selector_options:
+    use_scaler: false
+    n_neighbors: 4
+    n_components: 75
+    subsample_factor: 1.0
+    random_state: 1
+  Q:
+  - 40
+  - 20
+  - 20
+  - 1
+  - 3000
+  - 300
+  R:
+  - 10
+  - 10
+  - 10
+  slack: 50000
+  g_l1: 8
+  g_projection: 5000
+  A_u:
+  - - -1
+    - 0
+    - 0
+  - - 1
+    - 0
+    - 0
+  - - 0
+    - -1
+    - 0
+  - - 0
+    - 1
+    - 0
+  - - 0
+    - 0
+    - -1
+  - - 0
+    - 0
+    - 1
+  b_u:
+  - 0
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  A_y:
+  - - -1
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - - 1
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - - 0
+    - -1
+    - 0
+    - 0
+    - 0
+    - 0
+  - - 0
+    - 1
+    - 0
+    - 0
+    - 0
+    - 0
+  - - 0
+    - 0
+    - 0
+    - 0
+    - -1
+    - 0
+  - - 0
+    - 0
+    - 0
+    - 0
+    - 1
+    - 0
+  b_y:
+  - 0
+  - 33.333333333333336
+  - 0
+  - 26.666666666666668
+  - 0.6108652381980153
+  - 0.6108652381980153
+  input_reference: rocket_hover
+  solver:
+    solver: OSQP
+    warm_start: false
+    max_iter: 6000
+    eps_abs: 1.0e-05
+    eps_rel: 0.0001
+    adaptive_rho_interval: 25
+  factorization: none
+  maximum_columns: null
+parameter_status: Adapted Select-DPC benchmark parameters

@@ -1,0 +1,16 @@
+id: bd_chi2
+name: "BD-\u03C7\xB2"
+family: bd_chi2
+parameters:
+  diffusion_steps: 30
+  include_past_inputs: false
+  iterations: 5
+  neighbors: 400
+  sampling_scheme: sigma
+  slope_ridge: 1.0e-06
+  smoothing: 0.0
+  bandwidth: 0.8
+  extrapolation_limit: 1.0
+  mode_width: 0.3
+parameter_status: Transferred validation parameters
+  and matched data

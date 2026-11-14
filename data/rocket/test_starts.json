@@ -1,0 +1,343 @@
+{
+  "task": "rocket",
+  "max_steps": 1000,
+  "notes": "Seeds and actual initial observations are frozen from final paper records. Reacher targets are explicit, so evaluation no longer depends on discarded validation generation counts. Rocket initial_condition retains the original normalized reset argument; initial_state is an audit value, not a replacement reset.",
+  "starts": [
+    {
+      "seed": 3000,
+      "policy_seed": 3000,
+      "initial_observation": [
+        6.6684393882751465,
+        24.439491271972656,
+        0.0,
+        -0.3270000219345093,
+        -0.0006511045503430068,
+        0.0
+      ],
+      "initial_state": [
+        6.6684393882751465,
+        24.439491271972656,
+        0.0,
+        -0.3270000219345093,
+        -0.0006511045503430068,
+        0.0
+      ],
+      "initial_raw_observation": [
+        6.6684393882751465,
+        24.439491271972656,
+        0.0,
+        -0.3270000219345093,
+        -0.0006511045503430068,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_condition": [
+        0.2,
+        0.9,
+        0.0
+      ],
+      "test_index": 0
+    },
+    {
+      "seed": 3001,
+      "policy_seed": 3001,
+      "initial_observation": [
+        28.881513595581055,
+        21.686752319335938,
+        0.0,
+        -0.3270000219345093,
+        -0.22405004501342773,
+        0.0
+      ],
+      "initial_state": [
+        28.881513595581055,
+        21.686752319335938,
+        0.0,
+        -0.3270000219345093,
+        -0.22405004501342773,
+        0.0
+      ],
+      "initial_raw_observation": [
+        28.881513595581055,
+        21.686752319335938,
+        0.0,
+        -0.3270000219345093,
+        -0.22405004501342773,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_condition": null,
+      "test_index": 1
+    },
+    {
+      "seed": 3002,
+      "policy_seed": 3002,
+      "initial_observation": [
+        23.704648971557617,
+        23.637771606445312,
+        0.0,
+        -0.3270000219345093,
+        -0.16160544753074646,
+        0.0
+      ],
+      "initial_state": [
+        23.704648971557617,
+        23.637771606445312,
+        0.0,
+        -0.3270000219345093,
+        -0.16160544753074646,
+        0.0
+      ],
+      "initial_raw_observation": [
+        23.704648971557617,
+        23.637771606445312,
+        0.0,
+        -0.3270000219345093,
+        -0.16160544753074646,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_condition": null,
+      "test_index": 2
+    },
+    {
+      "seed": 3003,
+      "policy_seed": 3003,
+      "initial_observation": [
+        3.7276198863983154,
+        13.892244338989258,
+        0.0,
+        -0.3270000219345093,
+        0.021913811564445496,
+        0.0
+      ],
+      "initial_state": [
+        3.7276198863983154,
+        13.892244338989258,
+        0.0,
+        -0.3270000219345093,
+        0.021913811564445496,
+        0.0
+      ],
+      "initial_raw_observation": [
+        3.7276198863983154,
+        13.892244338989258,
+        0.0,
+        -0.3270000219345093,
+        0.021913811564445496,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_condition": null,
+      "test_index": 3
+    },
+    {
+      "seed": 3004,
+      "policy_seed": 3004,
+      "initial_observation": [
+        7.797788143157959,
+        23.10614585876465,
+        0.0,
+        -0.3270000219345093,
+        -0.12732543051242828,
+        0.0
+      ],
+      "initial_state": [
+        7.797788143157959,
+        23.10614585876465,
+        0.0,
+        -0.3270000219345093,
+        -0.12732543051242828,
+        0.0
+      ],
+      "initial_raw_observation": [
+        7.797788143157959,
+        23.10614585876465,
+        0.0,
+        -0.3270000219345093,
+        -0.12732543051242828,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_condition": null,
+      "test_index": 4
+    },
+    {
+      "seed": 3005,
+      "policy_seed": 3005,
+      "initial_observation": [
+        32.461978912353516,
+        21.696279525756836,
+        0.0,
+        -0.3270000219345093,
+        -0.0319754034280777,
+        0.0
+      ],
+      "initial_state": [
+        32.461978912353516,
+        21.696279525756836,
+        0.0,
+        -0.3270000219345093,
+        -0.0319754034280777,
+        0.0
+      ],
+      "initial_raw_observation": [
+        32.461978912353516,
+        21.696279525756836,
+        0.0,
+        -0.3270000219345093,
+        -0.0319754034280777,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_condition": null,
+      "test_index": 5
+    },
+    {
+      "seed": 3006,
+      "policy_seed": 3006,
+      "initial_observation": [
+        31.22758674621582,
+        25.00428009033203,
+        0.0,
+        -0.3270000219345093,
+        -0.20934803783893585,
+        0.0
+      ],
+      "initial_state": [
+        31.22758674621582,
+        25.00428009033203,
+        0.0,
+        -0.3270000219345093,
+        -0.20934803783893585,
+        0.0
+      ],
+      "initial_raw_observation": [
+        31.22758674621582,
+        25.00428009033203,
+        0.0,
+        -0.3270000219345093,
+        -0.20934803783893585,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_condition": null,
+      "test_index": 6
+    },
+    {
+      "seed": 3007,
+      "policy_seed": 3007,
+      "initial_observation": [
+        15.668891906738281,
+        19.207225799560547,
+        0.0,
+        -0.3270000219345093,
+        -0.029883746057748795,
+        0.0
+      ],
+      "initial_state": [
+        15.668891906738281,
+        19.207225799560547,
+        0.0,
+        -0.3270000219345093,
+        -0.029883746057748795,
+        0.0
+      ],
+      "initial_raw_observation": [
+        15.668891906738281,
+        19.207225799560547,
+        0.0,
+        -0.3270000219345093,
+        -0.029883746057748795,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_condition": null,
+      "test_index": 7
+    },
+    {
+      "seed": 3008,
+      "policy_seed": 3008,
+      "initial_observation": [
+        32.7591552734375,
+        12.156306266784668,
+        0.0,
+        -0.3270000219345093,
+        -0.1746891736984253,
+        0.0
+      ],
+      "initial_state": [
+        32.7591552734375,
+        12.156306266784668,
+        0.0,
+        -0.3270000219345093,
+        -0.1746891736984253,
+        0.0
+      ],
+      "initial_raw_observation": [
+        32.7591552734375,
+        12.156306266784668,
+        0.0,
+        -0.3270000219345093,
+        -0.1746891736984253,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_condition": null,
+      "test_index": 8
+    },
+    {
+      "seed": 3009,
+      "policy_seed": 3009,
+      "initial_observation": [
+        0.24959664046764374,
+        17.013851165771484,
+        0.0,
+        -0.3270000219345093,
+        0.06382904201745987,
+        0.0
+      ],
+      "initial_state": [
+        0.24959664046764374,
+        17.013851165771484,
+        0.0,
+        -0.3270000219345093,
+        0.06382904201745987,
+        0.0
+      ],
+      "initial_raw_observation": [
+        0.24959664046764374,
+        17.013851165771484,
+        0.0,
+        -0.3270000219345093,
+        0.06382904201745987,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_condition": null,
+      "test_index": 9
+    }
+  ],
+  "source_sha256": {
+    "results/paper/rocket/bd_chi2/seed_3000/trajectory.npz": "3ead10c031d66982b641a047e8484e88de89fd17d90528d4f3723d6ed35812f7",
+    "results/paper/rocket/bd_chi2/seed_3001/trajectory.npz": "61169615bfb3c148ed0e532d258c81b0dc1a409557184af3a909f78eceb724ca",
+    "results/paper/rocket/bd_chi2/seed_3002/trajectory.npz": "f5129fd9d76526cdd7f5a43aa2b57bcf61e6c96e799fd1ddd81bc5de6ed9313d",
+    "results/paper/rocket/bd_chi2/seed_3003/trajectory.npz": "5238b0a08b4132568a9f220b99fe6d1b66a6fb3643adda0efd8f9b177a388ea3",
+    "results/paper/rocket/bd_chi2/seed_3004/trajectory.npz": "54ab7886d0712a83eeb6d45bec5f40de4b18391c6da76cb9cf7098d4565b20aa",
+    "results/paper/rocket/bd_chi2/seed_3005/trajectory.npz": "c98dd9b7910be59cb46c3fba75be59ca8e29b2b5ea1704a156d55e2b87bc4528",
+    "results/paper/rocket/bd_chi2/seed_3006/trajectory.npz": "443560097cff97a5afe871bdc3cd6984d15c88b417232c0b9cc7babc1ea23ead",
+    "results/paper/rocket/bd_chi2/seed_3007/trajectory.npz": "9a98e801fe852b74bfaf10f6309b955ea68c8f8b507300b3b00420e9a60b9083",
+    "results/paper/rocket/bd_chi2/seed_3008/trajectory.npz": "4b18c90ed4f4f05ca988c588bf5f122f2378ac7e7dfbc59dfc20ea51dbcc1a1a",
+    "results/paper/rocket/bd_chi2/seed_3009/trajectory.npz": "8e4f9eca6f6e17973d05a5e2a540f2abad937b79a2b301d4e97d1fb8c7d507c7"
+  }
+}

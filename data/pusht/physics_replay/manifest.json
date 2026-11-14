@@ -1,0 +1,38 @@
+{
+  "created_utc": "2026-11-13T22:28:56.343487+00:00",
+  "script_path": "/home/lucas/Workspace/diffusion_filtering_refactor/results/final_benchmark_20261111/scripts/replay_pusht_path.py",
+  "script_sha256": "a4e2e29eef45b000db9aed37e0aa60454823d29b76687bd11116c84b06f7ca8c",
+  "record_directory": "/home/lucas/Workspace/diffusion_filtering_refactor/results/pusht_tuning_20261112/final/pusht/bd_chi2/seed_300009",
+  "seed": 300009,
+  "input_sha256": {
+    "/home/lucas/Workspace/diffusion_filtering_refactor/results/pusht_tuning_20261112/final/pusht/bd_chi2/seed_300009/trajectory.npz": "43dd232833194d28b4738524a4d117794039bdb869273bd322c7064240d677b3",
+    "/home/lucas/Workspace/diffusion_filtering_refactor/results/pusht_tuning_20261112/final/pusht/bd_chi2/seed_300009/metadata.json": "f94238cfe76b09c2d312a3f67a253e7db2b11f51df821805bc54318b543d4172",
+    "/home/lucas/Workspace/diffusion_filtering_refactor/results/pusht_tuning_20261112/final/pusht/bd_chi2/seed_300009/result.json": "77aa6a6d92b8bbfd9a1fce0079d6fb7e0ec306f98e32cf2d7403c29e85a4b7cf",
+    "/home/lucas/Workspace/diffusion_filtering_refactor/results/pusht_tuning_20261112/final/pusht/bd_chi2/seed_300009/record.json": "b85d5e351d70e1d062c3a9427d8205f03cecd896b15103cd02917c63822d542f",
+    "/home/lucas/Workspace/diffusion_filtering_refactor/third_party/diffusion_policy/diffusion_policy/env/pusht/pusht_env.py": "759107dc0ea6017b8afe3380ce23817713edf26af725fc4f03c0416ced940bd0",
+    "/home/lucas/Workspace/diffusion_filtering_refactor/third_party/diffusion_policy/diffusion_policy/env/pusht/pymunk_override.py": "85e7c54b5e9630a9f7e675250ee514ae9b2249d11654ec0811d8e4bcf413fe39"
+  },
+  "physics_hz": 100,
+  "control_hz": 10,
+  "recorded_samples": 296,
+  "physics_samples": 2951,
+  "control_boundary_states_bitwise_equal": true,
+  "velocities_contacts_and_termination_equal": true,
+  "maximum_reward_error": 5.551115123125783e-16,
+  "reward_absolute_tolerance": 1e-12,
+  "maximum_control_boundary_state_error": 0.0,
+  "controller_calls": 0,
+  "replayed_control_steps": 295,
+  "replayed_physics_steps": 2950,
+  "smoothing": false,
+  "interpolation": false,
+  "software": {
+    "numpy": "1.26.4",
+    "pymunk": "6.2.1",
+    "gym": "0.26.2",
+    "Shapely": "1.8.4"
+  },
+  "output_sha256": {
+    "trajectory.npz": "7309cb824d52f5cdac59a7eab3031f1f9d850272ae38efc1602b89137ed7bc3c"
+  }
+}

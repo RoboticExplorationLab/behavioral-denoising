@@ -1,0 +1,12 @@
+id: bd_kl
+name: BD-KL
+family: bd_kl
+parameters:
+  diffusion_steps: 50
+  include_past_inputs: false
+  neighbors: 400
+  sampling: ode
+  sampling_scheme: sigma
+  smoothing: 0.0
+  bandwidth: 0.1
+parameter_status: 'Fixed bandwidth 0.1; not tuned'

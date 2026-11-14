@@ -1,0 +1,7 @@
+# Preserve byte hashes of saved scientific records across checkouts.
+results/** -text
+data/** -text
+# Python CSV writers use CRLF; retain it without treating CR as trailing whitespace.
+*.csv -text whitespace=trailing-space,space-before-tab,cr-at-eol
+# Vendored files retain exact upstream bytes, including upstream whitespace.
+third_party/** -text -whitespace
