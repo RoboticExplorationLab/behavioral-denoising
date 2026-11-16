@@ -65,14 +65,19 @@ def test_changed_result_is_rejected_before_plotting(tmp_path):
         pusht_gallery.load_trials(tmp_path)
 
 
-def make_asset(path, extra=None):
-    data = {"total": 1, "trials": [{"seed": 42, "peak_coverage": .94,
+def make_asset(path, extra=None, *, frozen_site=False, peak_coverage=.94):
+    data = {"total": 1, "trials": [{"seed": 42, "peak_coverage": peak_coverage,
              "final_coverage": .8, "video": "media/pusht/seed_42.mp4",
              "poster": "media/pusht/seed_42.jpg"}]}
     with ZipFile(path, "w") as archive:
         archive.writestr("data/trials.json", json.dumps(data))
         archive.writestr("media/pusht/seed_42.mp4", b"video")
         archive.writestr("media/pusht/seed_42.jpg", b"poster")
+        if frozen_site:
+            archive.writestr("index.html", '<h1>L4DC submission</h1><a href="../">Current gallery</a>')
+            archive.writestr("styles.css", "/* original styles */")
+            archive.writestr("gallery.js", "/* original behavior */")
+            archive.writestr(".nojekyll", b"")
         if extra:
             archive.writestr(extra, b"unexpected")
     return {"bytes": path.stat().st_size, "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
@@ -98,4 +103,29 @@ def test_asset_wrong_checksum_and_unsafe_members_fail_without_output(tmp_path):
     specification = make_asset(archive, "../outside")
     with pytest.raises(ValueError, match="Unsafe"):
         builder.assemble(archive, output, specification)
+    assert not output.exists()
+
+
+def test_current_and_submission_galleries_keep_separate_data_and_page_sources(tmp_path):
+    current, submission, output = tmp_path / "current.zip", tmp_path / "submission.zip", tmp_path / "site"
+    current_specification = make_asset(current)
+    submission_specification = make_asset(submission, frozen_site=True, peak_coverage=.63)
+    result = builder.assemble_site(current, submission, output, current_specification, submission_specification)
+    assert result["current_trials"] == result["l4dc_trials"] == 1
+    assert (output / "index.html").read_bytes() == (ROOT / "website/index.html").read_bytes()
+    assert 'L4DC submission' in (output / "l4dc/index.html").read_text()
+    assert (output / "l4dc/gallery.js").read_text() == "/* original behavior */"
+    assert json.loads((output / "data/trials.json").read_text())["trials"][0]["peak_coverage"] == .94
+    assert json.loads((output / "l4dc/data/trials.json").read_text())["trials"][0]["peak_coverage"] == .63
+    assert (output / "media/pusht/seed_42.mp4").is_file()
+    assert (output / "l4dc/media/pusht/seed_42.mp4").is_file()
+
+
+def test_invalid_submission_asset_prevents_partial_site_publication(tmp_path):
+    current, submission, output = tmp_path / "current.zip", tmp_path / "submission.zip", tmp_path / "site"
+    current_specification = make_asset(current)
+    submission_specification = make_asset(submission, frozen_site=True)
+    with pytest.raises(ValueError, match="pinned release"):
+        builder.assemble_site(current, submission, output, current_specification,
+                              {**submission_specification, "sha256": "wrong"})
     assert not output.exists()

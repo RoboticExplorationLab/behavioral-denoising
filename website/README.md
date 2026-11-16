@@ -2,12 +2,14 @@
 
 The gallery shows all 50 BD-χ² trials with block-relative observations and action
 targets. Cards show peak and final coverage; videos load only when selected.
+The original submission gallery is preserved separately at `l4dc/`, with its own
+frozen videos, coverage data, and page sources.
 
 ## Preview the published gallery
 
-The videos, posters, and coverage summaries are stored as a versioned GitHub
-Release asset rather than experiment outputs in the source tree. Python 3.10+
-can download the checksummed asset and assemble the site:
+The videos, posters, and coverage summaries are stored as versioned GitHub
+Release assets rather than experiment outputs in the source tree. Python 3.10+
+can download both checksummed assets and assemble the site:
 
 ```bash
 python website/build.py
@@ -15,7 +17,8 @@ python -m http.server 8000 --directory website/build
 ```
 
 Open <http://localhost:8000>. To use an already downloaded archive, pass
-`--archive /path/to/pusht-gallery.zip`. The builder refuses to overwrite an
+`--archive /path/to/pusht-gallery.zip` and
+`--l4dc-archive /path/to/l4dc-gallery.zip`. The builder refuses to overwrite an
 existing directory; use `--output /path/to/new-build` for another build.
 
 ## Render your own runs
@@ -40,13 +43,17 @@ For coverage summaries alone, use `scripts/plots/pusht.py`. Both accept
 
 ## Deployment
 
-GitHub Pages builds from `website/gallery_asset.json` on changes to the website
-or workflow on `main`, or through **Actions → Deploy rollout gallery → Run
-workflow**. Publish the specified release asset before pushing a new asset
-manifest. The workflow verifies its SHA-256 and builds the static site without
-installing a simulator or running experiments.
+GitHub Pages builds from `website/gallery_asset.json` and
+`website/l4dc_gallery_asset.json` on changes to the website or workflow on `main`,
+or through **Actions → Deploy rollout gallery → Run workflow** with `main`
+selected. Other branches cannot deploy this workflow. Publish the specified
+release assets before pushing their manifests. The workflow verifies their
+SHA-256 and builds both galleries without installing a simulator or running
+experiments.
 
 The deployed page is
 <https://roboticexplorationlab.github.io/behavioral-denoising/>.
+The original submission gallery is
+<https://roboticexplorationlab.github.io/behavioral-denoising/l4dc/>.
 Original paper results and figure reproduction remain on the
 [`l4dc` branch](https://github.com/RoboticExplorationLab/behavioral-denoising/tree/l4dc).

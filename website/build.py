@@ -1,4 +1,4 @@
-"""Assemble the gallery from a checksummed media archive and the website sources."""
+"""Assemble the current gallery and the frozen L4DC submission gallery."""
 import argparse
 import hashlib
 import json
@@ -20,7 +20,7 @@ def digest(path):
     return value.hexdigest()
 
 
-def assemble(archive_path, output, specification):
+def assemble(archive_path, output, specification, *, frozen_site=False):
     """Verify before writing; refuse to replace an existing build directory."""
     archive_path, output = Path(archive_path), Path(output)
     if (archive_path.stat().st_size != specification["bytes"]
@@ -43,6 +43,8 @@ def assemble(archive_path, output, specification):
         if not trials or saved["total"] != len(trials):
             raise ValueError("Invalid gallery trial count")
         seeds, expected = set(), {"data/trials.json"}
+        if frozen_site:
+            expected.update(("index.html", "styles.css", "gallery.js", ".nojekyll"))
         for trial in trials:
             seed = trial["seed"]
             if type(seed) is not int or seed < 0 or seed in seeds:
@@ -67,27 +69,45 @@ def assemble(archive_path, output, specification):
                 destination.parent.mkdir(parents=True, exist_ok=True)
                 with archive.open(member) as source, destination.open("xb") as target:
                     shutil.copyfileobj(source, target)
-            for name in ("index.html", "styles.css", "gallery.js"):
-                shutil.copyfile(HERE / name, staging / name)
-            (staging / ".nojekyll").touch()
+            if not frozen_site:
+                for name in ("index.html", "styles.css", "gallery.js"):
+                    shutil.copyfile(HERE / name, staging / name)
+                (staging / ".nojekyll").touch()
             staging.rename(output)
     return {"trials": len(trials), "output": str(output)}
+
+
+def assemble_site(current_archive, submission_archive, output, current_specification, submission_specification):
+    """Publish both galleries together, preserving the archived HTML and assets."""
+    output = Path(output)
+    if output.exists():
+        raise FileExistsError(f"Choose a new output directory: {output}")
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix=".gallery-site-", dir=output.parent) as temporary:
+        staging = Path(temporary) / "site"
+        current = assemble(current_archive, staging, current_specification)
+        submission = assemble(submission_archive, staging / "l4dc", submission_specification, frozen_site=True)
+        staging.rename(output)
+    return {"current_trials": current["trials"], "l4dc_trials": submission["trials"], "output": str(output)}
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--archive", type=Path, help="Use a local copy of the pinned release asset")
+    parser.add_argument("--l4dc-archive", type=Path, help="Use a local copy of the frozen submission gallery")
     parser.add_argument("--output", type=Path, default=HERE / "build")
     args = parser.parse_args()
-    specification = json.loads((HERE / "gallery_asset.json").read_text())
-    if args.archive:
-        report = assemble(args.archive, args.output, specification)
-    else:
-        with tempfile.TemporaryDirectory(prefix="pusht-gallery-") as temporary:
-            archive = Path(temporary) / "gallery.zip"
-            with urlopen(specification["url"], timeout=60) as source, archive.open("xb") as target:
-                shutil.copyfileobj(source, target)
-            report = assemble(archive, args.output, specification)
+    specifications = [json.loads((HERE / name).read_text()) for name in
+                      ("gallery_asset.json", "l4dc_gallery_asset.json")]
+    with tempfile.TemporaryDirectory(prefix="pusht-gallery-") as temporary:
+        archives = []
+        for index, (local, specification) in enumerate(zip((args.archive, args.l4dc_archive), specifications)):
+            archive = local or Path(temporary) / f"gallery-{index}.zip"
+            if local is None:
+                with urlopen(specification["url"], timeout=60) as source, archive.open("xb") as target:
+                    shutil.copyfileobj(source, target)
+            archives.append(archive)
+        report = assemble_site(*archives, args.output, *specifications)
     print(json.dumps(report))
 
 

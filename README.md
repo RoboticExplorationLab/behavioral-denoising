@@ -41,6 +41,8 @@ mean peak coverage increases from **63.09% to 94.43%**, and mean final coverage 
 [Watch all 50 updated trials](https://roboticexplorationlab.github.io/behavioral-denoising/),
 with peak and final coverage for each trial. Coverage is the fraction of the goal
 shape covered by the block. Trials stop above 95% coverage or after 30 seconds.
+The [L4DC submission gallery](https://roboticexplorationlab.github.io/behavioral-denoising/l4dc/)
+retains all 50 original rollouts.
 
 ## Install
 
