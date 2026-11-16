@@ -27,14 +27,16 @@ simulation. It writes `data/trials.json`, 50 MP4 videos, and 50 JPEG posters und
 `website/build/`. Generated assets are build output and need not be committed.
 All asset URLs are relative so the site works under a GitHub project subpath.
 
-## GitHub Pages
+## Published submission gallery
 
-In `RoboticExplorationLab/behavioral-denoising`, select **Settings → Pages → Build
-and deployment → Source → GitHub Actions**. The
-[`Deploy rollout gallery` workflow](../.github/workflows/pages.yml) builds from
-`results/paper.zip` and deploys when gallery inputs change on `main`, or when run
-manually from the Actions tab. The workflow uses GitHub's
-[official Pages actions](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
+The original 50 trials are preserved at:
+<https://roboticexplorationlab.github.io/behavioral-denoising/l4dc/>.
 
-After a successful deployment, the gallery URL is:
-<https://roboticexplorationlab.github.io/behavioral-denoising/>.
+The `main` branch deploys this frozen gallery alongside the current gallery.
+Its archived page sources, trial data and media are distributed in the
+[`l4dc-submission` release](https://github.com/RoboticExplorationLab/behavioral-denoising/releases/tag/l4dc-submission).
+The tag retains the exact submission source before these gallery-link updates.
+
+The workflow on this branch does not deploy, including manual dispatch, so it
+cannot overwrite the current gallery. The local build commands above continue
+to reproduce the original trial videos.
