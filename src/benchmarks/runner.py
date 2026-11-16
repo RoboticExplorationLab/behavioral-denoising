@@ -1,4 +1,4 @@
-"""Fixed paper protocols with atomic per-start records and checked resumption."""
+"""Configured benchmarks with atomic per-start records and checked resumption."""
 
 import argparse
 from contextlib import contextmanager
@@ -83,7 +83,7 @@ def checked_input(path):
     try:
         relative = str(path.relative_to(ROOT))
     except ValueError:
-        raise ValueError("Paper inputs must be inside the release data directory") from None
+        raise ValueError("Benchmark inputs must be inside the data directory") from None
     expected = manifest.get(relative)
     actual = digest(path)
     if expected is None or expected["sha256"] != actual:
@@ -91,7 +91,7 @@ def checked_input(path):
     return path, actual
 
 
-def protocol_manifest(task, configuration, methods, starts, inputs, paper_protocol):
+def protocol_manifest(task, configuration, methods, starts, inputs):
     """Identity includes parameters, inputs, source and numerical dependencies."""
     sources = list((ROOT / "src").rglob("*.py")) + list((ROOT / "src/tasks/assets").glob("*.xml"))
     sources += [ROOT / "experiments" / f"{task}.py"]
@@ -108,7 +108,7 @@ def protocol_manifest(task, configuration, methods, starts, inputs, paper_protoc
             pass
     protocol = json_value({
         "schema_version": 1, "task": task, "configuration": configuration, "methods": methods,
-        "test_starts": starts, "paper_protocol": paper_protocol, "input_sha256": inputs,
+        "test_starts": starts, "input_sha256": inputs,
         "source_sha256": {str(path.relative_to(ROOT)): digest(path) for path in sorted(set(sources))},
         "python": platform.python_version(), "packages": packages,
     })
@@ -208,6 +208,21 @@ def saved_experts(task, configuration, starts):
     return experts, {str(path.relative_to(ROOT)): checksum}
 
 
+def expert_comparison_matches(task, configuration):
+    """Only compare saved expert costs under the same evaluation conditions."""
+    configured = configuration.get("evaluation", {}).get("expert_cache_file")
+    configured = configured or configuration.get("expert_cache_file", f"data/{task}/expert_evaluations.json")
+    path, _ = checked_input(configured)
+    reference = json.loads(path.read_text()).get("evaluation_conditions")
+    if reference is None:
+        return False
+    current = deepcopy(configuration)
+    if task == "cartpole":
+        current.setdefault("state_weights", [5, 0, 10000, .1, .1])
+        current.setdefault("action_weights", [1])
+    return all(current.get(key) == value for key, value in reference.items())
+
+
 def run_controller_trial(task, module, configuration, method, parameters, data, start, cache):
     seed, initial, steps = start
     recorder = TraceRecorder(task)
@@ -243,7 +258,6 @@ def run_task(task, *, config_path=None, methods=None, seeds=None, steps=None, ou
     if not selected or len(selected) != len(set(selected)) or not set(selected).issubset(available):
         raise ValueError(f"Choose distinct methods from {list(available)}")
     starts = experiment_starts(task, module, configuration)
-    default_steps = starts[0][2]
     if steps is not None:
         if isinstance(steps, bool) or not isinstance(steps, int) or steps < 1:
             raise ValueError("steps must be a positive integer")
@@ -254,7 +268,7 @@ def run_task(task, *, config_path=None, methods=None, seeds=None, steps=None, ou
             configuration["task"]["max_episode_steps"] = steps
         else:
             configuration["evaluation"]["steps"] = steps
-    paper_protocol = (steps is None or steps == default_steps) and not overrides and config_path is None
+    expert_comparable = task != "pusht" and expert_comparison_matches(task, configuration)
     all_seeds = [start[0] for start in starts]
     seeds = all_seeds if seeds is None else list(seeds)
     if not seeds or len(seeds) != len(set(seeds)) or not set(seeds).issubset(all_seeds):
@@ -262,7 +276,7 @@ def run_task(task, *, config_path=None, methods=None, seeds=None, steps=None, ou
     if task == "cartpole":
         banks = configuration["datasets"]
         if len(banks) != 1:
-            raise ValueError("The paper Cartpole protocol uses one shared MPC bank")
+            raise ValueError("Cartpole requires one shared demonstration bank")
         bank = next(iter(banks.values()))
     else:
         collection = configuration["demonstrations"]
@@ -278,10 +292,8 @@ def run_task(task, *, config_path=None, methods=None, seeds=None, steps=None, ou
     else:
         manifest_path, manifest_hash = checked_input(configuration["demonstrations"]["manifest_file"])
         inputs[str(manifest_path.relative_to(ROOT))] = manifest_hash
-    protocol = protocol_manifest(task, configuration, method_configs, starts, inputs, paper_protocol)
-    output = resolve(output or "results/new_benchmark")
-    if output == ROOT / "results/paper" or (ROOT / "results/paper") in output.parents:
-        raise ValueError("Choose a fresh output; results/paper contains preserved reference records")
+    protocol = protocol_manifest(task, configuration, method_configs, starts, inputs)
+    output = resolve(output or "runs/benchmark")
     initialize_output(output, task, protocol)
     data = load_dataset(bank_path, task)
     if task != "pusht":
@@ -307,7 +319,7 @@ def run_task(task, *, config_path=None, methods=None, seeds=None, steps=None, ou
                 if completed_record(destination, protocol["sha256"]):
                     print(f"{task}/{identifier}/{seed}: verified existing record", flush=True)
                     continue
-                metadata = {"protocol_sha256": protocol["sha256"], "paper_protocol": paper_protocol,
+                metadata = {"protocol_sha256": protocol["sha256"], "expert_comparable": expert_comparable,
                             "config": configuration, "methods": [method], "method": method,
                             "test_starts": starts, "task": task, "seed": seed,
                             "timing_protocol": "Online telemetry; use scripts/timing.py for controlled timing"}
@@ -316,7 +328,7 @@ def run_task(task, *, config_path=None, methods=None, seeds=None, steps=None, ou
                     if task == "pusht":
                         row, arrays, decisions, queries, geometry = module.run_fixed_trial(
                             data, configuration, method, seed, cache)
-                        row.update(task=task, method=identifier, paper_protocol=paper_protocol, evaluation_steps=start[2])
+                        row.update(task=task, method=identifier, evaluation_steps=start[2])
                         metadata.update(geometry=geometry, environment_seed=seed, policy_seed=row["policy_seed"])
                         _atomic_write(staging / "trajectory.npz", lambda stream: np.savez_compressed(stream, **arrays))
                         atomic_json_lines(staging / "diagnostics.jsonl", decisions)
@@ -324,7 +336,7 @@ def run_task(task, *, config_path=None, methods=None, seeds=None, steps=None, ou
                         _write_json(staging / "result.json", row)
                     else:
                         row, recorder = run_controller_trial(task, module, configuration, method, parameters, data, start, cache)
-                        row.update(task=task, method=identifier, paper_protocol=paper_protocol, evaluation_steps=start[2])
+                        row.update(task=task, method=identifier, evaluation_steps=start[2])
                         metadata.update(paired_expert=experts[seed], reconstruction=recorder.reconstruction)
                         export_episode(staging, task, row, metadata, expert_row=experts[seed],
                                        references=recorder.references())
@@ -338,17 +350,17 @@ def run_task(task, *, config_path=None, methods=None, seeds=None, steps=None, ou
                 print(f"{task}/{identifier}/{seed}: {row.get('terminal_reason', row.get('termination_reason'))}", flush=True)
     from .reporting import aggregate_results
     with file_lock(output / ".report.lock"):
-        return aggregate_results(output, expert_root=ROOT / "results/paper")
+        return aggregate_results(output)
 
 
 def main(task):
-    parser = argparse.ArgumentParser(description=f"Reproduce the fixed {task} paper benchmark")
+    parser = argparse.ArgumentParser(description=f"Run the configured {task} benchmark")
     parser.add_argument("command", nargs="?", choices=("run", "describe", "aggregate"), default="run")
     parser.add_argument("--config", type=Path)
     parser.add_argument("--methods", nargs="+", help="Method names, e.g. bd_chi2 select_dpc")
     parser.add_argument("--seeds", nargs="+", type=int, help="A subset of the configured test starts")
-    parser.add_argument("--steps", type=int, help="Override the horizon for a labelled smoke test")
-    parser.add_argument("--output", type=Path, default=Path("results/new_benchmark"))
+    parser.add_argument("--steps", type=int, help="Override the evaluation horizon")
+    parser.add_argument("--output", type=Path, default=Path("runs/benchmark"))
     arguments = parser.parse_args()
     from threadpoolctl import threadpool_limits
     with threadpool_limits(limits=1):
@@ -359,7 +371,7 @@ def main(task):
                                         "starts": experiment_starts(task, module, configuration)}), indent=2))
         elif arguments.command == "aggregate":
             from .reporting import aggregate_results
-            aggregate_results(resolve(arguments.output), expert_root=ROOT / "results/paper")
+            aggregate_results(resolve(arguments.output))
         else:
             run_task(task, config_path=arguments.config, methods=arguments.methods, seeds=arguments.seeds,
                      steps=arguments.steps, output=arguments.output)

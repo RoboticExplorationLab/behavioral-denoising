@@ -1,4 +1,4 @@
-"""Rebuild paper tables from saved records; no controller or simulator calls."""
+"""Summarize benchmark runs from saved records; no controller or simulator calls."""
 
 import argparse
 import json
@@ -13,9 +13,9 @@ from src.benchmarks.reporting import aggregate_results
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--root", type=Path, default=ROOT / "results/paper")
+    parser.add_argument("--root", type=Path, default=ROOT / "runs/benchmark")
     parser.add_argument("--tasks", nargs="+", choices=["cartpole", "rocket", "reacher", "pusht"])
-    parser.add_argument("--expert-root", type=Path, default=ROOT / "results/paper")
+    parser.add_argument("--expert-root", type=Path, help="Optional directory containing paired MPC runs")
     parser.add_argument("--require-complete", action="store_true")
     arguments = parser.parse_args()
     report = aggregate_results(arguments.root, tasks=arguments.tasks, expert_root=arguments.expert_root,

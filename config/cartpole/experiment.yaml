@@ -1,4 +1,4 @@
-benchmark_id: paper_control_benchmark
+benchmark_id: control_benchmark
 data_arm: shared_mpc
 data_budget:
   mpc_episodes: 200
@@ -9,7 +9,6 @@ datasets:
 description: 'Cartpole benchmark: shared MPC data, ten starts, fixed parameters.'
 evaluation_mode: fixed
 future: 1
-implementation: draft_aligned
 methods:
 - bd_chi2
 - select_dpc_upstream

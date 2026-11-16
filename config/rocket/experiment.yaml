@@ -2,7 +2,7 @@ action_weights:
 - 10
 - 10
 - 10
-benchmark_id: paper_control_benchmark
+benchmark_id: control_benchmark
 data_arm: shared_mpc
 data_budget:
   episodes: 58
@@ -73,7 +73,6 @@ expert_state_bounds:
   - 26.666666666666668
   - 0.6108652381980153
   - 0.6108652381980153
-implementation: draft_aligned
 methods:
 - bd_chi2
 - select_dpc_upstream

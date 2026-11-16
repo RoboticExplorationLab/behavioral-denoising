@@ -1,6 +1,6 @@
 name: pusht
-study_id: pusht_final_protocol
-description: Push-T comparison with tuned configurations and held-out test starts.
+study_id: pusht_block_relative
+description: Push-T with block-relative BD features and released human demonstrations.
 evaluation_mode: fixed
 methods:
 - bd_chi2
@@ -15,19 +15,17 @@ task:
   render_size: 512
 history: 2
 execute_steps: 8
+bd_coordinates: block_relative
 evaluation:
   test_seed_start: 300005
   test_count: 50
   policy_seed_offset: 1000000
   observation_noise: 0.0
   repeats_per_start: 1
-  validation_seed_start: 200000
-  validation_count: 8
   tune: false
 success:
   coverage_threshold: 0.95
   comparison: strictly_greater
 score: maximum_clipped_coverage_divided_by_0.95
-output: results/new_pusht
-parameter_selection: data/pusht/selection/winners.json
+output: runs/pusht
 test_starts: data/pusht/test_starts.json

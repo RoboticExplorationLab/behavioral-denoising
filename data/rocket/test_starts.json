@@ -1,7 +1,7 @@
 {
   "task": "rocket",
   "max_steps": 1000,
-  "notes": "Seeds and actual initial observations are frozen from final paper records. Reacher targets are explicit, so evaluation no longer depends on discarded validation generation counts. Rocket initial_condition retains the original normalized reset argument; initial_state is an audit value, not a replacement reset.",
+  "notes": "Reset using initial_condition, the normalized simulator reset argument; initial_state records the resulting physical state.",
   "starts": [
     {
       "seed": 3000,
@@ -327,17 +327,5 @@
       "initial_condition": null,
       "test_index": 9
     }
-  ],
-  "source_sha256": {
-    "results/paper/rocket/bd_chi2/seed_3000/trajectory.npz": "3ead10c031d66982b641a047e8484e88de89fd17d90528d4f3723d6ed35812f7",
-    "results/paper/rocket/bd_chi2/seed_3001/trajectory.npz": "61169615bfb3c148ed0e532d258c81b0dc1a409557184af3a909f78eceb724ca",
-    "results/paper/rocket/bd_chi2/seed_3002/trajectory.npz": "f5129fd9d76526cdd7f5a43aa2b57bcf61e6c96e799fd1ddd81bc5de6ed9313d",
-    "results/paper/rocket/bd_chi2/seed_3003/trajectory.npz": "5238b0a08b4132568a9f220b99fe6d1b66a6fb3643adda0efd8f9b177a388ea3",
-    "results/paper/rocket/bd_chi2/seed_3004/trajectory.npz": "54ab7886d0712a83eeb6d45bec5f40de4b18391c6da76cb9cf7098d4565b20aa",
-    "results/paper/rocket/bd_chi2/seed_3005/trajectory.npz": "c98dd9b7910be59cb46c3fba75be59ca8e29b2b5ea1704a156d55e2b87bc4528",
-    "results/paper/rocket/bd_chi2/seed_3006/trajectory.npz": "443560097cff97a5afe871bdc3cd6984d15c88b417232c0b9cc7babc1ea23ead",
-    "results/paper/rocket/bd_chi2/seed_3007/trajectory.npz": "9a98e801fe852b74bfaf10f6309b955ea68c8f8b507300b3b00420e9a60b9083",
-    "results/paper/rocket/bd_chi2/seed_3008/trajectory.npz": "4b18c90ed4f4f05ca988c588bf5f122f2378ac7e7dfbc59dfc20ea51dbcc1a1a",
-    "results/paper/rocket/bd_chi2/seed_3009/trajectory.npz": "8e4f9eca6f6e17973d05a5e2a540f2abad937b79a2b301d4e97d1fb8c7d507c7"
-  }
+  ]
 }

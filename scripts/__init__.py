@@ -1,1 +1,1 @@
-"""Commands for preparing data and reproducing the paper's tables and figures."""
+"""Commands for preparing data, evaluating controllers, and viewing saved runs."""

@@ -1,4 +1,4 @@
-"""Configuration loading and applied-action feedback for the four paper tasks."""
+"""Configuration loading and applied-action feedback for the four example tasks."""
 
 from pathlib import Path
 

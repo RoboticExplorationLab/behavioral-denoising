@@ -1,4 +1,4 @@
-"""State-based Push-T with released demonstrations and the fixed validation winners."""
+"""State-based Push-T with released human demonstrations."""
 from copy import deepcopy
 from pathlib import Path
 from time import perf_counter, process_time
@@ -8,6 +8,7 @@ import numpy as np
 from src.data import DeePCDims, prepare_dataset
 from src.optimization.hankel import HankelMatrixGenerator
 from src.policies.bd_chi2 import BDChi2Policy
+from src.policies.pusht_coordinates import decode_actions, relative_dictionary, relative_observations
 
 ROOT = Path(__file__).resolve().parents[1]
 METHODS = ("bd_chi2", "select_dpc")
@@ -36,14 +37,48 @@ class RecordedBDChi2(BDChi2Policy):
         return plan
 
 
+class RelativeBDChi2(RecordedBDChi2):
+    """Use block-relative features internally and return world-space targets."""
+
+    def reset(self, seed=None):
+        super().reset(seed)
+        self._planning_observation = None
+
+    def act(self, observation, reference=None):
+        self._planning_observation = np.asarray(observation, dtype=float).copy()
+        return super().act(relative_observations(observation), reference)
+
+    def plan(self, history):
+        if self._planning_observation is None:
+            raise RuntimeError("Call act with a physical observation before planning")
+        anchor = self._planning_observation.copy()
+        coordinate_actions = super().plan(history)
+        world_actions = decode_actions(coordinate_actions, anchor)
+        self.latest_query.update(coordinate_actions=coordinate_actions.copy(),
+                                 planned_actions=world_actions.copy(),
+                                 action_representation="initial_block_frame",
+                                 action_anchor_observation=anchor)
+        return world_actions
+
+
 def build_policy(data, configuration, method, reference):
     options = deepcopy(method["parameters"])
     past, future = configuration["history"], method["prediction_horizon"]
     execute = configuration["execute_steps"]
     if method["id"] == "bd_chi2":
-        inputs, outputs = HankelMatrixGenerator(past, future).generate_hankel_matrices(prepare_dataset(data))
-        return RecordedBDChi2(inputs, outputs, DeePCDims(past, future, 6, 2),
-                              action_horizon=future, execute_steps=execute, **options)
+        coordinates = configuration.get("bd_coordinates", "world")
+        if coordinates == "block_relative":
+            if options.get("include_past_inputs", True):
+                raise ValueError("Block-relative Push-T requires include_past_inputs=false")
+            inputs, outputs = relative_dictionary(data, past, future)
+            policy_class = RelativeBDChi2
+        elif coordinates == "world":
+            inputs, outputs = HankelMatrixGenerator(past, future).generate_hankel_matrices(prepare_dataset(data))
+            policy_class = RecordedBDChi2
+        else:
+            raise ValueError(f"Unknown Push-T BD coordinate representation: {coordinates}")
+        return policy_class(inputs, outputs, DeePCDims(past, future, 6, 2),
+                            action_horizon=future, execute_steps=execute, **options)
     if method["id"] == "select_dpc":
         from src.policies.select_dpc_chunks import SelectDPCChunks
         return SelectDPCChunks(data, reference=reference, past=past, horizon=future,

@@ -525,5 +525,33 @@
   "metadata_normalization": {
     "reason": "Canonical module names for both python -m and imported driver; source bytes and recorded trajectories unchanged",
     "original_cache": "/tmp/benchmark_data_20261111/rocket/expert_evaluations.json"
+  },
+  "evaluation_conditions": {
+    "task": {
+      "mode": "landing"
+    },
+    "reference": null,
+    "steps": null,
+    "evaluation": {
+      "expert_cache_file": "data/rocket/expert_evaluations.json",
+      "steps": 1000
+    },
+    "outcome_protocol": "benchmark_v1",
+    "action_limit": null,
+    "state_weights": [
+      40,
+      20,
+      20,
+      1,
+      3000,
+      300
+    ],
+    "action_weights": [
+      10,
+      10,
+      10
+    ],
+    "height_limit": null,
+    "test_starts": "data/rocket/test_starts.json"
   }
 }

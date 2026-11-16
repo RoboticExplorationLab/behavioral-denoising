@@ -3,36 +3,50 @@
 Code for **Behavioral Denoising: A New Perspective
 on Nonlinear Behavioral Control Inspired by Closed-Form Diffusion Policies**.
 
-[Paper results](results/README.md) · [Configurations](config/README.md) ·
-[Implementation](IMPLEMENTATION.md) · [Data](data/README.md) ·
+This branch contains the current implementation and runnable examples for
+Cartpole, Rocket Landing, Reacher, and Push-T.
+For the **L4DC submission code, saved results, and paper reproduction instructions**,
+see the [`l4dc` branch](https://github.com/RoboticExplorationLab/behavioral-denoising/tree/l4dc).
+
+[Configurations](config/README.md) · [Implementation](IMPLEMENTATION.md) ·
+[Demonstrations](data/README.md) ·
 [Video gallery](https://roboticexplorationlab.github.io/behavioral-denoising/)
 
 ## BD-χ² across four tasks
 
 ![Successful BD-χ² rollouts: Cartpole and Rocket Landing above Reacher and Push-T.](media/teasers/bd_chi2_four_tasks.gif)
 
-Selected successful rollouts at real-time playback. Each panel holds its final
-pose after the run ends.
+Selected rollouts from the L4DC submission, at real-time playback. Each panel
+holds its final pose after the run ends. The updated Push-T controller is shown
+in the gallery below.
 
 ## Comparison with [Select-DPC](https://github.com/naefjo/choose-wisely-paper)
 
 ![BD-χ² above Select-DPC on Cartpole, Rocket Landing, and Reacher.](media/teasers/select_dpc_comparison.gif)
 
 BD-χ² (top, green) and Select-DPC (bottom, orange), starting from the same states.
-These selected trials show BD-χ² succeeding where Select-DPC fails. Playback is
-synchronized by simulation time, with final poses held after termination.
+These selected submission trials show BD-χ² succeeding where Select-DPC fails.
+Playback is synchronized by simulation time, with final poses held after termination.
 
-## All Push-T trials
+## Push-T update
 
-[![Preview of the BD-χ² Push-T video gallery.](media/teasers/pusht_gallery.png)](https://roboticexplorationlab.github.io/behavioral-denoising/)
+BD-χ² now expresses the pusher position and planned action targets in the block's
+coordinate frame, while retaining the block's absolute pose. The demonstrations,
+controller parameters, and execution schedule are unchanged. On the same 50 starts,
+mean peak coverage increases from **63.09% to 94.43%**, and mean final coverage from
+**57.99% to 88.16%**. This comparison reuses the original evaluation starts after
+choosing the representation; some individual trials regress.
 
-[Watch all 50 BD-χ² trials](https://roboticexplorationlab.github.io/behavioral-denoising/):
-peak and final coverage for each trial, with coverage summaries and seed search.
+[![Preview of the updated BD-χ² Push-T video gallery.](media/teasers/pusht_gallery.png)](https://roboticexplorationlab.github.io/behavioral-denoising/)
+
+[Watch all 50 updated trials](https://roboticexplorationlab.github.io/behavioral-denoising/),
+with peak and final coverage for each trial. Coverage is the fraction of the goal
+shape covered by the block. Trials stop above 95% coverage or after 30 seconds.
 
 ## Install
 
-Tested with Python 3.10 on Ubuntu 22.04. Run the following commands from the repository root to set up venvs used for this codebase.
-The control benchmark and Push-T use different NumPy versions so they require separate environments:
+Tested with Python 3.10 on Ubuntu 22.04. From the repository root, create separate
+environments for the control benchmarks and Push-T, which require different NumPy versions:
 
 ```bash
 python3.10 -m venv .venv
@@ -41,91 +55,76 @@ python3.10 -m venv .venv-pusht
 .venv-pusht/bin/python -m pip install -r requirements/pusht.txt
 ```
 
-The simulators are included under `third_party/`. No GPU is needed.
+The simulators and demonstrations are included. No GPU is needed.
 
-## Reproduce the tables and figures
+## Run the examples
 
-Demonstrations are included. To use the saved paper results without rerunning
-the experiments, first extract the bundled archive from the repository root:
-
-```bash
-.venv/bin/python -m zipfile -e results/paper.zip .
-```
-
-Then rebuild the tables and figures:
-
-```bash
-.venv/bin/python scripts/prepare_data.py --verify
-.venv/bin/python scripts/report.py --require-complete
-.venv/bin/python scripts/plot.py --group control
-.venv-pusht/bin/python scripts/plot.py --group pusht
-```
-
-Figures are written to `results/paper/figures/`. The extracted
-`results/paper/README.md` reports success criteria, costs, and computation times.
-To plot and report your own experiment runs, add `--root results/reproduction`
-to the report and plot commands above.
-
-With FFmpeg installed, regenerate the README animations with
-`.venv-pusht/bin/python scripts/plots/readme_teasers.py`. See the
-[gallery instructions](website/README.md) to build and preview the full Push-T page.
-
-## Run the experiments
-
-Use one numerical thread per worker. If a robotics shell (e.g., ROS) sets `PYTHONPATH`, unset
-it before running: this project imports `src.*` and must not add `src/` itself to
-`PYTHONPATH` (it contains a module named `selectors`).
+Use one numerical thread per worker. If a robotics shell such as ROS sets
+`PYTHONPATH`, unset it first: imports use `src.*`, so `src/` itself must not be on
+`PYTHONPATH`.
 
 ```bash
 unset PYTHONPATH
 export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
 export SDL_VIDEODRIVER=dummy MPLBACKEND=Agg
-.venv/bin/python -m experiments.cartpole --output results/reproduction
-.venv/bin/python -m experiments.rocket --output results/reproduction
-.venv/bin/python -m experiments.reacher --output results/reproduction
-.venv-pusht/bin/python -m experiments.pusht --output results/reproduction
 ```
 
-Each task uses its fixed paper configurations and saved test starts. Results are
-stored under `<output>/<task>/<method>/seed_<seed>/`. Repeat the same command
-to resume an interrupted run. Use a new output directory when changing settings.
-`results/paper/` is reserved for the provided results.
-
-For a quick check, select one method and start:
+Start with one method and one initial state:
 
 ```bash
-.venv/bin/python -m experiments.cartpole --methods bd_chi2 --seeds 10003 --output results/check
+.venv/bin/python -m experiments.cartpole --methods bd_chi2 --seeds 10003 --output runs/check
+.venv-pusht/bin/python -m experiments.pusht --methods bd_chi2 --seeds 300031 --output runs/check
 ```
+
+To run the configured methods and starts for each task:
+
+```bash
+.venv/bin/python -m experiments.cartpole --output runs/benchmark
+.venv/bin/python -m experiments.rocket --output runs/benchmark
+.venv/bin/python -m experiments.reacher --output runs/benchmark
+.venv-pusht/bin/python -m experiments.pusht --output runs/benchmark
+```
+
+Records are saved under `<output>/<task>/<method>/seed_<seed>/`, including states,
+actions, references, outcomes, and timing. Repeat a command to resume it; use a new
+output directory after changing settings. Generated runs are not committed.
 
 `--methods` accepts `bd_mean`, `bd_sample`, `bd_kl`, `bd_mean_chi2`, `bd_chi2`,
 `select_dpc`, `windowed_deepc`, and `deepc`. Push-T supports `bd_chi2` and `select_dpc`.
 Use `--steps` for a shorter trial. DeePC can take many hours to run.
 
+## View your runs
+
+Reports and visualizations read saved trajectories without rerunning controllers:
+
+```bash
+.venv/bin/python scripts/report.py --root runs/benchmark
+.venv/bin/python scripts/plot.py --root runs/benchmark --group control
+.venv-pusht/bin/python scripts/plot.py --root runs/benchmark --group pusht
+```
+
+Add `--videos` and install FFmpeg to generate motion videos. See the
+[gallery instructions](website/README.md) to build a Push-T page from your own runs
+or preview the published gallery assets. Paper figures and their reconstruction
+scripts are available on [`l4dc`](https://github.com/RoboticExplorationLab/behavioral-denoising/tree/l4dc).
+
 ## Timing and tests
 
-Timing replays saved policy queries, excludes initialization and simulation, and
-records process CPU time, CPU affinity, SMT topology, and background load:
+Timing replays saved controller queries and excludes initialization and simulation:
 
 ```bash
-.venv/bin/python scripts/timing.py --task cartpole --method bd_chi2 --output results/timing
+.venv/bin/python scripts/timing.py --root runs/benchmark --task cartpole --method bd_chi2
+```
+
+The timing record includes process CPU time, CPU affinity, SMT topology, and
+background load. Use a quiet machine for comparisons.
+
+Run tests in their corresponding environments; no saved benchmark results are required:
+
+```bash
 .venv/bin/python -m pytest -q -rs --ignore=tests/test_pusht.py --ignore=tests/test_pusht_task.py --ignore=tests/test_select_dpc_chunks.py
-.venv-pusht/bin/python -m pytest -q -rs tests/test_pusht.py tests/test_pusht_task.py tests/test_select_dpc_chunks.py
+.venv-pusht/bin/python -m pytest -q -rs tests/test_pusht.py tests/test_pusht_task.py tests/test_pusht_coordinates.py tests/test_select_dpc_chunks.py tests/test_gallery.py
 ```
-
-Timing needs saved trials: extract the archive first, or add
-`--root results/reproduction` to replay your own runs. Runtime depends on hardware
-and system load.
-
-The default tests do not rerun the complete benchmark. Tests that compare with
-the paper results skip when the archive has not been extracted. After extraction,
-they run automatically with the commands above. To also rerun one BD-χ² episode
-per task and compare its trajectory against the saved result:
-
-```bash
-.venv/bin/python -m pytest -q -m simulator tests/test_release_reproduction.py
-```
-
-This optional check uses both environments created during installation.
 
 ## Acknowledgments
 

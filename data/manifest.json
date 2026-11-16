@@ -1,122 +1,50 @@
 {
   "data/cartpole/demonstrations.npz": {
     "sha256": "e75317dd31e03559244ab1d60d2d3eb4dd0577df9c305cc40bf236626f5e3738",
-    "source": "results/final_benchmark_20261111/data/cartpole/mpc_demonstrations.npz",
     "bytes": 907122
   },
   "data/cartpole/expert_evaluations.json": {
-    "sha256": "e789d8db579b2de3afcf2fe7880e7e222a455d9afca6e80225920aa821474e69",
-    "source": "results/final_benchmark_20261111/cartpole/mpc_expert/*/result.json",
-    "bytes": 24157
+    "sha256": "5a619307f9d18d6bef929125b7bdc1e9c548be9e93ebc1a1dcc4567f7be6dd5e",
+    "bytes": 24653
   },
   "data/reacher/demonstrations.npz": {
     "sha256": "57ab40ee53dd0f5bd6d4ebda91bdb2518183d24fc75cd740d7e5678be78e2258",
-    "source": "results/final_benchmark_20261111/data/reacher/mpc_demonstrations.npz",
     "bytes": 3122538
   },
   "data/reacher/expert_evaluations.json": {
-    "sha256": "cf9efa12749d27ccf3934d3ef0ec000a516693251ba3aace5896f5206b8bff6c",
-    "source": "results/final_benchmark_20261111/data/reacher/expert_evaluations.json",
-    "bytes": 15387
+    "sha256": "534a7d61f8ff76c10bb037b3f4dcd5d877632df1b5d2041eef0c7bfeb4f36876",
+    "bytes": 15987
   },
   "data/rocket/demonstrations.npz": {
     "sha256": "d0cde35c7413f737efbed0ed0951b18b7374b2eced13eaa865118dae87481ded",
-    "source": "results/final_benchmark_20261111/data/rocket/mpc_demonstrations.npz",
     "bytes": 797794
   },
   "data/rocket/expert_evaluations.json": {
-    "sha256": "2e36a3b04221dca64361792025a1a2b0b77852d181c4777987d29d9b6b67749b",
-    "source": "results/final_benchmark_20261111/data/rocket/expert_evaluations.json",
-    "bytes": 13686
+    "sha256": "16bafb4c8521999297391d8e69f5e747d098620c1f4be446197deccf68344672",
+    "bytes": 14213
   },
   "data/pusht/demonstrations.npz": {
     "sha256": "536c91b9b4a5100903280fb33ce7bd5f52f949f0bb3036efa406f3dfea578509",
-    "source": "data/pusht/demonstrations.npz",
     "bytes": 621609
   },
   "data/pusht/upstream_manifest.json": {
     "sha256": "6deff70b05ec82fdf92d1f786fd554d97819cb0142e21adfae92c6c4cdb80d5f",
-    "source": "data/pusht/manifest.json",
     "bytes": 67942
   },
-  "data/pusht/subset64.npz": {
-    "sha256": "fd6a95af7be35a379ce9735367f9ab6739d00e9525565e7b8ccbc4ec17a542eb",
-    "source": "results/pusht_tuning_20261112/data/subset64.npz",
-    "bytes": 191946
-  },
-  "data/pusht/subset_manifest.json": {
-    "sha256": "b54f1ae32f2bc0b4a8ccb8902f2940b8cbaa178bf1594afa2682a18931ef78c3",
-    "source": "results/pusht_tuning_20261112/data/subset_manifest.json",
-    "bytes": 916
-  },
-  "data/pusht/selection/protocol.json": {
-    "sha256": "e7cdea31245d7044044cf71a39c8aff1a3b4775490badfa537224bf94ec2f1fe",
-    "source": "results/pusht_tuning_20261112/protocol.json",
-    "bytes": 75979
-  },
-  "data/pusht/selection/winners.json": {
-    "sha256": "c6118a128546b31a33b2e94aeeb3641b5c7f7679c4d348d30b2b0b8c200f1a74",
-    "source": "results/pusht_tuning_20261112/winners.json",
-    "bytes": 4599
-  },
-  "data/pusht/selection/confirmation_selection.json": {
-    "sha256": "b4f7a718b237fbed257ac9ecd5f6c2aa18dbef5812e391ae2d59ad2ed56966e8",
-    "source": "results/pusht_tuning_20261112/confirmation_selection.json",
-    "bytes": 5220
-  },
-  "data/pusht/selection/screen_summary.json": {
-    "sha256": "5e1044fb323bab076775a88cd558fd8269482f26cc78e8e72f202395b04f8e8f",
-    "source": "results/pusht_tuning_20261112/screen_summary.json",
-    "bytes": 89697
-  },
-  "data/pusht/selection/confirm_summary.json": {
-    "sha256": "f9781a8ec7d1be5f17f3670cb89dec92a60bd1102619597eb014e9805996ef3d",
-    "source": "results/pusht_tuning_20261112/confirm_summary.json",
-    "bytes": 7262
-  },
-  "data/pusht/selection/screen_jobs.json": {
-    "sha256": "88efc3ecc9f6e14cd0ca2632c1702e76046b8a87934eba166f7deba564a25f84",
-    "source": "results/pusht_tuning_20261112/screen_jobs.json",
-    "bytes": 95696
-  },
-  "data/pusht/selection/confirm_jobs.json": {
-    "sha256": "c5e3ea451ee8903eb901f630564fc33a13374df62926def393b48baaca41f3a4",
-    "source": "results/pusht_tuning_20261112/confirm_jobs.json",
-    "bytes": 7661
-  },
-  "data/pusht/physics_replay/trajectory.npz": {
-    "sha256": "7309cb824d52f5cdac59a7eab3031f1f9d850272ae38efc1602b89137ed7bc3c",
-    "source": "results/final_benchmark_20261111/visualizations/comparisons/four_tasks_bd_chi2/pusht_physics_replay/trajectory.npz",
-    "bytes": 66693
-  },
-  "data/pusht/physics_replay/manifest.json": {
-    "sha256": "caca3c8672292a34dd2e77849bcf02df4df8d63a0b9202bac6d4ba57d40fccb4",
-    "source": "results/final_benchmark_20261111/visualizations/comparisons/four_tasks_bd_chi2/pusht_physics_replay/manifest.json",
-    "bytes": 2354
-  },
-  "data/cartpole/collection_source.yaml": {
-    "sha256": "47a09ede773a770b7526e6cbe342b8d27fb8a999896266d5fb6042f52bbc2ff2",
-    "source": "results/final_benchmark_20261111/provenance/cartpole_expert/collection_config.yaml",
-    "bytes": 3753
-  },
   "data/cartpole/test_starts.json": {
-    "sha256": "b966c058bc59a0507f45e8b66495a47bcd24ca9f4823784c3a806947fbc4fcf9",
-    "bytes": 7544,
-    "source": "results/paper/cartpole/bd_chi2/*/trajectory.npz and metadata.json"
+    "sha256": "cff4a6f1554126ec25a19cd15b0914f9214d20c995bae04705871db9543a8d36",
+    "bytes": 5968
   },
   "data/reacher/test_starts.json": {
-    "sha256": "6f4a4efc94ddc510fd92300c441fcc85669d7cf171843952c39742ab2eede3fc",
-    "bytes": 18531,
-    "source": "results/paper/reacher/bd_chi2/*/trajectory.npz and metadata.json"
+    "sha256": "7c7ebac670fb499abfee97d8dbb88ea0c943f8403c56259114e83ca6639deccf",
+    "bytes": 16959
   },
   "data/rocket/test_starts.json": {
-    "sha256": "c7a385db4deae008416182cbaa6ea303903a28432db6e91e8804c30effb04109",
-    "bytes": 8520,
-    "source": "results/paper/rocket/bd_chi2/*/trajectory.npz and metadata.json"
+    "sha256": "f5aa59210fd2b32823aad0563c891be0f56941fa8dc1fa66e8282f48f91a8e47",
+    "bytes": 7018
   },
   "data/pusht/test_starts.json": {
-    "sha256": "7a526fbdc5408c8be354ba47f27db3e107fe41cc248b30dde14b90bd2bb498f1",
-    "bytes": 34261,
-    "source": "results/paper/pusht/bd_chi2/*/trajectory.npz and metadata.json"
+    "sha256": "10331b9552ba8f09c721f540b4156c072f93271075f5164edd7f62ad648ad831",
+    "bytes": 27531
   }
 }

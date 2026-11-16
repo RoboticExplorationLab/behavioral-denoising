@@ -1,4 +1,4 @@
-"""The paper's five boxed methods and three DeePC baselines.
+"""Behavioral denoising methods and DeePC baselines.
 
 BehavioralDenoisingPolicy implements both BD-mean and BD-sample.
 """

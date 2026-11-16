@@ -1,7 +1,7 @@
-"""Render the 50 frozen BD-chi-squared PushT trials for the public gallery.
+"""Render saved BD-χ² Push-T trials for a standalone video gallery.
 
     .venv-pusht/bin/python scripts/plots/pusht_gallery.py \
-        --root results/paper --output website/build --workers 6
+        --root runs/benchmark --output website/build --workers 6
 
 Only saved poses are drawn: no controller, simulator, interpolation, or temporal
 smoothing is used. Every recorded sample, including t=0 and the terminal pose,
@@ -9,8 +9,7 @@ occupies one frame at the native 10 Hz. The last pose therefore remains visible
 for one frame beyond the recorded trajectory duration. ``duration_s`` in the
 gallery data is the recorded terminal time, not this extra display interval.
 
-The existing paper validators check input hashes, protocol, coverage, and
-outcomes. Per-trial render records allow interrupted builds to resume after
+Saved-record validation checks input hashes, protocol, coverage, and outcomes. Per-trial render records allow interrupted builds to resume after
 checking inputs, output hashes, decoded frame counts, and encoding properties.
 Requires numpy, matplotlib, shapely, pillow, and FFmpeg/ffprobe on PATH.
 """
@@ -52,12 +51,9 @@ from scripts.plots import common, pusht
 
 METHOD = "bd_chi2"
 LABEL = "BD-χ²"
-SEEDS = list(range(300005, 300055))
 SIZE = 512
 FPS = 10
 GREEN = "#2ca02c"
-PREVIEW_SEEDS = (300013, 300021, 300044, 300052,
-                 300015, 300023, 300028, 300053)
 
 
 def sha256(path):
@@ -75,21 +71,12 @@ def write_json(path, data):
 
 
 def load_trials(root):
-    protocol = pusht.load_protocol(root)
-    if protocol["test_seeds"] != SEEDS:
-        raise ValueError("Expected the frozen 50 seeds 300005 through 300054")
-    directory = root / "pusht" / METHOD
-    recorded = sorted(int(path.name.removeprefix("seed_"))
-                      for path in directory.glob("seed_*") if path.is_dir())
-    if recorded != SEEDS:
-        raise ValueError("Missing or unexpected BD-chi-squared final records")
-    trials = [pusht.load_trial(directory / f"seed_{seed}", METHOD, seed, protocol)
-              for seed in SEEDS]
-    if sum(bool(trial.result["success"]) for trial in trials) != 19:
-        raise ValueError("Expected 19 successes and 31 failures in the frozen evaluation")
+    trials = pusht.load_trials(root, [METHOD])[METHOD]
+    expected = {key: value for key, value in trials[0].geometry.items() if key != "block_polygons"}
     for trial in trials:
-        if trial.geometry != trials[0].geometry:
-            raise ValueError("Expected the same task geometry in all 50 trials")
+        geometry = {key: value for key, value in trial.geometry.items() if key != "block_polygons"}
+        if geometry != expected or not pusht.Polygon(trial.outline).equals(pusht.Polygon(trials[0].outline)):
+            raise ValueError("Expected the same task geometry in all gallery trials")
     return trials
 
 
@@ -254,23 +241,24 @@ def render_trial(task):
         temporary_poster.unlink(missing_ok=True)
 
 
-def contact_sheet(output, font_path):
-    # Four successful and four unsuccessful starts, all shown at their initial pose.
+def contact_sheet(output, font_path, trials, destination):
+    # Evenly spaced seeds show a range of starting poses without outcome selection.
+    indices = np.linspace(0, len(trials) - 1, min(8, len(trials)), dtype=int)
+    preview_seeds = [trials[index].seed for index in indices]
     tile, gap, margin, heading = 224, 10, 18, 50
     sheet = Image.new("RGB", (4 * tile + 3 * gap + 2 * margin,
                              2 * tile + gap + heading + margin), "white")
     painter = ImageDraw.Draw(sheet)
     font = ImageFont.truetype(font_path, 27)
-    painter.text((sheet.width / 2, 24), "All 50 trials", font=font,
+    painter.text((sheet.width / 2, 24), f"All {len(trials)} trials", font=font,
                  fill="#354135", anchor="mm")
-    for index, seed in enumerate(PREVIEW_SEEDS):
+    for index, seed in enumerate(preview_seeds):
         with Image.open(output / "media/pusht" / f"seed_{seed}.jpg") as poster:
             # Omit the small video status footer from this compact linked preview.
             image = poster.crop((0, 0, SIZE, 480)).resize((tile, round(tile * 480 / SIZE)),
                                                        Image.Resampling.LANCZOS)
             sheet.paste(image, (margin + (index % 4) * (tile + gap),
                                heading + (index // 4) * (tile + gap)))
-    destination = common.REPOSITORY / "media/teasers/pusht_gallery.png"
     destination.parent.mkdir(parents=True, exist_ok=True)
     temporary = destination.with_suffix(".tmp.png")
     sheet.save(temporary, optimize=True)
@@ -279,10 +267,11 @@ def contact_sheet(output, font_path):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--root", type=Path, default=common.PAPER_RESULTS,
-                        help="Extracted paper result root")
+    parser.add_argument("--root", type=Path, default=common.DEFAULT_RUNS,
+                        help="Saved experiment output root")
     parser.add_argument("--output", type=Path, default=common.REPOSITORY / "website/build")
     parser.add_argument("--workers", type=int, default=6)
+    parser.add_argument("--preview", type=Path, help="Optional contact-sheet PNG")
     args = parser.parse_args()
     if args.workers < 1:
         parser.error("--workers must be positive")
@@ -292,7 +281,8 @@ def main():
     root, output = args.root.resolve(), args.output.resolve()
     trials = load_trials(root)
     bounds = view_bounds(trials)
-    print(f"Validated {len(trials)} saved trials: 19 successes, 31 failures.", flush=True)
+    print(f"Validated {len(trials)} saved trials; mean peak coverage "
+          f"{100 * np.mean([trial.result['max_coverage'] for trial in trials]):.2f}%.", flush=True)
     print(f"Shared workspace view: {bounds}; {SIZE} × {SIZE}, {FPS} fps, native poses.", flush=True)
     (output / "media/pusht").mkdir(parents=True, exist_ok=True)
     (output / "data").mkdir(parents=True, exist_ok=True)
@@ -300,13 +290,11 @@ def main():
     sources = {"renderer": sha256(Path(__file__)), "validators": sha256(Path(pusht.__file__)),
                "common": sha256(Path(common.__file__)), "font": sha256(font_path)}
     protocol_path = root / "protocols/pusht.json"
-    if not protocol_path.exists():
-        protocol_path = root / "pusht/protocol.json"
     tasks = []
     for trial in trials:
         directory = root / "pusht" / METHOD / f"seed_{trial.seed}"
         paths = [protocol_path, *(directory / name for name in
-                  ("trajectory.npz", "result.json", "metadata.json", "record.json")
+                  ("trajectory.npz", "result.json", "metadata.json")
                   if (directory / name).exists())]
         inputs = {str(path.relative_to(root)): sha256(path) for path in paths}
         settings = {"sources": sources, "inputs": inputs, "bounds": bounds,
@@ -320,26 +308,26 @@ def main():
         for done, future in enumerate(as_completed(futures), start=1):
             seed, status, record = future.result()
             records[seed] = record
-            print(f"[{done:02d}/50] {seed}: {status}; {record['frames']} frames checked", flush=True)
+            print(f"[{done:02d}/{len(trials)}] {seed}: {status}; {record['frames']} frames checked", flush=True)
 
-    if sorted(records) != SEEDS:
-        raise ValueError("Not all 50 media pairs were validated")
+    if sorted(records) != sorted(trial.seed for trial in trials):
+        raise ValueError("Not all media pairs were validated")
     # Recheck the pinned source files before publishing a complete gallery index.
     for task in tasks:
         for name, expected in task[-1].items():
             if sha256(root / name) != expected:
                 raise ValueError(f"Input changed during rendering: {root / name}")
-    rows = [{"seed": trial.seed, "success": bool(trial.result["success"]),
+    rows = [{"seed": trial.seed,
              "peak_coverage": float(trial.result["max_coverage"]),
              "final_coverage": float(trial.result["final_coverage"]),
              "duration_s": float(trial.time[-1]),
              "video": f"media/pusht/seed_{trial.seed}.mp4",
              "poster": f"media/pusht/seed_{trial.seed}.jpg"} for trial in trials]
-    write_json(output / "data/trials.json", {"method": LABEL, "total": 50,
-                                             "successes": 19, "failures": 31, "trials": rows})
-    contact_sheet(output, font_path)
+    write_json(output / "data/trials.json", {"method": LABEL, "total": len(rows), "trials": rows})
+    if args.preview:
+        contact_sheet(output, font_path, trials, args.preview)
     total_bytes = sum((output / row[key]).stat().st_size for row in rows for key in ("video", "poster"))
-    print(f"Gallery complete: 50 verified videos and posters, {total_bytes / 1024**2:.1f} MiB.", flush=True)
+    print(f"Gallery complete: {len(trials)} verified videos and posters, {total_bytes / 1024**2:.1f} MiB.", flush=True)
     print(output / "data/trials.json", flush=True)
 
 

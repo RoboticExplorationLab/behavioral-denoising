@@ -1,4 +1,4 @@
-"""Protocol and saved-record checks without running a Push-T benchmark."""
+"""Push-T configuration and recorder checks without running a benchmark."""
 
 import json
 import numpy as np
@@ -9,10 +9,10 @@ from src.data import TrajectoryData, TrajectoryDataSet, prepare_dataset
 from src.dataset_io import load_dataset
 from src.benchmarks import runner
 from src.interfaces import Step
+from src.tasks.pusht import state_features
 
 
-@pytest.mark.reference_results
-def test_released_bank_and_final_configuration_match_frozen_winners(paper_results):
+def test_released_bank_and_configured_window_counts():
     settings = runner.load_experiment_config("pusht")
     methods = runner.load_method_configs("pusht", settings["methods"])
     path, _ = runner.checked_input(settings["demonstrations"]["data_file"])
@@ -24,20 +24,16 @@ def test_released_bank_and_final_configuration_match_frozen_winners(paper_result
     assert [sum(max(0, len(item.input_trajectory) - settings["history"] - method["prediction_horizon"] + 1)
                 for item in aligned.dataset) for method in methods] == [23590, 19058]
     assert settings["task"]["legacy"] is True
+    assert settings["bd_coordinates"] == "block_relative"
     assert pusht.test_seeds(settings) == list(range(300005, 300055))
-    frozen = json.loads((paper_results / "pusht/protocol.json").read_text())
-    for method in methods:
-        winner = frozen["selected_candidates"][method["id"]]
-        assert method["parameters"] == winner["method"]["parameters"]
-        assert method["prediction_horizon"] == winner["method"]["prediction_horizon"]
-        assert settings["execute_steps"] == winner["execute_steps"]
 
 
 def test_configured_builders_accept_parameters_without_simulation():
     settings = runner.load_experiment_config("pusht")
     methods = runner.load_method_configs("pusht", settings["methods"])
     rng = np.random.default_rng(7)
-    episodes = [TrajectoryData(rng.normal(size=(60, 6)), rng.normal(size=(60, 2))) for _ in range(3)]
+    episodes = [TrajectoryData(state_features(rng.normal(size=(60, 5))), rng.normal(size=(60, 2)))
+                for _ in range(3)]
     data = TrajectoryDataSet(episodes, "fixture", "post_action")
     reference = np.array([0, 0, 256, 256, 2 ** -0.5, 2 ** -0.5])
     for method in methods:

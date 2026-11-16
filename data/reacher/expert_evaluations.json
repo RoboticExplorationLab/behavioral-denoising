@@ -509,5 +509,36 @@
     "src/dataset_io.py": "c9e04f4c3e49a071b2e3c804c298f13ddc401cf2594323432e25b34c040469c3",
     "collector": "2a36ec554e65cf5c72ac8659b469931c1069f4e625d2200e8b5ac025e84655e4"
   },
-  "reuse_note": "Exact saved expert prefixes through fifth target; cap500, first-five protocol, no expert rerun."
+  "reuse_note": "Exact saved expert prefixes through fifth target; cap500, first-five protocol, no expert rerun.",
+  "evaluation_conditions": {
+    "task": {
+      "target_seed": 42,
+      "target_tolerance": 0.005
+    },
+    "reference": null,
+    "steps": null,
+    "evaluation": {
+      "expert_cache_file": "data/reacher/expert_evaluations.json",
+      "steps": 500,
+      "stop_after_targets": 5
+    },
+    "outcome_protocol": "benchmark_v1",
+    "action_limit": 0.5,
+    "state_weights": [
+      0,
+      0,
+      0,
+      0,
+      40000,
+      40000,
+      10,
+      10
+    ],
+    "action_weights": [
+      10,
+      10
+    ],
+    "height_limit": 0.1,
+    "test_starts": "data/reacher/test_starts.json"
+  }
 }

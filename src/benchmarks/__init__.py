@@ -1,1 +1,1 @@
-"""Shared policy construction, recording, and paper reporting."""
+"""Shared policy construction, recording, and evaluation reporting."""

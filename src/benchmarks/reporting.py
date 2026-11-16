@@ -1,8 +1,7 @@
-"""Build paper metrics from saved episodes, without running policies or simulators.
+"""Summarize saved episodes without running policies or simulators.
 
-Reacher paper success means five ordered references and no height-limit violation.
-Its completion-only outcome is retained separately. Expert costs remain paired by
-start; the paper does not discard denominators for tiny expert height violations.
+Costs use successful runs and an expert from the same evaluation conditions.
+Reacher reference completion and constraint-respecting success are kept separate.
 """
 
 from __future__ import annotations
@@ -24,12 +23,6 @@ METHODS = {
     "bd_chi2": "BD-χ²", "select_dpc": "Select-DPC", "bd_mean": "BD-mean",
     "bd_sample": "BD-sample", "bd_kl": "BD-KL", "bd_mean_chi2": "BD-mean-χ²",
     "windowed_deepc": "Windowed DeePC", "deepc": "DeePC",
-}
-SEEDS = {
-    "cartpole": list(range(10003, 10013)),
-    "rocket": list(range(3000, 3010)),
-    "reacher": list(range(3000, 3005)) + list(range(4000, 4005)),
-    "pusht": list(range(300005, 300055)),
 }
 STATE_WEIGHTS = {
     "cartpole": [5, 0, 10000, .1, .1],
@@ -107,8 +100,9 @@ def _controller_failed(result):
                 or result.get("controller_error"))
 
 
-def episode_metrics(task, result, arrays, verify=True):
+def episode_metrics(task, result, arrays, verify=True, configuration=None):
     """Recompute outcome and cost using the saved pre-action observations."""
+    configuration = configuration or {}
     steps = int(result["steps"])
     failure = _controller_failed(result)
     _require(len(arrays["actions"]) == steps, "Action count differs from recorded steps")
@@ -133,8 +127,8 @@ def episode_metrics(task, result, arrays, verify=True):
     observations = arrays["observations"]
     _require(len(arrays["references"]) == steps, "Reference/action alignment differs")
     errors = observations[:-1] - arrays["references"]
-    cost = float(np.sum(errors ** 2 * STATE_WEIGHTS[task])
-                 + np.sum(arrays["actions"] ** 2 * ACTION_WEIGHTS[task]))
+    cost = float(np.sum(errors ** 2 * configuration.get("state_weights", STATE_WEIGHTS[task]))
+                 + np.sum(arrays["actions"] ** 2 * configuration.get("action_weights", ACTION_WEIGHTS[task])))
     if verify:
         for name in ("cost", "trace_cost"):
             recorded = result.get(name)
@@ -153,26 +147,29 @@ def episode_metrics(task, result, arrays, verify=True):
         success = steps == horizon and len(stable) >= 50 and bool(stable[-50:].all()) and not failure
         completion = success
     elif task == "reacher":
+        target_count = len(arrays["targets"])
+        tolerance = configuration.get("task", {}).get("target_tolerance", .005)
+        height_limit = configuration.get("height_limit", .1)
         completed = 0
         counts = []
         for observation in observations:
-            if completed < 5 and np.linalg.norm(observation[4:6] - arrays["targets"][completed]) < .005:
+            if completed < target_count and np.linalg.norm(observation[4:6] - arrays["targets"][completed]) < tolerance:
                 completed += 1
             counts.append(completed)
-        completion = completed == 5 and not failure and steps <= int(result.get("evaluation_steps", 500))
-        post_action_violations = int(np.sum(observations[1:, 5] > .1))
-        initial_violation = bool(observations[0, 5] > .1)
+        completion = completed == target_count and not failure and steps <= int(result.get("evaluation_steps", 500))
+        post_action_violations = int(np.sum(observations[1:, 5] > height_limit))
+        initial_violation = bool(observations[0, 5] > height_limit)
         success = completion and post_action_violations == 0 and not initial_violation
         if verify:
             _require(np.array_equal(counts, arrays["target_completion_counts"]), "Reacher reference counts mismatch")
             _require(post_action_violations == int(result["violations_strict"]), "Reacher height counts mismatch")
             _require(bool(result["clean_success_strict"]) == success, "Reacher strict success mismatch")
             if completion:
-                _require(counts[-2] < 5 and metrics["terminal_reason"] == "targets_completed",
-                         "Reacher did not stop on its fifth reference")
+                _require(counts[-2] < target_count and metrics["terminal_reason"] == "targets_completed",
+                         "Reacher did not stop on its last reference")
         metrics.update(references_completed=completed, height_violations=post_action_violations,
                        initial_height_violation=initial_violation,
-                       max_height_excess_m=float(max(0.0, np.max(observations[:, 5]) - .1)))
+                       max_height_excess_m=float(max(0.0, np.max(observations[:, 5]) - height_limit)))
     else:
         success = bool(result["settled"] and result["contact_success"] and not failure)
         completion = success
@@ -182,7 +179,7 @@ def episode_metrics(task, result, arrays, verify=True):
                 _require(steps and bool(arrays["terminated"][-1]) and arrays["rewards"][-1] > 0,
                          "Rocket has no positive terminal landing")
     if verify:
-        # The research records call reference completion `success` for Reacher.
+        # Reacher's recorder calls reference completion `success`.
         _require(bool(result["success"]) == completion, f"{task} recorded success mismatch")
     return {**metrics, "success": bool(success), "completion_success": bool(completion)}
 
@@ -200,8 +197,8 @@ def _read_episode(directory, task, seed, inputs, verify):
         saved = inputs.json(marker)
         for name in ("result.json", "metadata.json", "trajectory.npz"):
             _require(_digest(directory / name) == saved["sha256"][name], f"Completed file changed: {directory / name}")
-    metrics = episode_metrics(task, result, arrays, verify)
-    metrics.update(seed=seed, paper_protocol=bool(result.get("paper_protocol", metadata.get("paper_protocol", True))))
+    metrics = episode_metrics(task, result, arrays, verify, metadata.get("config"))
+    metrics.update(seed=seed, expert_comparable=bool(metadata.get("expert_comparable", False)))
     return result, metadata, arrays, metrics
 
 
@@ -215,58 +212,57 @@ def _expert(task, seed, root, expert_root, inputs, metadata):
             arrays_path = path.parent / "trajectory.npz"
             arrays = inputs.arrays(arrays_path) if arrays_path.is_file() else None
             return result, arrays
-    return metadata.get("paired_expert"), None
+    if metadata.get("paired_expert") is not None:
+        return metadata["paired_expert"], None
+    path = Path(__file__).resolve().parents[2] / "data" / task / "expert_evaluations.json"
+    if path.is_file():
+        saved = inputs.json(path)
+        matching = [record for record in saved["runs"] if int(record["seed"]) == seed]
+        _require(len(matching) <= 1, "Duplicate saved expert start")
+        if matching:
+            return {**matching[0]["result"], "seed": seed}, None
+    return None, None
 
 
-def _row(task, method, records):
+def _row(task, method, records, expected_seeds):
     successful = [record for record in records if record["success"]]
     row = {"task": task, "method": method, "label": METHODS[method],
-           "planned_trials": len(SEEDS[task]), "completed_trials": len(records),
+           "expected_trials": len(expected_seeds), "completed_trials": len(records),
            "successful_trials": len(successful), "successful_seeds": [r["seed"] for r in successful],
            "completion_only_successes": sum(record["completion_success"] for record in records),
-           "paper_protocol": all(record["paper_protocol"] for record in records),
            "zero_action_failures": sum(not record["success"] and not record["steps"] for record in records),
            "records": records}
     if task == "pusht":
         row.update(score=statistics_summary(r["score"] for r in records),
-                   median_score=statistics.median(r["score"] for r in records))
+                   median_score=statistics.median(r["score"] for r in records),
+                   peak_coverage=statistics_summary(r["max_coverage"] for r in records),
+                   final_coverage=statistics_summary(r["final_coverage"] for r in records))
     else:
         row["cost_ratio"] = statistics_summary(r["cost_ratio"] for r in successful if r["cost_ratio"] is not None)
     return row
 
 
 def timing_rows(root, inputs):
-    """Aggregate per-start process-CPU timing means."""
-    rows = []
-    for name in ("required", "deepc", "reacher_deepc"):
-        path = root / "timing" / f"{name}.json"
-        if not path.exists():
+    """Aggregate complete, action-validated timing replays by task and method."""
+    groups = {}
+    for path in sorted((root / "timing").glob("*/*/seed_*/result.json")):
+        trial = inputs.json(path)
+        if trial.get("state") == "no_actions":
             continue
-        cohort = inputs.json(path)
-        _require(cohort.get("publication_eligible") is True, f"Unvalidated timing cohort: {name}")
-        trials = cohort["trials"]
-        _require(len(trials) == cohort["planned_trials"] == cohort["eligible_trials"], "Incomplete timing cohort")
-        groups = {}
-        for trial in trials:
-            _require(trial["eligible"], "Ineligible timing trial")
-            if trial["method"] != "bd_kl":
-                _require(trial["state"] == "completed" and trial["resource_guard"]["passed"], "Failed timing replay/resource guard")
-                _require(trial["decisions"] > 0, "Timing trial has no decisions")
-            else:
-                _require(trial["no_actions"] and trial["decisions"] == 0, "BD-KL must have undefined timing")
-            groups.setdefault((trial["task"], trial["method"]), []).append(trial)
-        for (task, method), group in groups.items():
-            _require(len(group) == 3 and len({trial["seed"] for trial in group}) == 3, "Timing requires three distinct starts")
-            values = [] if method == "bd_kl" else [trial["cpu_ms_per_action"] for trial in group]
-            measured = statistics_summary(values)
-            original = next(row for row in cohort["rows"] if row["task"] == task and row["method"] == method)
-            if values:
-                for key in ("mean", "sample_sd"):
-                    _require(math.isclose(measured[key], original["cpu_ms_per_action"][key], rel_tol=1e-12), "Timing aggregation mismatch")
-            rows.append({"task": task, "method": method, "cpu_ms_per_action": measured,
-                         "seeds": [trial["seed"] for trial in group], "source_cohort": name})
-    _require(len({(r["task"], r["method"]) for r in rows}) == len(rows), "Duplicate timing rows")
-    return sorted(rows, key=lambda row: (TASKS.index(row["task"]), tuple(METHODS).index(row["method"])))
+        _require(trial.get("validated_replay") is True and trial.get("complete_sequence") is True
+                 and not trial.get("pilot", False),
+                 f"Unvalidated or incomplete timing replay: {path}")
+        _require(trial.get("decisions", 0) > 0, "Timing replay has no decisions")
+        value = trial.get("cpu_ms_per_action")
+        _require(value is not None and math.isfinite(value) and value > 0, "Invalid timing value")
+        groups.setdefault((trial["task"], trial["method"]), []).append(trial)
+    rows = []
+    for (task, method), trials in sorted(groups.items()):
+        seeds = [trial["seed"] for trial in trials]
+        _require(len(seeds) == len(set(seeds)), "Duplicate timing start")
+        rows.append({"task": task, "method": method, "seeds": seeds,
+                     "cpu_ms_per_action": statistics_summary(trial["cpu_ms_per_action"] for trial in trials)})
+    return rows
 
 
 def _stat_text(value, digits=3):
@@ -278,40 +274,37 @@ def _stat_text(value, digits=3):
 
 def _markdown(report):
     rows = report["rows"]
-    lines = ["# Paper benchmark results", ""]
-    if not report["complete"]:
-        lines += ["Partial results: only available trials are shown. Cost ratios are omitted for runs with a changed evaluation horizon.", ""]
-    lines += ["Cost / expert is the mean ± sample standard deviation of method/expert cost ratios, paired by start "
-             "and computed over successful trials only. Successful subsets differ between methods. "
-             "A single successful trial has no standard deviation; no successes gives —.", "",
-             "Reacher success requires all five references within 10 s and no recorded height above 0.1 m. "
-             "The paired expert cost is not filtered by expert height violations.", ""]
+    lines = ["# Benchmark results", "",
+             "Cost / expert is the mean ± sample standard deviation of paired cost ratios over successful runs. "
+             "Ratios require matching evaluation conditions; successful subsets can differ between methods. "
+             "One successful run has no sample standard deviation; no eligible runs gives —.", ""]
     control_rows = [row for row in rows if row["task"] != "pusht"]
     if control_rows:
-        lines += ["| Task | Method | Successes | Cost / expert |",
-                  "|---|---|---:|---:|"]
+        lines += ["| Task | Method | Successes | Cost / expert |", "|---|---|---:|---:|"]
         for row in control_rows:
             lines.append(f'| {row["task"].title()} | {row["label"]} | {row["successful_trials"]}/{row["completed_trials"]} | '
                          f'{_stat_text(row["cost_ratio"])} |')
+        if any(row["task"] == "reacher" for row in control_rows):
+            lines += ["", "Reacher success requires completing the ordered references within the configured budget "
+                      "without a recorded height-limit violation. Completion alone is saved separately. "
+                      "Paired expert costs are not filtered by expert height violations."]
     push_rows = [row for row in rows if row["task"] == "pusht"]
     if push_rows:
-        lines += ["", "Push-T score is maximum post-action coverage / 0.95, capped at one. "
-                  "Success requires coverage strictly above 95% within 300 actions.", "",
-                  "| Method | Successes | Mean score ± sample SD | Median score |",
-                  "|---|---:|---:|---:|"]
+        lines += ["", "Push-T coverage includes every saved trial; success requires coverage strictly above 95%. "
+                  "Final coverage is measured at termination.", "",
+                  "| Method | Trials | Peak coverage (0–1) | Final coverage (0–1) |", "|---|---:|---:|---:|"]
         for row in push_rows:
-            lines.append(f'| {row["label"]} | {row["successful_trials"]}/{row["completed_trials"]} | '
-                         f'{_stat_text(row["score"], 4)} | {row["median_score"]:.3f} |')
+            lines.append(f'| {row["label"]} | {row["completed_trials"]} | '
+                         f'{_stat_text(row["peak_coverage"], 4)} | {_stat_text(row["final_coverage"], 4)} |')
     if report["timing"]:
-        lines += ["", "Action timing: mean ± sample SD of three equally weighted per-start process-CPU means "
-                  "(ms/action), one numerical thread. Setup, simulation and Rocket touchdown overrides are excluded. "
-                  "These were affinity-controlled measurements under monitored background load, not an unloaded-machine "
-                  "comparison.", "",
-                  "| Task | Method | CPU ms/action |", "|---|---|---:|"]
+        lines += ["", "Timing averages equally weighted per-start process-CPU means (ms/action), with one numerical thread. "
+                  "Initialization, simulation and task overrides are excluded. CPU affinity and background load are recorded; "
+                  "CPU reservation is not enforced.", "",
+                  "| Task | Method | Starts | CPU ms/action |", "|---|---|---:|---:|"]
         for row in report["timing"]:
-            lines.append(f'| {row["task"].title()} | {METHODS[row["method"]]} | {_stat_text(row["cpu_ms_per_action"])} |')
-    lines += ["", "BD-KL produces no actions in the paper trials, so its action timing is undefined.", ""]
-    return "\n".join(lines)
+            lines.append(f'| {row["task"].title()} | {METHODS[row["method"]]} | {len(row["seeds"])} | '
+                         f'{_stat_text(row["cpu_ms_per_action"])} |')
+    return "\n".join(lines) + "\n"
 
 
 def aggregate_results(root, tasks=None, verify=True, require_complete=False, expert_root=None):
@@ -329,7 +322,15 @@ def aggregate_results(root, tasks=None, verify=True, require_complete=False, exp
     rows = []
     complete = True
     for task in tasks:
-        method_names = ("bd_chi2", "select_dpc") if task == "pusht" else tuple(METHODS)
+        protocol_path = root / "protocols" / f"{task}.json"
+        protocol = inputs.json(protocol_path) if protocol_path.exists() else None
+        if protocol is not None:
+            method_names = [method["id"].removesuffix("_upstream") for method in protocol["methods"]]
+            expected_seeds = sorted(start[0] for start in protocol["test_starts"])
+        else:
+            method_names = [method for method in METHODS if (root / task / method).is_dir()]
+            expected_seeds = []
+            complete = False
         for method in method_names:
             directories = sorted((root / task / method).glob("seed_*/result.json"))
             if not directories:
@@ -346,39 +347,39 @@ def aggregate_results(root, tasks=None, verify=True, require_complete=False, exp
                     if expert:
                         _require(int(expert["seed"]) == seed and bool(expert["success"]), "Invalid paired expert")
                     if verify and expert_arrays is not None:
-                        episode_metrics(task, expert, expert_arrays, verify=True)
+                        episode_metrics(task, expert, expert_arrays, verify=True, configuration=metadata.get("config"))
                         _require(np.array_equal(arrays["states"][0], expert_arrays["states"][0]), "Expert initial state differs")
                         if task == "reacher":
                             _require(np.array_equal(arrays["targets"], expert_arrays["targets"]), "Expert references differ")
                     ratio = None
-                    if metrics["success"] and metrics["paper_protocol"]:
+                    if metrics["success"] and metrics["expert_comparable"]:
                         _require(expert_cost is not None and math.isfinite(expert_cost) and expert_cost > 0,
                                  f"Missing valid expert cost for {task}/{method}/{seed}")
                         ratio = metrics["cost"] / expert_cost
                     metrics.update(expert_cost=expert_cost, cost_ratio=ratio)
                 records.append(metrics)
-            row = _row(task, method, records)
-            complete = complete and row["paper_protocol"] and sorted(r["seed"] for r in records) == SEEDS[task]
+            row = _row(task, method, records, expected_seeds)
+            complete = complete and sorted(r["seed"] for r in records) == expected_seeds
             rows.append(row)
     if require_complete:
-        _require(complete, "Incomplete paper cohort: every task method and prescribed start is required")
+        _require(complete, "Incomplete benchmark: every configured method and start is required")
     report = {"schema_version": 1, "tasks": list(tasks), "complete": bool(complete),
               "controller_records": sum(row["completed_trials"] for row in rows),
               "success_definition": {"reacher": "Five ordered references and no strict height violation",
-                                     "other_tasks": "Finalized task-specific paper criterion"},
-              "cost_population": "Successful controller trials on the full paper protocol, paired by start",
+                                     "other_tasks": "Configured task-specific success criterion"},
+              "cost_population": "Successful controller trials with matching expert evaluation conditions, paired by start",
               "cost_std_ddof": 1, "rows": rows, "timing": timing_rows(root, inputs),
               "import_verification": imported}
     outputs = {"summary.json": json.dumps(report, indent=2, allow_nan=False) + "\n", "README.md": _markdown(report)}
     buffer = io.StringIO()
-    writer = csv.DictWriter(buffer, fieldnames=["task", "method", "completed", "planned", "successes", "completion_only_successes",
+    writer = csv.DictWriter(buffer, fieldnames=["task", "method", "completed", "expected", "successes", "completion_only_successes",
                                                "cost_ratio_n", "cost_ratio_mean", "cost_ratio_sample_sd", "score_mean", "score_sample_sd"])
     writer.writeheader()
     for row in rows:
         costs = row.get("cost_ratio", {})
         scores = row.get("score", {})
         writer.writerow({"task": row["task"], "method": row["method"], "completed": row["completed_trials"],
-                         "planned": row["planned_trials"], "successes": row["successful_trials"],
+                         "expected": row["expected_trials"], "successes": row["successful_trials"],
                          "completion_only_successes": row["completion_only_successes"], "cost_ratio_n": costs.get("n"),
                          "cost_ratio_mean": costs.get("mean"), "cost_ratio_sample_sd": costs.get("sample_sd"),
                          "score_mean": scores.get("mean"), "score_sample_sd": scores.get("sample_sd")})

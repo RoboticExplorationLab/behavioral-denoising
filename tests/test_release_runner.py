@@ -11,7 +11,7 @@ from src.benchmarks import runner
 
 
 @pytest.mark.parametrize("task", runner.TASKS)
-def test_frozen_starts_are_the_paper_starts(task):
+def test_configured_starts_match_the_included_start_manifest(task):
     settings = runner.load_experiment_config(task)
     starts = runner.experiment_starts(task, import_module(f"experiments.{task}"), settings)
     frozen = json.loads((runner.ROOT / f"data/{task}/test_starts.json").read_text())
@@ -69,6 +69,28 @@ def test_input_manifest_rejects_unregistered_data(tmp_path, monkeypatch):
         runner.checked_input("data/bank.npz")
 
 
+def test_expert_comparison_requires_matching_evaluation_conditions():
+    from copy import deepcopy
+    original = runner.load_experiment_config("reacher")
+    assert runner.expert_comparison_matches("reacher", original)
+    changed = deepcopy(original)
+    changed["evaluation"]["steps"] = 100
+    assert not runner.expert_comparison_matches("reacher", changed)
+    changed = deepcopy(original)
+    changed["action_weights"] = [1., 1.]
+    assert not runner.expert_comparison_matches("reacher", changed)
+    changed = deepcopy(original)
+    changed["methods"] = ["bd_chi2"]
+    assert runner.expert_comparison_matches("reacher", changed)
+
+
+def test_editing_the_default_config_does_not_relabel_saved_experts(monkeypatch):
+    changed = runner.load_experiment_config("reacher")
+    changed["action_weights"] = [1., 1.]
+    monkeypatch.setattr(runner, "load_experiment_config", lambda task: changed)
+    assert not runner.expert_comparison_matches("reacher", changed)
+
+
 def test_json_preserves_nonfinite_parameter_meaning():
     value = runner.json_value({"lambda": np.inf, "array": np.array([1., np.nan])})
     assert value == {"lambda": {"nonfinite": "+Infinity"}, "array": [1., {"nonfinite": "NaN"}]}
@@ -117,8 +139,8 @@ def test_cartpole_loop_feeds_back_the_clipped_action(monkeypatch):
 
 def test_output_resolution_canonicalizes_parent_segments_and_symlinks(tmp_path, monkeypatch):
     root = tmp_path / "release"
-    (root / "results/paper").mkdir(parents=True)
-    (root / "paper_alias").symlink_to(root / "results/paper", target_is_directory=True)
+    (root / "runs/benchmark").mkdir(parents=True)
+    (root / "run_alias").symlink_to(root / "runs/benchmark", target_is_directory=True)
     monkeypatch.setattr(runner, "ROOT", root)
-    assert runner.resolve("results/new/../paper") == root / "results/paper"
-    assert runner.resolve("paper_alias") == root / "results/paper"
+    assert runner.resolve("runs/new/../benchmark") == root / "runs/benchmark"
+    assert runner.resolve("run_alias") == root / "runs/benchmark"

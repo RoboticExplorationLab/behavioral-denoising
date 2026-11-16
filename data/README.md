@@ -18,8 +18,10 @@ Windows are built within episode boundaries. Reacher demonstrations append the
 reference x/y coordinates to the eight state features. Its evaluation starts
 specify all five references in order.
 
-Push-T observations contain pusher x/y, block x/y, and the cosine and sine of the
-block angle. Actions are absolute pusher target positions in pixels. The dataset
+Stored Push-T observations contain pusher x/y, block x/y, and the cosine and sine
+of the block angle. Stored actions are absolute pusher target positions in pixels.
+BD-χ² constructs block-relative features and action targets when loading windows;
+Select-DPC uses the stored world coordinates. The dataset
 omits terminal observations, so alignment drops the last action of each episode,
 leaving 25,444 action/next-observation pairs.
 
@@ -28,7 +30,7 @@ leaving 25,444 action/next-observation pairs.
 To download and convert the dataset again, choose a new output directory:
 
 ```bash
-.venv-pusht/bin/python scripts/prepare_data.py --pusht-output results/pusht_data
+.venv-pusht/bin/python scripts/prepare_data.py --pusht-output runs/pusht_data
 ```
 
 Use `--archive /path/to/pusht.zip` to read an existing download.

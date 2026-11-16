@@ -1,1 +1,1 @@
-"""Offline figures and movies from saved benchmark records."""
+"""Plot and animate saved experiment runs without running controllers."""

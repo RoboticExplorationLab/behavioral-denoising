@@ -1,7 +1,7 @@
 """Verify the included datasets or import the official Push-T dataset.
 
 Without arguments this only reads and checks the included inputs. A Push-T
-download/import requires a new output directory; it never replaces paper data.
+download/import requires a new output directory; it never replaces included data.
 """
 
 import argparse
@@ -32,9 +32,9 @@ def verify_inputs(root=ROOT):
     for name, entry in manifest.items():
         path = root / name
         if not path.is_file() or digest(path) != entry["sha256"]:
-            raise ValueError(f"Paper input differs from its manifest: {name}")
+            raise ValueError(f"Included input differs from its manifest: {name}")
         if path.stat().st_size != entry["bytes"]:
-            raise ValueError(f"Paper input size differs from its manifest: {name}")
+            raise ValueError(f"Included input size differs from its manifest: {name}")
     return {"verified_files": len(manifest), "manifest_sha256": digest(root / "data/manifest.json")}
 
 
@@ -78,7 +78,7 @@ def prepare_pusht(output, archive=None):
             shutil.copyfile(Path(archive), raw_archive)
         expected = provenance["source_archive"]
         if raw_archive.stat().st_size != expected["bytes"] or digest(raw_archive) != expected["sha256"]:
-            raise ValueError("Push-T archive differs from the paper's pinned upstream download")
+            raise ValueError("Push-T archive differs from the specified upstream download")
         # State-based control uses the state and action arrays only.
         prefix = "pusht/pusht_cchi_v7_replay.zarr/"
         members = {prefix + name for name in provenance["source_files_sha256"]}

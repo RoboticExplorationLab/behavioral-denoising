@@ -761,5 +761,34 @@
       }
     }
   ],
-  "note": "Same-start saved MPC denominators from finalized paper records."
+  "note": "Same-start saved MPC denominators from finalized paper records.",
+  "evaluation_conditions": {
+    "task": {
+      "angle_termination": 7.0,
+      "max_episode_steps": 1000
+    },
+    "reference": [
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "steps": 300,
+    "evaluation": null,
+    "outcome_protocol": "benchmark_v1",
+    "action_limit": null,
+    "state_weights": [
+      5,
+      0,
+      10000,
+      0.1,
+      0.1
+    ],
+    "action_weights": [
+      1
+    ],
+    "height_limit": null,
+    "test_starts": "data/cartpole/test_starts.json"
+  }
 }

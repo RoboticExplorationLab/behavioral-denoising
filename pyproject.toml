@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "behavioral-denoising"
 version = "0.1.0"
-description = "Behavioral denoising and predictive-control paper benchmarks"
+description = "Behavioral denoising and predictive-control benchmarks"
 readme = "README.md"
 license = {file = "LICENSE"}
 requires-python = ">=3.10"
@@ -40,7 +40,6 @@ addopts = '--disable-plugin-autoload -m "not simulator"'
 testpaths = ["tests"]
 pythonpath = ["."]
 markers = [
-    "reference_results: requires extracted results/paper.zip reference records",
-    "simulator: closed-loop simulation reproduction checks",
+    "simulator: closed-loop simulation checks",
     "pusht: requires the separate Push-T environment",
 ]

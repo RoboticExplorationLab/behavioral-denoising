@@ -12,9 +12,8 @@ dist/
 .aws/
 MUJOCO_LOG.TXT
 .DS_Store
-results/*
-!results/README.md
-!results/paper.zip
+runs/
+results/
 data/pusht/pusht.zip
 data/pusht/pusht_cchi_v7_replay.zarr/
 docs/

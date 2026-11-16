@@ -1,7 +1,6 @@
-"""Paper metrics must distinguish completion, constraint success and timing scope."""
+"""Metrics distinguish completion, constraints, paired costs and timing validity."""
 
 import json
-import shutil
 
 import numpy as np
 import pytest
@@ -9,87 +8,105 @@ import pytest
 from src.benchmarks.reporting import aggregate_results, episode_metrics, statistics_summary, timing_rows, Inputs
 
 
-@pytest.mark.reference_results
-def test_reacher_completion_with_height_violation_is_not_paper_success(paper_results):
-    directory = paper_results / "reacher/bd_chi2/seed_3000"
-    result = json.loads((directory / "result.json").read_text())
-    with np.load(directory / "trajectory.npz", allow_pickle=False) as archive:
-        arrays = dict(archive)
+def cartpole_record(steps=50, success=True):
+    observations = np.tile([0., 0., 1., 0., 0.], (steps + 1, 1))
+    arrays = {"observations": observations, "states": np.zeros((steps + 1, 4)),
+              "actions": np.ones((steps, 1)), "references": observations[:-1].copy()}
+    result = {"steps": steps, "evaluation_steps": 50, "cost": float(steps), "success": success}
+    return result, arrays
+
+
+def save_episode(root, seed, result, arrays, *, comparable=True):
+    directory = root / "cartpole/bd_chi2" / f"seed_{seed}"
+    directory.mkdir(parents=True)
+    (directory / "result.json").write_text(json.dumps({**result, "seed": seed}))
+    (directory / "metadata.json").write_text(json.dumps({"expert_comparable": comparable,
+        "paired_expert": {"seed": seed, "success": True, "cost": 25.}}))
+    np.savez_compressed(directory / "trajectory.npz", **arrays)
+
+
+def save_protocol(root, seeds, methods=("bd_chi2",)):
+    (root / "protocols").mkdir(exist_ok=True)
+    (root / "protocols/cartpole.json").write_text(json.dumps({
+        "methods": [{"id": method} for method in methods],
+        "test_starts": [[seed, None, 50] for seed in seeds]}))
+
+
+def test_reacher_completion_with_height_violation_is_not_success():
+    targets = np.array([[.02, 0.], [.04, 0.], [.06, .11], [.08, 0.], [.10, 0.]])
+    observations = np.zeros((6, 8))
+    observations[1:, 4:6] = targets
+    arrays = {"observations": observations, "actions": np.zeros((5, 2)),
+              "references": np.zeros((5, 8)), "targets": targets,
+              "target_completion_counts": np.arange(6)}
+    result = {"steps": 5, "cost": float(np.sum(observations[:-1, 4:6] ** 2) * 40000),
+              "success": True, "violations_strict": 1, "clean_success_strict": False,
+              "terminal_reason": "targets_completed", "evaluation_steps": 500}
     outcome = episode_metrics("reacher", result, arrays)
     assert outcome["completion_success"]
     assert not outcome["success"]
-    assert outcome["height_violations"] == 4
+    assert outcome["height_violations"] == 1
+    assert outcome["max_height_excess_m"] == pytest.approx(.01)
 
 
-@pytest.mark.reference_results
-def test_paper_table_reproduces_strict_subsets_and_all_push_t_scores(tmp_path, paper_results):
-    # Symlinks keep the test small; only newly generated reports are written here.
-    for task in ("cartpole", "rocket", "reacher", "pusht", "timing"):
-        (tmp_path / task).symlink_to(paper_results / task, target_is_directory=True)
+def test_report_uses_current_protocol_and_only_successful_paired_costs(tmp_path):
+    save_episode(tmp_path, 17, *cartpole_record())
+    save_episode(tmp_path, 23, *cartpole_record(steps=10, success=False))
+    save_protocol(tmp_path, [17, 23])
     report = aggregate_results(tmp_path, require_complete=True)
-    rows = {(r["task"], r["method"]): r for r in report["rows"]}
-    assert report["controller_records"] == 340
-    assert report["complete"]
-    assert rows["reacher", "bd_chi2"]["successful_trials"] == 7
-    assert rows["reacher", "bd_chi2"]["completion_only_successes"] == 10
-    assert rows["reacher", "bd_chi2"]["cost_ratio"]["n"] == 7
-    assert rows["reacher", "bd_chi2"]["cost_ratio"]["mean"] == pytest.approx(1.104, abs=.0005)
-    assert rows["reacher", "bd_mean_chi2"]["successful_trials"] == 4
-    assert rows["reacher", "bd_mean_chi2"]["cost_ratio"]["mean"] == pytest.approx(1.047, abs=.0005)
-    assert rows["cartpole", "select_dpc"]["cost_ratio"]["n"] == 4
-    assert rows["pusht", "bd_chi2"]["successful_trials"] == 19
-    assert rows["pusht", "bd_chi2"]["score"]["n"] == 50
-    assert rows["pusht", "bd_chi2"]["score"]["mean"] == pytest.approx(.6606, abs=.00005)
-    assert rows["pusht", "select_dpc"]["successful_trials"] == 0
-    assert rows["pusht", "select_dpc"]["score"]["n"] == 50
-    assert len(report["timing"]) == 24
+    row = report["rows"][0]
+    assert report["complete"] and report["controller_records"] == 2
+    assert row["successful_seeds"] == [17]
+    assert row["cost_ratio"] == {"n": 1, "mean": 2., "sample_sd": None}
+    assert "paper" not in (tmp_path / "README.md").read_text().lower()
+    assert "BD-KL produces no actions" not in (tmp_path / "README.md").read_text()
 
 
-@pytest.mark.reference_results
-def test_cost_change_is_detected(paper_results):
-    directory = paper_results / "cartpole/bd_chi2/seed_10003"
-    result = json.loads((directory / "result.json").read_text())
-    with np.load(directory / "trajectory.npz", allow_pickle=False) as archive:
-        arrays = dict(archive)
+def test_incomplete_configured_cohort_is_detected(tmp_path):
+    save_episode(tmp_path, 17, *cartpole_record())
+    save_protocol(tmp_path, [17, 23])
+    report = aggregate_results(tmp_path)
+    assert not report["complete"]
+    with pytest.raises(ValueError, match="Incomplete benchmark"):
+        aggregate_results(tmp_path, require_complete=True)
+
+
+def test_changed_evaluation_conditions_exclude_expert_ratio(tmp_path):
+    save_episode(tmp_path, 17, *cartpole_record(), comparable=False)
+    save_protocol(tmp_path, [17])
+    report = aggregate_results(tmp_path, require_complete=True)
+    assert report["rows"][0]["successful_trials"] == 1
+    assert report["rows"][0]["cost_ratio"]["n"] == 0
+
+
+def test_cost_change_is_detected():
+    result, arrays = cartpole_record()
     arrays["actions"][0, 0] += 100
     with pytest.raises(ValueError, match="cost mismatch"):
         episode_metrics("cartpole", result, arrays)
 
 
-@pytest.mark.reference_results
-def test_zero_action_failure_has_no_successful_cost(paper_results):
-    directory = paper_results / "cartpole/bd_kl/seed_10003"
-    result = json.loads((directory / "result.json").read_text())
-    with np.load(directory / "trajectory.npz", allow_pickle=False) as archive:
-        arrays = dict(archive)
+def test_zero_action_failure_has_no_successful_cost():
+    result, arrays = cartpole_record(steps=0, success=False)
+    result.update(cost=None, controller_failure=True)
     outcome = episode_metrics("cartpole", result, arrays)
     assert not outcome["success"]
     assert outcome["cost"] is None
     assert outcome["recomputed_trace_cost"] == 0
 
 
-def test_cartpole_short_diagnostic_still_needs_fifty_stable_steps():
-    observations = np.tile([0., 0., 1., 0., 0.], (11, 1))
-    arrays = {"observations": observations, "states": np.zeros((11, 4)),
-              "actions": np.zeros((10, 1)), "references": observations[:-1]}
-    result = {"steps": 10, "evaluation_steps": 10, "cost": 0., "success": False}
+def test_cartpole_short_run_still_needs_fifty_stable_steps():
+    result, arrays = cartpole_record(steps=10, success=False)
+    result["evaluation_steps"] = 10
     assert not episode_metrics("cartpole", result, arrays)["success"]
 
 
-@pytest.mark.reference_results
-def test_changed_horizon_is_diagnostic_and_has_no_ratio(tmp_path, paper_results):
-    source = paper_results / "cartpole/bd_chi2/seed_10003"
-    destination = tmp_path / "cartpole/bd_chi2/seed_10003"
-    shutil.copytree(source, destination)
-    result_path = destination / "result.json"
-    result = json.loads(result_path.read_text())
-    result["paper_protocol"] = False
-    result_path.write_text(json.dumps(result))
-    report = aggregate_results(tmp_path, tasks=["cartpole"], expert_root=paper_results)
-    assert not report["complete"]
-    assert report["rows"][0]["cost_ratio"]["n"] == 0
-    with pytest.raises(ValueError, match="Incomplete paper cohort"):
-        aggregate_results(tmp_path, tasks=["cartpole"], expert_root=paper_results, require_complete=True)
+def test_configured_weights_are_used_when_verifying_cost():
+    result, arrays = cartpole_record()
+    result["cost"] *= 2
+    assert episode_metrics("cartpole", result, arrays, configuration={"action_weights": [2]})["cost"] == 100
+    with pytest.raises(ValueError, match="cost mismatch"):
+        episode_metrics("cartpole", result, arrays)
 
 
 def test_sample_standard_deviation_and_singleton_are_explicit():
@@ -98,15 +115,20 @@ def test_sample_standard_deviation_and_singleton_are_explicit():
     assert statistics_summary([])["mean"] is None
 
 
-@pytest.mark.reference_results
-def test_timing_rejects_an_ineligible_cohort(tmp_path, paper_results):
-    folder = tmp_path / "timing"
-    folder.mkdir()
-    cohort = json.loads((paper_results / "timing/required.json").read_text())
-    cohort["trials"][0]["eligible"] = False
-    (folder / "required.json").write_text(json.dumps(cohort))
-    with pytest.raises(ValueError, match="Ineligible timing trial"):
+def test_timing_rejects_unvalidated_replays_and_accepts_any_method(tmp_path):
+    directory = tmp_path / "timing/cartpole/bd_kl/seed_17"
+    directory.mkdir(parents=True)
+    trial = {"task": "cartpole", "method": "bd_kl", "seed": 17, "validated_replay": False,
+             "complete_sequence": True, "decisions": 50, "cpu_ms_per_action": 2.}
+    path = directory / "result.json"
+    path.write_text(json.dumps(trial))
+    with pytest.raises(ValueError, match="Unvalidated"):
         timing_rows(tmp_path, Inputs(tmp_path))
+    trial["validated_replay"] = True
+    path.write_text(json.dumps(trial))
+    row, = timing_rows(tmp_path, Inputs(tmp_path))
+    assert row["cpu_ms_per_action"] == {"n": 1, "mean": 2., "sample_sd": None}
+    assert row["seeds"] == [17]
 
 
 def test_push_t_initial_overlap_does_not_count_as_post_action_score():
@@ -115,3 +137,10 @@ def test_push_t_initial_overlap_does_not_count_as_post_action_score():
     outcome = episode_metrics("pusht", result, arrays)
     assert outcome["score"] == 0
     assert not outcome["success"]
+
+
+def test_push_t_does_not_continue_after_crossing_success_threshold():
+    arrays = {"actions": np.zeros((2, 2)), "observations": np.zeros((3, 6)), "coverage": np.array([0., .96, .97])}
+    result = {"steps": 2, "score": 1., "success": True}
+    with pytest.raises(ValueError, match="continued after"):
+        episode_metrics("pusht", result, arrays)

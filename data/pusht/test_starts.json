@@ -1,7 +1,7 @@
 {
   "task": "pusht",
   "max_steps": 300,
-  "notes": "Seeds and actual initial observations are frozen from final paper records. Reacher targets are explicit, so evaluation no longer depends on discarded validation generation counts. Rocket initial_condition retains the original normalized reset argument; initial_state is an audit value, not a replacement reset.",
+  "notes": "Reset using each seed with the configured legacy simulator reset; policy_seed sets controller randomness.",
   "starts": [
     {
       "seed": 300005,
@@ -1303,57 +1303,5 @@
         -1.1128084503011664
       ]
     }
-  ],
-  "source_sha256": {
-    "results/paper/pusht/bd_chi2/seed_300005/trajectory.npz": "ca6e04b583593b7aeabd32918aeaf8e7d137d263f604efb7f111424aa5e87aea",
-    "results/paper/pusht/bd_chi2/seed_300006/trajectory.npz": "b50d2900e1f642eca3f81f5d9f60f5f9a857c220d58db7ee152c5dfda60cb081",
-    "results/paper/pusht/bd_chi2/seed_300007/trajectory.npz": "db22f2b7fe07caebcb71fae7d767453f639c0d0b9b25d31062287e3948253bc7",
-    "results/paper/pusht/bd_chi2/seed_300008/trajectory.npz": "f0b0b89955f8bf0d2c64c5856b4c55176f38e8a800ea1f47c731c1c57cefd70c",
-    "results/paper/pusht/bd_chi2/seed_300009/trajectory.npz": "43dd232833194d28b4738524a4d117794039bdb869273bd322c7064240d677b3",
-    "results/paper/pusht/bd_chi2/seed_300010/trajectory.npz": "8984e68f5e28c0059dce69de5ec6cf30c17d2d6fd4f3e8e3ee243bb6bae630e8",
-    "results/paper/pusht/bd_chi2/seed_300011/trajectory.npz": "faaff0e7c2b527ca2df51bc6f17197497274fdeb943d556735757685231e3cc3",
-    "results/paper/pusht/bd_chi2/seed_300012/trajectory.npz": "51fa52128afb9abaa1c8e31d47b869f6a26c3284d7fc9a5989e03731ac30261a",
-    "results/paper/pusht/bd_chi2/seed_300013/trajectory.npz": "c8a60c47091fd27aa28fc24e8f3180da05eaccc485ab2ea7fbecc0bc51bba8b5",
-    "results/paper/pusht/bd_chi2/seed_300014/trajectory.npz": "640ef9223d1be13b102c6df26c3c5acdcfad56db257a46a47a56161a1bc192f2",
-    "results/paper/pusht/bd_chi2/seed_300015/trajectory.npz": "e7891b68db10b827f20787e97468e14d1aea69d9f6937e42f1713074b04564d7",
-    "results/paper/pusht/bd_chi2/seed_300016/trajectory.npz": "3804472961031df6673b723ba6a637f751859cade7cd963c7334fe1e57d628f0",
-    "results/paper/pusht/bd_chi2/seed_300017/trajectory.npz": "d7913637a5f25233e99e7db455276df2ba25c6b6cfaa542744c4e1dc23492da4",
-    "results/paper/pusht/bd_chi2/seed_300018/trajectory.npz": "52663869141f6e7e3227b453fe624bb88bbe8c2dc817ad4114e27a47a904e366",
-    "results/paper/pusht/bd_chi2/seed_300019/trajectory.npz": "8ce6c7bb4af7712adde3c9b29779665ab6fb19dccc9167429cde558bf0f4eadd",
-    "results/paper/pusht/bd_chi2/seed_300020/trajectory.npz": "d8f10a2527475d41da812bc129203d0d0f18d5545c53a2336f75e12bce2aa4bc",
-    "results/paper/pusht/bd_chi2/seed_300021/trajectory.npz": "98d1bfe9913e77637a9d29974751c247efd66d7a407e3776c0d6d528d7cf9f7f",
-    "results/paper/pusht/bd_chi2/seed_300022/trajectory.npz": "6c62682bf44014fbea251ed870cecea14236926c98447fbaa78387c6bc56ccb7",
-    "results/paper/pusht/bd_chi2/seed_300023/trajectory.npz": "4f204f74f319739dd9ea893161306e1831656845c03fbf1e74d49e40a1c835dc",
-    "results/paper/pusht/bd_chi2/seed_300024/trajectory.npz": "ce687b4738730985ead3b1087273bdeaaf9e5a29f255df6bfca232518e45bc28",
-    "results/paper/pusht/bd_chi2/seed_300025/trajectory.npz": "9edb59b21af9b4b1653ce23b5edf0395f1d2e00165539a4e56b2d3cbdbad50ed",
-    "results/paper/pusht/bd_chi2/seed_300026/trajectory.npz": "51a24a50272fbea994cc8d0aa4cda71954042ce070850d6d2a65a0164bda1059",
-    "results/paper/pusht/bd_chi2/seed_300027/trajectory.npz": "7ac0f5375c7df1427735cfd1947864a7b62819e137bd115b51ce8238fb27748a",
-    "results/paper/pusht/bd_chi2/seed_300028/trajectory.npz": "f08f64cc352da4357765687785a31e39d1cb6af72ce9b2fd6ff89e3cdae6026b",
-    "results/paper/pusht/bd_chi2/seed_300029/trajectory.npz": "904bcf84cabdd6e046efabd8a7e7acbe651c30bea37209ad7d7abae776c8c2dc",
-    "results/paper/pusht/bd_chi2/seed_300030/trajectory.npz": "b15c93d66a713d206b058e9fc01e78e66e9d599f8f8a6af6b8a55deebc09e468",
-    "results/paper/pusht/bd_chi2/seed_300031/trajectory.npz": "07008883103679e3367f090375c01d821b10199905a46d19b24331133adf6547",
-    "results/paper/pusht/bd_chi2/seed_300032/trajectory.npz": "58aa8e0b7f149f79ba2630a22c5f90c6e1a8eaf720c5513f7807e3421914cef6",
-    "results/paper/pusht/bd_chi2/seed_300033/trajectory.npz": "93b8af3930dc3d0b5a9289c43f9e04ccf1dcb7b2a4bcaf53ca0b27b405b5c937",
-    "results/paper/pusht/bd_chi2/seed_300034/trajectory.npz": "2d251ac0e50fc0ea69e343b2678250b2c991b9c46c7a81d8afd3e947803f0864",
-    "results/paper/pusht/bd_chi2/seed_300035/trajectory.npz": "d922628777e377806c13072f2b6a2517b79da6139c5fa33926a560b0da8d1987",
-    "results/paper/pusht/bd_chi2/seed_300036/trajectory.npz": "cd6ffa03cb2377ffef938c19cb5884801ca7d760526c3c549c5dc10654187f55",
-    "results/paper/pusht/bd_chi2/seed_300037/trajectory.npz": "f0c66477ae7ac8f9fc1f3c602dd68d0de2246f343a2d77393fe56a73a7125977",
-    "results/paper/pusht/bd_chi2/seed_300038/trajectory.npz": "72172f6cf60ea208b91b5a6aad6f7d7d7db2f90b8d1b986e8909221343da0943",
-    "results/paper/pusht/bd_chi2/seed_300039/trajectory.npz": "eeb4bb09bc128ffcf05b1ae77c37f6d256e0bc597152ba9db04ddb30fc02009c",
-    "results/paper/pusht/bd_chi2/seed_300040/trajectory.npz": "c6bdf4c8a43c82a96bd17cb006abc7216529353aac8162636baf5f6f5820ea91",
-    "results/paper/pusht/bd_chi2/seed_300041/trajectory.npz": "e6089a1267bb4ebcf9c53112eaeb6e579d24d8ad38dedea9bfe104b10334f1a1",
-    "results/paper/pusht/bd_chi2/seed_300042/trajectory.npz": "d5a1616da48730c2f92c063232d51bbb2a1dc2c1b7606acdfe38df2d3b4b2664",
-    "results/paper/pusht/bd_chi2/seed_300043/trajectory.npz": "66d61505d86afa65ce9d2c59ee6ffd08f45cc9e227ad98efbb3c30c01784f950",
-    "results/paper/pusht/bd_chi2/seed_300044/trajectory.npz": "9dcfbb77aa55933a45637d925532f379d24080510a78a11d5dbc6cc643115b2d",
-    "results/paper/pusht/bd_chi2/seed_300045/trajectory.npz": "0bad2751eaacc0b4f07178abe1d0e3d1c747bc59372e9ad59048fa01d58452ef",
-    "results/paper/pusht/bd_chi2/seed_300046/trajectory.npz": "8abe558fe366e0211c0dfda23375d5901587543c8303b69212355b9a1a4d6fdf",
-    "results/paper/pusht/bd_chi2/seed_300047/trajectory.npz": "e82079541e1b4a5cc496bc412194414c1eb6a5bd6ac0116c102481b04b555ef9",
-    "results/paper/pusht/bd_chi2/seed_300048/trajectory.npz": "f787dd7a0cb264c0de2f84d6bf6ddad851d53f73a0fce6ef3bb45b2f64d12a66",
-    "results/paper/pusht/bd_chi2/seed_300049/trajectory.npz": "1178db48f759500799ed9387a7786b19069195fcf08d28222dc828a9b25d4c4c",
-    "results/paper/pusht/bd_chi2/seed_300050/trajectory.npz": "0ad25aca98ab30f8ad00fb8ab9b37a7e3f65a4641aa2f1a1964d1b8b2f6cec64",
-    "results/paper/pusht/bd_chi2/seed_300051/trajectory.npz": "adb28512bf1ba81529d2ba12979dca36b4ec4381002c77025f720c0fc4d8acdd",
-    "results/paper/pusht/bd_chi2/seed_300052/trajectory.npz": "8742ac9c9292e36ef92dad9a60e006f33bde3eb338d853f2bdeade1cbd8afcd9",
-    "results/paper/pusht/bd_chi2/seed_300053/trajectory.npz": "33fc0879be5a9095378804bb1e7e66fa312115b2b7ecf25e5c23aa16af566210",
-    "results/paper/pusht/bd_chi2/seed_300054/trajectory.npz": "fc92a7920c83ffcaad419620115df39a16d4b9b6e1a2732302db3c0561d99804"
-  }
+  ]
 }

@@ -1,7 +1,7 @@
 # Experiment configurations
 
 Each task has an `experiment.yaml` describing the evaluation and one YAML per
-method. Defaults reproduce the settings used in the paper.
+method. Edit these files to change the controller or evaluation settings.
 
 | Task | Demonstrations | Evaluation |
 |---|---|---|
@@ -15,12 +15,18 @@ noise is added during evaluation. Starts and Reacher references are specified in
 `data/<task>/test_starts.json`.
 
 The `*_upstream.yaml` files use parameters from the Select-DPC benchmarks. BD-KL
-and Cartpole BD-sample use untuned settings. Push-T uses the parameters selected
-on eight validation starts, with 50 separate starts for testing.
+and Cartpole BD-sample use untuned settings. Push-T retains the scalar parameters
+selected on eight validation starts. BD-χ² now uses block-relative pusher
+coordinates and action targets; Select-DPC continues to use world coordinates.
+The updated representation was evaluated on the same 50 starts as the earlier
+version, rather than on a new held-out set.
 
 Reacher success requires reaching all five references without a height-limit
 violation. Cost statistics include successful controller trials only, normalized
 by each start's saved expert cost.
 
 Isomap fits are cached in `.cache/isomap/` and recomputed when absent. Use a new
-results directory after changing a configuration.
+output directory after changing a configuration.
+
+For the original configurations and paper results, use the
+[l4dc branch](https://github.com/RoboticExplorationLab/behavioral-denoising/tree/l4dc).

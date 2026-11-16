@@ -1,8 +1,8 @@
 """Replay saved controller queries and record process-CPU time per action.
 
 Setup, warm-up, logging, validation, and simulator initialization are excluded.
-Saved actions are checked against the release implementation. A truncated replay
-is a diagnostic, not a replacement for the paper's full-sequence timing protocol.
+Saved actions are checked against the current implementation. Partial replays
+are labelled and excluded from the complete-sequence timing summary.
 """
 import argparse
 from copy import deepcopy
@@ -33,7 +33,7 @@ import numpy as np
 from threadpoolctl import threadpool_info, threadpool_limits
 
 METHODS = ("bd_chi2", "select_dpc", "bd_mean", "bd_sample", "bd_kl", "bd_mean_chi2", "windowed_deepc", "deepc")
-PRESPECIFIED_SEEDS = {"cartpole": (10003, 10007, 10012), "reacher": (3000, 4000, 4004), "rocket": (3000, 3004, 3009)}
+TASKS = ("cartpole", "reacher", "rocket")
 ACTION_TOLERANCE = 1e-5
 
 
@@ -253,34 +253,16 @@ def replay_sequence(policy, arrays, bounds, augmented, feedback_function, *, max
                 expected_actions=np.asarray(expected_values).reshape(-1, dimension)), processed_steps
 
 
-def canonical_data(task, metadata, config, records=None):
+def canonical_data(task, metadata, config, records):
+    """Verify the demonstration bank against the recorded run protocol."""
     path = ROOT / 'data' / task / 'demonstrations.npz'
     actual = sha256(path)
-    if "payload_sha256" in metadata:
-        if records is None:
-            raise ValueError("New release records require their protocol directory")
-        protocol = json.loads((records / "protocols" / f"{task}.json").read_text())
-        declared_hash = protocol.pop("sha256")
-        actual_protocol_hash = hashlib.sha256(json.dumps(protocol, sort_keys=True, allow_nan=False).encode()).hexdigest()
-        if actual_protocol_hash != declared_hash or declared_hash != metadata["protocol_sha256"]:
-            raise ValueError("Record protocol hash mismatch")
-        expected = protocol["input_sha256"][str(path.relative_to(ROOT))]
-    elif task == 'cartpole' and 'dataset' in metadata:
-        expected = metadata['dataset']['sha256']
-    elif task == 'rocket':
-        expected = config['demonstrations']['dataset_sha256']
-    else:
-        if task == 'cartpole':
-            if len(config['datasets']) != 1:
-                raise ValueError('Cartpole replay requires one explicitly selected dataset')
-            original_name = Path(next(iter(config['datasets'].values()))).name
-        else:
-            original_name = Path(config['demonstrations']['data_file']).name
-        matches = {value for name, value in metadata['provenance']['input_sha256'].items()
-                   if Path(name).name == original_name}
-        if len(matches) != 1:
-            raise ValueError('Cannot uniquely verify the bank against its source record')
-        expected = matches.pop()
+    protocol = json.loads((records / "protocols" / f"{task}.json").read_text())
+    declared_hash = protocol.pop("sha256")
+    actual_protocol_hash = hashlib.sha256(json.dumps(protocol, sort_keys=True, allow_nan=False).encode()).hexdigest()
+    if actual_protocol_hash != declared_hash or declared_hash != metadata["protocol_sha256"]:
+        raise ValueError("Record protocol hash mismatch")
+    expected = protocol["input_sha256"][str(path.relative_to(ROOT))]
     if actual != expected:
         raise ValueError(f'Canonical {task} data differs from its recorded bank')
     return path, actual
@@ -343,7 +325,7 @@ def replay(task_name, method_name, seed, records, output, *, cpu,
               "started_utc": utc(), "source_record": str(record.resolve()),
               "pilot": max_decisions is not None, "max_decisions": max_decisions,
               "cpu": cpu, "smt_siblings": siblings,
-              "publication_eligible": False, "initialization_included": False,
+              "validated_replay": False, "initialization_included": False,
               "clocks": {"primary": "process_time_ns", "secondary": "perf_counter_ns"},
               "load_qualification": "Affinity-controlled with recorded load; CPU reservation is not enforced.",
               "source_sha256": {str(path.relative_to(ROOT)): sha256(path)
@@ -415,8 +397,7 @@ def replay(task_name, method_name, seed, records, output, *, cpu,
         complete = processed == count and len(measured["cpu_ns"]) == decisions
         report.update(state="completed" if accepted else "action_mismatch",
                       complete_sequence=complete, all_actions_validated=accepted,
-                      publication_eligible=accepted and complete and max_decisions is None
-                                           and metadata.get("paper_protocol", True),
+                      validated_replay=accepted,
                       decisions=len(measured["cpu_ns"]), processed_steps=processed,
                       cpu_ms_per_action=float(np.mean(measured["cpu_ns"])) / 1e6,
                       wall_ms_per_action=float(np.mean(measured["wall_ns"])) / 1e6,
@@ -429,7 +410,7 @@ def replay(task_name, method_name, seed, records, output, *, cpu,
             raise ValueError(f"Controller action replay differs: {report['max_action_absolute_gap']}")
         return report
     except BaseException as error:
-        report.update(state="failed", error=repr(error), publication_eligible=False, finished_utc=utc())
+        report.update(state="failed", error=repr(error), validated_replay=False, finished_utc=utc())
         save_json(output / "result.json", report)
         raise
     finally:
@@ -443,9 +424,9 @@ def replay(task_name, method_name, seed, records, output, *, cpu,
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--root", type=Path, default=ROOT / "results/paper")
-    parser.add_argument("--output", type=Path, default=ROOT / "results/timing")
-    parser.add_argument("--task", choices=PRESPECIFIED_SEEDS)
+    parser.add_argument("--root", type=Path, default=ROOT / "runs/benchmark")
+    parser.add_argument("--output", type=Path, help="Timing output directory (default: <root>/timing)")
+    parser.add_argument("--task", choices=TASKS)
     parser.add_argument("--method", choices=METHODS)
     parser.add_argument("--seeds", type=int, nargs="+")
     parser.add_argument("--cpu", type=int, default=min(os.sched_getaffinity(0)))
@@ -459,11 +440,16 @@ def main():
         return
     if not args.task or not args.method:
         parser.error("--task and --method are required")
+    args.output = args.output or args.root / "timing"
     if args.max_decisions is not None and args.max_decisions <= 0:
         parser.error("--max-decisions must be positive")
     if not np.isfinite(args.warmup_seconds) or args.warmup_seconds < 0:
         parser.error("--warmup-seconds must be finite and nonnegative")
-    seeds = args.seeds or PRESPECIFIED_SEEDS[args.task]
+    available = sorted(int(path.parent.name.removeprefix("seed_"))
+                       for path in (args.root / args.task / args.method).glob("seed_*/result.json"))
+    seeds = args.seeds or available[:3]
+    if not seeds or len(seeds) != len(set(seeds)) or not set(seeds).issubset(available):
+        parser.error(f"Choose distinct saved seeds from {available}")
     results = []
     for seed in seeds:
         result = replay(args.task, args.method, seed, args.root.resolve(), args.output.resolve(),
@@ -471,9 +457,9 @@ def main():
         results.append(result)
         print(json.dumps({key: result.get(key) for key in
                           ("task", "method", "seed", "state", "decisions", "cpu_ms_per_action")}), flush=True)
-    valid = [result["cpu_ms_per_action"] for result in results if result["publication_eligible"]]
+    valid = [result["cpu_ms_per_action"] for result in results if result["validated_replay"] and result.get("complete_sequence") and not result["pilot"]]
     summary = {"task": args.task, "method": args.method, "seeds": list(seeds),
-               "complete_protocol": list(seeds) == list(PRESPECIFIED_SEEDS[args.task]) and len(valid) == 3,
+               "all_sequences_validated": len(valid) == len(seeds),
                "mean_ms": float(np.mean(valid)) if valid else None,
                "sample_sd_ms": float(np.std(valid, ddof=1)) if len(valid) > 1 else None,
                "n": len(valid), "aggregation": "Equally weighted per-start process-CPU means"}
