@@ -1,6 +1,6 @@
 name: pusht
-study_id: pusht_block_relative
-description: Push-T with block-relative BD features and released human demonstrations.
+study_id: pusht_configurable_coordinates
+description: Push-T with configurable coordinates and released human demonstrations.
 evaluation_mode: fixed
 methods:
 - bd_chi2
@@ -10,12 +10,12 @@ demonstrations:
   manifest_file: data/pusht/upstream_manifest.json
   selection: all_released_episodes
 task:
+  representation: block_relative
   legacy: true
   max_episode_steps: 300
   render_size: 512
 history: 2
 execute_steps: 8
-bd_coordinates: block_relative
 evaluation:
   test_seed_start: 300005
   test_count: 50

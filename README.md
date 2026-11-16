@@ -30,11 +30,21 @@ Playback is synchronized by simulation time, with final poses held after termina
 
 ## Push-T update
 
-BD-χ² now expresses the pusher position and planned action targets in the block's
-coordinate frame, while retaining the block's absolute pose. The demonstrations,
-controller parameters, and execution schedule are unchanged. On the same 50 starts,
-mean peak coverage increases from **63.09% to 94.43%**, and mean final coverage from
-**57.99% to 88.16%**.
+BD-χ² and Select-DPC now express the pusher position and planned action targets in
+the block's coordinate frame, while retaining the block's absolute pose. All
+rows below use the same 50 starts, demonstrations, and execution schedule.
+World-coordinate rows are the previous results. Controller parameters were
+not retuned for the relative representation.
+
+| Method | Coordinates | Mean peak coverage | Mean final coverage |
+|---|---|---:|---:|
+| BD-χ² | World | 63.09% | 57.99% |
+| BD-χ² | Block-relative | 94.43% | 88.16% |
+| Select-DPC | World | 6.28% | 2.23% |
+| Select-DPC | Block-relative | 10.55% | 0.00% |
+
+Relative Select-DPC produced frequent OSQP inaccurate-solution warnings.
+These values include all trials and the controller's existing fallback behavior.
 
 [![Preview of the updated BD-χ² Push-T video gallery.](media/teasers/pusht_gallery.png)](https://roboticexplorationlab.github.io/behavioral-denoising/)
 
@@ -87,12 +97,25 @@ To run the configured methods and starts for each task:
 ```
 
 Records are saved under `<output>/<task>/<method>/seed_<seed>/`, including states,
-actions, references, outcomes, and timing. Repeat a command to resume it; use a new
+actions, references, outcomes, and timing. Repeat a command to resume it. Use a new
 output directory after changing settings. Generated runs are not committed.
 
 `--methods` accepts `bd_mean`, `bd_sample`, `bd_kl`, `bd_mean_chi2`, `bd_chi2`,
 `select_dpc`, `windowed_deepc`, and `deepc`. Push-T supports `bd_chi2` and `select_dpc`.
 Use `--steps` for a shorter trial. DeePC can take many hours to run.
+
+Both Push-T methods default to `block_relative` observations and action targets.
+To select this representation explicitly, run:
+
+```bash
+.venv-pusht/bin/python -m experiments.pusht --representation block_relative \
+  --methods bd_chi2 select_dpc --output runs/pusht_relative
+```
+
+Use `--representation world` for both methods to use absolute coordinates.
+The gallery above shows BD-χ². See the
+[coordinate configuration](config/README.md#push-t-coordinates) for per-method
+overrides. Saved trajectories and executed actions remain in world coordinates.
 
 ## View your runs
 
@@ -120,11 +143,11 @@ Timing replays saved controller queries and excludes initialization and simulati
 The timing record includes process CPU time, CPU affinity, SMT topology, and
 background load. Use a quiet machine for comparisons.
 
-Run tests in their corresponding environments; no saved benchmark results are required:
+Run tests in their corresponding environments. No saved benchmark results are required:
 
 ```bash
 .venv/bin/python -m pytest -q -rs --ignore=tests/test_pusht.py --ignore=tests/test_pusht_task.py --ignore=tests/test_select_dpc_chunks.py
-.venv-pusht/bin/python -m pytest -q -rs tests/test_pusht.py tests/test_pusht_task.py tests/test_pusht_coordinates.py tests/test_select_dpc_chunks.py tests/test_gallery.py
+.venv-pusht/bin/python -m pytest -q -rs tests/test_pusht.py tests/test_pusht_task.py tests/test_pusht_coordinates.py tests/test_pusht_representations.py tests/test_select_dpc_chunks.py tests/test_gallery.py
 ```
 
 ## Acknowledgments

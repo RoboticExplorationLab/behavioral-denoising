@@ -16,6 +16,7 @@ import numpy as np
 from src.data import TrajectoryData, TrajectoryDataSet, prepare_dataset
 from src.dataset_io import save_dataset
 from src.interfaces import Dynamics, Step, Task
+from src.tasks.pusht_coordinates import PushTCoordinates
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -136,12 +137,19 @@ class PushTTask(Task):
     observation_dim = 6
     action_dim = 2
 
-    def __init__(self, max_episode_steps=300, legacy=True, render_size=512, dynamics=None):
+    def __init__(self, max_episode_steps=300, legacy=True, render_size=512, dynamics=None,
+                 representation="world"):
+        self.coordinates = PushTCoordinates(representation)
         super().__init__(dynamics if dynamics is not None else PushTDynamics(
             max_episode_steps=max_episode_steps, legacy=legacy, render_size=render_size))
 
     def observation(self, raw):
+        """Physical measurement used by recording and the public policy interface."""
         return state_features(raw)
+
+    def policy_observation(self, raw):
+        """Features in the configured representation, before policy normalization."""
+        return self.coordinates.observations(self.observation(raw))
 
     def reference(self, raw=None, step=0):
         return state_features(np.r_[np.zeros(2), GOAL_POSE])

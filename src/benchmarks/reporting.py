@@ -199,6 +199,18 @@ def _read_episode(directory, task, seed, inputs, verify):
             _require(_digest(directory / name) == saved["sha256"][name], f"Completed file changed: {directory / name}")
     metrics = episode_metrics(task, result, arrays, verify, metadata.get("config"))
     metrics.update(seed=seed, expert_comparable=bool(metadata.get("expert_comparable", False)))
+    if task == "pusht":
+        configuration = metadata.get("config", {})
+        method = metadata.get("method", {})
+        configured = method.get("representation", configuration.get("task", {}).get("representation"))
+        if configured is None:
+            # Older public runs stored the BD-only choice in the task config.
+            configured = configuration.get("bd_coordinates", "world") if directory.parent.name == "bd_chi2" else "world"
+        representation = result.get("representation", metadata.get("representation", configured))
+        _require(representation in {"world", "block_relative"}, "Unknown Push-T representation")
+        _require(metadata.get("representation", representation) == representation,
+                 "Push-T representation differs between result and metadata")
+        metrics["representation"] = representation
     return result, metadata, arrays, metrics
 
 
@@ -233,6 +245,9 @@ def _row(task, method, records, expected_seeds):
            "zero_action_failures": sum(not record["success"] and not record["steps"] for record in records),
            "records": records}
     if task == "pusht":
+        representations = {record.get("representation", "world") for record in records}
+        _require(len(representations) == 1, "Do not aggregate different Push-T representations into one method row")
+        row["representation"] = representations.pop()
         row.update(score=statistics_summary(r["score"] for r in records),
                    median_score=statistics.median(r["score"] for r in records),
                    peak_coverage=statistics_summary(r["max_coverage"] for r in records),
@@ -292,9 +307,10 @@ def _markdown(report):
     if push_rows:
         lines += ["", "Push-T coverage includes every saved trial; success requires coverage strictly above 95%. "
                   "Final coverage is measured at termination.", "",
-                  "| Method | Trials | Peak coverage (0–1) | Final coverage (0–1) |", "|---|---:|---:|---:|"]
+                  "| Method | Representation | Trials | Peak coverage (0–1) | Final coverage (0–1) |",
+                  "|---|---|---:|---:|---:|"]
         for row in push_rows:
-            lines.append(f'| {row["label"]} | {row["completed_trials"]} | '
+            lines.append(f'| {row["label"]} | {row["representation"]} | {row["completed_trials"]} | '
                          f'{_stat_text(row["peak_coverage"], 4)} | {_stat_text(row["final_coverage"], 4)} |')
     if report["timing"]:
         lines += ["", "Timing averages equally weighted per-start process-CPU means (ms/action), with one numerical thread. "
@@ -372,13 +388,14 @@ def aggregate_results(root, tasks=None, verify=True, require_complete=False, exp
               "import_verification": imported}
     outputs = {"summary.json": json.dumps(report, indent=2, allow_nan=False) + "\n", "README.md": _markdown(report)}
     buffer = io.StringIO()
-    writer = csv.DictWriter(buffer, fieldnames=["task", "method", "completed", "expected", "successes", "completion_only_successes",
+    writer = csv.DictWriter(buffer, fieldnames=["task", "method", "representation", "completed", "expected", "successes", "completion_only_successes",
                                                "cost_ratio_n", "cost_ratio_mean", "cost_ratio_sample_sd", "score_mean", "score_sample_sd"])
     writer.writeheader()
     for row in rows:
         costs = row.get("cost_ratio", {})
         scores = row.get("score", {})
-        writer.writerow({"task": row["task"], "method": row["method"], "completed": row["completed_trials"],
+        writer.writerow({"task": row["task"], "method": row["method"], "representation": row.get("representation"),
+                         "completed": row["completed_trials"],
                          "expected": row["expected_trials"], "successes": row["successful_trials"],
                          "completion_only_successes": row["completion_only_successes"], "cost_ratio_n": costs.get("n"),
                          "cost_ratio_mean": costs.get("mean"), "cost_ratio_sample_sd": costs.get("sample_sd"),

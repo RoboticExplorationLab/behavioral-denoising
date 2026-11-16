@@ -243,7 +243,8 @@ def run_controller_trial(task, module, configuration, method, parameters, data, 
     return row, recorder
 
 
-def run_task(task, *, config_path=None, methods=None, seeds=None, steps=None, output=None, overrides=None):
+def run_task(task, *, config_path=None, methods=None, seeds=None, steps=None, output=None, overrides=None,
+             representation=None):
     if task not in TASKS:
         raise ValueError(f"Unknown task: {task}")
     module = import_module(f"experiments.{task}")
@@ -253,6 +254,17 @@ def run_task(task, *, config_path=None, methods=None, seeds=None, steps=None, ou
     if configuration.get("evaluation_mode") != "fixed":
         raise ValueError("Release benchmarks use fixed parameters, not a tuning grid")
     method_configs = load_method_configs(task, configuration["methods"])
+    if representation is not None:
+        if task != "pusht":
+            raise ValueError("A representation override is supported only for Push-T")
+        configuration["task"]["representation"] = representation
+        # An explicit run override takes precedence over YAML method overrides.
+        for method in method_configs:
+            method["representation"] = representation
+    if task == "pusht":
+        # Validate all configured choices before creating an output directory.
+        for method in method_configs:
+            module.effective_coordinates(configuration, method)
     available = {canonical_method(method["id"]): method for method in method_configs}
     selected = list(available) if methods is None else [canonical_method(name) for name in methods]
     if not selected or len(selected) != len(set(selected)) or not set(selected).issubset(available):
@@ -329,7 +341,14 @@ def run_task(task, *, config_path=None, methods=None, seeds=None, steps=None, ou
                         row, arrays, decisions, queries, geometry = module.run_fixed_trial(
                             data, configuration, method, seed, cache)
                         row.update(task=task, method=identifier, evaluation_steps=start[2])
-                        metadata.update(geometry=geometry, environment_seed=seed, policy_seed=row["policy_seed"])
+                        metadata.update(geometry=geometry, environment_seed=seed, policy_seed=row["policy_seed"],
+                                        representation=row["representation"], normalization=row.pop("normalization", None),
+                                        coordinate_convention={
+                                            "observations": "Physical world coordinates",
+                                            "policy_observations": "Configured controller coordinates before normalization",
+                                            "actions": "Clipped world target positions sent to the simulator",
+                                            "planning_anchor": "Last history block pose; decoded chunk fixed throughout execution",
+                                        })
                         _atomic_write(staging / "trajectory.npz", lambda stream: np.savez_compressed(stream, **arrays))
                         atomic_json_lines(staging / "diagnostics.jsonl", decisions)
                         atomic_json_lines(staging / "queries.jsonl", queries)
@@ -361,17 +380,30 @@ def main(task):
     parser.add_argument("--seeds", nargs="+", type=int, help="A subset of the configured test starts")
     parser.add_argument("--steps", type=int, help="Override the evaluation horizon")
     parser.add_argument("--output", type=Path, default=Path("runs/benchmark"))
+    if task == "pusht":
+        from ..tasks.pusht_coordinates import REPRESENTATIONS
+        parser.add_argument("--representation", choices=REPRESENTATIONS,
+                            help="Override the task and method representations for this run")
     arguments = parser.parse_args()
     from threadpoolctl import threadpool_limits
     with threadpool_limits(limits=1):
         if arguments.command == "describe":
             configuration = load_experiment_config(task, arguments.config)
             module = import_module(f"experiments.{task}")
-            print(json.dumps(json_value({"task": task, "configuration": configuration,
-                                        "starts": experiment_starts(task, module, configuration)}), indent=2))
+            description = {"task": task, "configuration": configuration,
+                           "starts": experiment_starts(task, module, configuration)}
+            if task == "pusht":
+                if arguments.representation is not None:
+                    configuration["task"]["representation"] = arguments.representation
+                configured_methods = load_method_configs(task, configuration["methods"])
+                description["representations"] = {
+                    method["id"]: (arguments.representation or module.effective_coordinates(configuration, method).name)
+                    for method in configured_methods}
+            print(json.dumps(json_value(description), indent=2))
         elif arguments.command == "aggregate":
             from .reporting import aggregate_results
             aggregate_results(resolve(arguments.output))
         else:
             run_task(task, config_path=arguments.config, methods=arguments.methods, seeds=arguments.seeds,
-                     steps=arguments.steps, output=arguments.output)
+                     steps=arguments.steps, output=arguments.output,
+                     representation=getattr(arguments, "representation", None))

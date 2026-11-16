@@ -24,7 +24,9 @@ def test_released_bank_and_configured_window_counts():
     assert [sum(max(0, len(item.input_trajectory) - settings["history"] - method["prediction_horizon"] + 1)
                 for item in aligned.dataset) for method in methods] == [23590, 19058]
     assert settings["task"]["legacy"] is True
-    assert settings["bd_coordinates"] == "block_relative"
+    assert settings["task"]["representation"] == "block_relative"
+    assert {method["id"]: pusht.effective_coordinates(settings, method).name
+            for method in methods} == {"bd_chi2": "block_relative", "select_dpc": "block_relative"}
     assert pusht.test_seeds(settings) == list(range(300005, 300055))
 
 

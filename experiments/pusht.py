@@ -5,10 +5,9 @@ from time import perf_counter, process_time
 
 import numpy as np
 
-from src.data import DeePCDims, prepare_dataset
-from src.optimization.hankel import HankelMatrixGenerator
+from src.data import DeePCDims
 from src.policies.bd_chi2 import BDChi2Policy
-from src.policies.pusht_coordinates import decode_actions, relative_dictionary, relative_observations
+from src.tasks.pusht_coordinates import PushTCoordinates
 
 ROOT = Path(__file__).resolve().parents[1]
 METHODS = ("bd_chi2", "select_dpc")
@@ -37,52 +36,63 @@ class RecordedBDChi2(BDChi2Policy):
         return plan
 
 
-class RelativeBDChi2(RecordedBDChi2):
-    """Use block-relative features internally and return world-space targets."""
+class CoordinateBDChi2(RecordedBDChi2):
+    """Use shared Push-T coordinates while exposing physical actions/observations."""
 
-    def reset(self, seed=None):
-        super().reset(seed)
-        self._planning_observation = None
+    def __init__(self, *args, coordinates=None, **kwargs):
+        self.coordinates = (coordinates if isinstance(coordinates, PushTCoordinates)
+                            else PushTCoordinates("world" if coordinates is None else coordinates))
+        super().__init__(*args, **kwargs)
+
+    @property
+    def normalization(self):
+        return {"history_mean": self._z_mean.copy(), "history_scale": self._z_scale.copy(),
+                "action_mean": self._a_mean.copy(), "action_scale": self._a_scale.copy(),
+                "convention": "Per dictionary coordinate, including separate history/action lags"}
 
     def act(self, observation, reference=None):
+        # plan() is called only at a chunk boundary. Its anchor is then frozen
+        # in the decoded world chunk, even while later observations change.
         self._planning_observation = np.asarray(observation, dtype=float).copy()
-        return super().act(relative_observations(observation), reference)
+        return super().act(self.coordinates.observations(observation), reference)
 
     def plan(self, history):
-        if self._planning_observation is None:
-            raise RuntimeError("Call act with a physical observation before planning")
-        anchor = self._planning_observation.copy()
-        coordinate_actions = super().plan(history)
-        world_actions = decode_actions(coordinate_actions, anchor)
-        self.latest_query.update(coordinate_actions=coordinate_actions.copy(),
-                                 planned_actions=world_actions.copy(),
-                                 action_representation="initial_block_frame",
-                                 action_anchor_observation=anchor)
-        return world_actions
+        anchor = self._planning_observation
+        if self.coordinates.name == "block_relative" and self._include_past_inputs:
+            history = history.copy()
+            count = self._T_past * self._m
+            past_actions = history[:count].reshape(self._T_past, self._m)
+            history[:count] = self.coordinates.encode_actions(past_actions, anchor).reshape(-1)
+        coordinate_plan = super().plan(history)
+        world_plan = self.coordinates.decode_actions(coordinate_plan, anchor)
+        self.latest_query.update(
+            representation=self.coordinates.name, coordinate_actions=coordinate_plan.copy(),
+            planned_actions=world_plan.copy(), action_anchor_observation=anchor.copy())
+        return world_plan
+
+
+def effective_coordinates(configuration, method):
+    """A method override selects the same shared representation as the task default."""
+    # Read older BD-only configurations when neither shared setting is present.
+    fallback = configuration.get("bd_coordinates", "world") if method["id"] == "bd_chi2" else "world"
+    task_default = configuration["task"].get("representation", fallback)
+    return PushTCoordinates(method.get("representation", task_default))
 
 
 def build_policy(data, configuration, method, reference):
     options = deepcopy(method["parameters"])
     past, future = configuration["history"], method["prediction_horizon"]
     execute = configuration["execute_steps"]
+    coordinates = effective_coordinates(configuration, method)
     if method["id"] == "bd_chi2":
-        coordinates = configuration.get("bd_coordinates", "world")
-        if coordinates == "block_relative":
-            if options.get("include_past_inputs", True):
-                raise ValueError("Block-relative Push-T requires include_past_inputs=false")
-            inputs, outputs = relative_dictionary(data, past, future)
-            policy_class = RelativeBDChi2
-        elif coordinates == "world":
-            inputs, outputs = HankelMatrixGenerator(past, future).generate_hankel_matrices(prepare_dataset(data))
-            policy_class = RecordedBDChi2
-        else:
-            raise ValueError(f"Unknown Push-T BD coordinate representation: {coordinates}")
-        return policy_class(inputs, outputs, DeePCDims(past, future, 6, 2),
-                            action_horizon=future, execute_steps=execute, **options)
+        inputs, outputs = coordinates.dictionary(
+            data, past, future, transform_past_inputs=options.get("include_past_inputs", True))
+        return CoordinateBDChi2(inputs, outputs, DeePCDims(past, future, 6, 2), coordinates=coordinates,
+                                action_horizon=future, execute_steps=execute, **options)
     if method["id"] == "select_dpc":
         from src.policies.select_dpc_chunks import SelectDPCChunks
         return SelectDPCChunks(data, reference=reference, past=past, horizon=future,
-                               execute_steps=execute, **options)
+                               execute_steps=execute, coordinates=coordinates, **options)
     raise ValueError(f"Unknown method: {method['id']}")
 
 
@@ -96,6 +106,7 @@ def run_episode(task, policy, environment_seed, policy_seed, maximum_steps):
     """Record one episode. Called only by the explicit run command."""
     raw = task.reset(environment_seed)
     policy.reset(policy_seed)
+    coordinates = getattr(policy, "coordinates", PushTCoordinates())
     states, observations = [np.asarray(raw).copy()], [task.observation(raw)]
     snapshots = [task.dynamics.snapshot()]
     actions, proposed_actions, rewards = [], [], []
@@ -115,7 +126,8 @@ def run_episode(task, policy, environment_seed, policy_seed, maximum_steps):
         query_index = current_query(policy)
         decision = {"step": step, "wall_seconds": wall_seconds, "cpu_seconds": cpu_seconds,
                     "query_index": query_index, "new_query": query_index != before_query,
-                    "diagnostics": policy.diagnostics(), "proposed_action": proposed.copy()}
+                    "diagnostics": policy.diagnostics(), "proposed_action": proposed.copy(),
+                    "representation": coordinates.name}
         decisions.append(decision)
         if decision["new_query"]:
             queries.append({"step": step, "wall_seconds": wall_seconds, "cpu_seconds": cpu_seconds,
@@ -129,6 +141,12 @@ def run_episode(task, policy, environment_seed, policy_seed, maximum_steps):
         decision["proposed_action"] = proposed.copy()
         decision["applied_action"] = action.copy()
         decision["diagnostics"] = policy.diagnostics()
+        latest_query = policy.latest_query
+        if latest_query is not None and "action_anchor_observation" in latest_query:
+            anchor = latest_query["action_anchor_observation"]
+            decision["action_anchor_observation"] = np.asarray(anchor).copy()
+            decision["coordinate_proposed_action"] = coordinates.encode_actions(proposed, anchor)
+            decision["coordinate_applied_action"] = coordinates.encode_actions(action, anchor)
         transition = task.dynamics.step(action)
         raw = np.asarray(transition.observation).copy()
         proposed_actions.append(proposed)
@@ -162,6 +180,8 @@ def run_episode(task, policy, environment_seed, policy_seed, maximum_steps):
         "cpu_ms_per_query": 1000 * np.mean([q["cpu_seconds"] for q in queries]) if queries else None,
         "timing_protocol": "online telemetry, not isolated comparative timing",
         "final_diagnostics": policy.diagnostics(),
+        "representation": coordinates.name,
+        "normalization": getattr(policy, "normalization", None),
     }
     arrays = {
         "states": np.asarray(states), "observations": np.asarray(observations),
@@ -173,6 +193,12 @@ def run_episode(task, policy, environment_seed, policy_seed, maximum_steps):
     for key in ("agent_velocity", "block_velocity", "block_angular_velocity", "agent_angle",
                 "agent_angular_velocity", "n_contacts"):
         arrays[key] = np.array([s[key] for s in snapshots])
+    # Physical arrays retain the original schema; policy features are separate.
+    physical_observations = arrays["observations"]
+    policy_observations = np.full_like(physical_observations, np.nan)
+    finite = np.isfinite(physical_observations).all(axis=1)
+    policy_observations[finite] = coordinates.observations(physical_observations[finite])
+    arrays["policy_observations"] = policy_observations
     return result, arrays, decisions, queries, task.dynamics.geometry()
 
 
@@ -183,19 +209,25 @@ def run_fixed_trial(data, configuration, method, seed, cache=None):
     task = PushTTask(**configuration["task"])
     try:
         reference = np.array([0, 0, 256, 256, np.cos(np.pi / 4), np.sin(np.pi / 4)])
-        if method["id"] not in cache:
-            cache[method["id"]] = build_policy(data, configuration, method, reference)
-        return run_episode(task, cache[method["id"]], seed,
+        # A shared cache must never reuse the other representation or parameters.
+        import json
+        key = (id(data), json.dumps({"method": method, "history": configuration["history"],
+                          "execute_steps": configuration["execute_steps"],
+                          "representation": effective_coordinates(configuration, method).name}, sort_keys=True))
+        if key not in cache:
+            cache[key] = build_policy(data, configuration, method, reference)
+        return run_episode(task, cache[key], seed,
                            seed + configuration["evaluation"]["policy_seed_offset"],
                            configuration["task"]["max_episode_steps"])
     finally:
         task.close()
 
 
-def run_experiment(config_path=None, methods=None, overrides=None, output=None, *, seeds=None, steps=None):
+def run_experiment(config_path=None, methods=None, overrides=None, output=None, *, seeds=None, steps=None,
+                   representation=None):
     from src.benchmarks.runner import run_task
     return run_task("pusht", config_path=config_path, methods=methods, seeds=seeds,
-                    steps=steps, output=output, overrides=overrides)
+                    steps=steps, output=output, overrides=overrides, representation=representation)
 
 
 if __name__ == "__main__":
