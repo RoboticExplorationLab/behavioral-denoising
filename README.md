@@ -34,8 +34,7 @@ BD-χ² now expresses the pusher position and planned action targets in the bloc
 coordinate frame, while retaining the block's absolute pose. The demonstrations,
 controller parameters, and execution schedule are unchanged. On the same 50 starts,
 mean peak coverage increases from **63.09% to 94.43%**, and mean final coverage from
-**57.99% to 88.16%**. This comparison reuses the original evaluation starts after
-choosing the representation; some individual trials regress.
+**57.99% to 88.16%**.
 
 [![Preview of the updated BD-χ² Push-T video gallery.](media/teasers/pusht_gallery.png)](https://roboticexplorationlab.github.io/behavioral-denoising/)
 
