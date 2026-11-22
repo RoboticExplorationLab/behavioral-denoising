@@ -1,13 +1,14 @@
 # Behavioral Denoising
 
-Code for **Behavioral Denoising: A New Perspective
-on Nonlinear Behavioral Control Inspired by Closed-Form Diffusion Policies**.
+Code for **[Behavioral Denoising: A New Perspective
+on Nonlinear Behavioral Control Inspired by Closed-Form Diffusion Policies](https://arxiv.org/abs/2611.19712)**.
 
 This branch contains the current implementation and runnable examples for
 Cartpole, Rocket Landing, Reacher, and Push-T.
 For the **L4DC submission code, saved results, and paper reproduction instructions**,
 see the [`l4dc` branch](https://github.com/RoboticExplorationLab/behavioral-denoising/tree/l4dc).
 
+[Paper](https://arxiv.org/abs/2611.19712) ·
 [Configurations](config/README.md) · [Implementation](IMPLEMENTATION.md) ·
 [Demonstrations](data/README.md) ·
 [Video gallery](https://roboticexplorationlab.github.io/behavioral-denoising/)
@@ -148,6 +149,23 @@ Run tests in their corresponding environments. No saved benchmark results are re
 ```bash
 .venv/bin/python -m pytest -q -rs --ignore=tests/test_pusht.py --ignore=tests/test_pusht_task.py --ignore=tests/test_select_dpc_chunks.py
 .venv-pusht/bin/python -m pytest -q -rs tests/test_pusht.py tests/test_pusht_task.py tests/test_pusht_coordinates.py tests/test_pusht_representations.py tests/test_select_dpc_chunks.py tests/test_gallery.py
+```
+
+## Citation
+
+If you use this code, please cite our paper:
+
+```bibtex
+@misc{jia2026behavioraldenoising,
+  title = {Behavioral Denoising: A New Perspective on Nonlinear Behavioral Control Inspired by Closed-Form Diffusion Policies},
+  author = {Jia, Lucas Y. and Zhang, John Z. and Manchester, Zachary},
+  year = {2026},
+  eprint = {2611.19712},
+  archivePrefix = {arXiv},
+  primaryClass = {eess.SY},
+  doi = {10.48550/arXiv.2611.19712},
+  url = {https://arxiv.org/abs/2611.19712}
+}
 ```
 
 ## Acknowledgments
